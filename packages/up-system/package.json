@@ -1,0 +1,26 @@
+{
+  "name": "up-system",
+  "description": "System shim for the up ecosystem",
+  "version": "1.0.0",
+  "homepage": "http://github.com/up-ecosystem",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/up-ecosystem/up/blob/master/packages/up-system"
+  },
+  "author": "superdweebie <superdweebie@gmail.com>",
+  "tags": [
+    "web",
+    "stream",
+    "pipe",
+    "application",
+    "bootstrap"
+  ],
+  "dependencies": {},
+  "engines": {
+    "node": "5.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/up-ecosystem/up/issues"
+  },
+  "main": "lib/index.js"
+}

@@ -1,0 +1,53 @@
+.episode {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  .preview {
+    @width: 40vw;
+    width: @width;
+    height: (@width/16) * 9;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .preview-img {
+      width: 97%;
+      height: 94%;
+
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
+
+      background-color: @dark;
+      background-size: cover;
+      background-position: 50%, 50%;
+
+      .title {
+        padding: 3vw;
+        text-shadow: 1px 1px 2px @black;
+      }
+    }
+  }
+
+  .preview.selected {
+    background-color: @white;
+  }
+
+  .arrow-container {
+    height: 10px;
+  }
+
+  .arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid @white;
+  }
+}
+

@@ -1,0 +1,21 @@
+.episode-chooser {
+  .scrollbar(fade(@white, 20%), 4px, 4px, 2px);
+
+  height: ~"calc(100vh -" @menu-height ~")";
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  .series-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .other-languages {
+    margin-left: 3vw;
+    width: 40vw;
+  }
+}

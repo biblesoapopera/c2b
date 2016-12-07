@@ -1,0 +1,26 @@
+{
+  "name": "up-fs",
+  "description": "fs for up",
+  "version": "1.0.0",
+  "homepage": "http://github.com/up-ecosystem",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/up-ecosystem/up/blob/master/packages/up-fs"
+  },
+  "author": "superdweebie <superdweebie@gmail.com>",
+  "tags": [
+    "up",
+    "build",
+    "tools"
+  ],
+  "dependencies": {
+    "up-stream-node": "1.0.0"
+  },
+  "engines": {
+    "node": "5.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/up-ecosystem/up/issues"
+  },
+  "main": "lib/index.js"
+}

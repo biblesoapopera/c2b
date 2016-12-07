@@ -1,0 +1,72 @@
+'use strict';
+
+System.register('bso-model/User', ['babel-runtime/core-js/object/keys', 'babel-runtime/core-js/promise', 'mongoose', './role', './locale', './lang'], function (_export, _context) {
+  "use strict";
+
+  var _Object$keys, _Promise, mongoose, role, locale, lang, schema;
+
+  return {
+    setters: [function (_babelRuntimeCoreJsObjectKeys) {
+      _Object$keys = _babelRuntimeCoreJsObjectKeys.default;
+    }, function (_babelRuntimeCoreJsPromise) {
+      _Promise = _babelRuntimeCoreJsPromise.default;
+    }, function (_mongoose) {
+      mongoose = _mongoose.default;
+    }, function (_role) {
+      role = _role.default;
+    }, function (_locale) {
+      locale = _locale.default;
+    }, function (_lang) {
+      lang = _lang.default;
+    }],
+    execute: function () {
+
+      mongoose.Promise = _Promise;
+
+      schema = new mongoose.Schema({
+        username: {
+          type: String,
+          required: true,
+          maxlength: 120,
+          minlength: 4
+        },
+        password: {
+          type: String,
+          required: true,
+          maxlength: 120,
+          minlength: 8
+        },
+        name: {
+          type: String,
+          maxlength: 120,
+          minlength: 3
+        },
+        roles: {
+          type: Array,
+          default: ['guest'],
+          validate: function validate(val) {
+            return val.every(function (v) {
+              return role.indexOf(v) !== -1;
+            });
+          }
+        },
+        locale: {
+          type: String,
+          default: 'en-au',
+          validate: function validate(val) {
+            return _Object$keys(locale).indexOf(val) !== -1;
+          }
+        },
+        lang: {
+          type: String,
+          default: 'en',
+          validate: function validate(val) {
+            return _Object$keys(lang).indexOf(val) !== -1;
+          }
+        }
+      });
+
+      _export('default', mongoose.model('User', schema));
+    }
+  };
+});

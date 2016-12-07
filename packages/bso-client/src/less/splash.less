@@ -1,0 +1,22 @@
+.splash {
+  height: ~"calc(100vh -" @menu-height ~")";
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  background-color: fade(@white, 20%);
+  margin-top: 20vh;
+  padding: 5vw 5vw 5vw 5vw;
+  border: thin solid transparent;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border: thin solid @white;
+  background-color: fade(@white, 40%);
+}

@@ -1,0 +1,20 @@
+{
+  "name": "bso-server",
+  "description": "Server for bso",
+  "version": "1.0.0",
+  "homepage": "http://github.com/biblesoapopera",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/biblesoapopera/core/blob/master/packages/server"
+  },
+  "author": "superdweebie <superdweebie@gmail.com>",
+  "tags": [],
+  "dependencies": {},
+  "engines": {
+    "node": "5.0.0"
+  },
+  "bugs": {
+    "url": "http://github.com/biblesoapopera/core/issues"
+  },
+  "main": "lib/index.js"
+}

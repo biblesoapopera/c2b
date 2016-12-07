@@ -1,0 +1,377 @@
+.font0 {
+  font-family: 'Permanent Marker', cursive;
+  font-weight: 300;
+  font-size: 10vw;
+}
+.font1 {
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 6vw;
+}
+.font2 {
+  font-family: Sans-Serif;
+  font-weight: 600;
+  font-size: 4vw;
+}
+.font3 {
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 3.5vw;
+}
+.font-logo {
+  font-family: 'Permanent Marker', cursive;
+  font-weight: 300;
+  font-size: 30px;
+}
+.font-menu {
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 18px;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  color: #ffffff;
+  text-align: center;
+}
+div,
+h1,
+h2 {
+  margin: 0;
+}
+p {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  font-style: italic;
+  cursor: pointer;
+}
+a:hover {
+  text-decoration: underline;
+}
+.app {
+  height: 100vh;
+  width: 100vw;
+}
+.menu {
+  width: 100vw;
+  height: 50px;
+  background-color: #001129;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu .logo {
+  padding-left: 20px;
+}
+.background-0,
+.background-1 {
+  height: 100vh;
+  width: 100vw;
+}
+.background-0 {
+  position: absolute;
+  background: url('img/background.jpg');
+  background-size: cover;
+  background-position: 50%, 50%;
+  z-index: -1;
+}
+.background-1 {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.locale-switcher {
+  color: #ffffff;
+  width: 110px;
+  padding-right: 20px;
+}
+.locale-switcher .head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.locale-switcher .dropdown {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.locale-switcher .dropdown div {
+  width: 80vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.locale-switcher .dropdown ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+}
+.locale-switcher .dropdown li {
+  width: 100%;
+  height: 30px;
+  padding-top: 15px;
+  cursor: pointer;
+}
+.locale-switcher .dropdown li.selected {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.locale-switcher .dropdown li:hover {
+  background-color: #017b92;
+}
+.splash {
+  height: calc(100vh - 50px );
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-top: 20vh;
+  padding: 5vw 5vw 5vw 5vw;
+  border: thin solid transparent;
+  cursor: pointer;
+}
+.btn:hover {
+  border: thin solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.episode-chooser {
+  overflow: auto;
+  height: calc(100vh - 50px );
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.episode-chooser::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.episode-chooser::-webkit-scrollbar-button:start:decrement,
+.episode-chooser::-webkit-scrollbar-button:end:increment {
+  display: block;
+  height: 0;
+  background-color: transparent;
+}
+.episode-chooser::-webkit-scrollbar-track-piece {
+  border-radius: 0;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.episode-chooser::-webkit-scrollbar-thumb:vertical {
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+.episode-chooser::-webkit-scrollbar-thumb:horizontal {
+  width: 50px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+.episode-chooser .series-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.episode-chooser .other-languages {
+  margin-left: 3vw;
+  width: 40vw;
+}
+.series {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100vw;
+}
+.series .info {
+  padding-top: 3vw;
+  padding-left: 3vw;
+  text-align: left;
+}
+.series .series-scroll {
+  width: 100vw;
+  padding-top: 2vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.series .series-scroll .scroll-left,
+.series .series-scroll .scroll-right {
+  width: 5vw;
+  height: 20.6vw;
+  margin-top: .7vw;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: thin solid transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.series .series-scroll .scroll-left:hover,
+.series .series-scroll .scroll-right:hover {
+  border: thin solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.series .series-scroll .episode-swipe {
+  width: 90vw;
+  overflow-x: hidden;
+}
+.series .series-scroll .episode-swipe .episode-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+  transition-property: left;
+  transition-duration: .7s;
+}
+.series .episode-detail {
+  width: 100vw;
+  height: 0;
+  overflow: hidden;
+  transition-property: height;
+  transition-duration: .7s;
+}
+.series .episode-detail .detail-img {
+  width: 100vw;
+  height: 59.25vw;
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.series .episode-detail .detail-img .overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #000000, rgba(255, 0, 0, 0));
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.series .episode-detail .detail-img .overlay .top {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.series .episode-detail .detail-img .overlay .top .title {
+  padding: 3vw;
+  text-shadow: 1px 1px 2px #000000;
+}
+.series .episode-detail .detail-img .overlay .top .close {
+  padding-top: 3vw;
+  padding-right: 10vw;
+}
+.series .episode-detail .detail-img .overlay .top .close div {
+  cursor: pointer;
+  width: 8vw;
+  height: 8vw;
+  text-align: center;
+  border-radius: 5vw;
+  line-height: 8vw;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: thin solid transparent;
+}
+.series .episode-detail .detail-img .overlay .top .close div:hover {
+  border: thin solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.series .episode-detail .detail-img .overlay .play div {
+  cursor: pointer;
+  width: 20vw;
+  height: 20vw;
+  text-align: center;
+  border-radius: 10vw;
+  line-height: 20vw;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: thin solid transparent;
+  font-size: 8vw;
+}
+.series .episode-detail .detail-img .overlay .play div span {
+  padding-left: 1.7vw;
+}
+.series .episode-detail .detail-img .overlay .play div:hover {
+  border: thin solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.series .episode-detail .detail-summary {
+  width: 100vw;
+  height: 20vw;
+  background: #000000;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.series .episode-detail .detail-summary div {
+  padding: 3vw;
+}
+.series .episode-detail.open {
+  height: 79.25vw;
+}
+.episode {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.episode .preview {
+  width: 40vw;
+  height: 22.5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.episode .preview .preview-img {
+  width: 97%;
+  height: 94%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  background-color: #001129;
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.episode .preview .preview-img .title {
+  padding: 3vw;
+  text-shadow: 1px 1px 2px #000000;
+}
+.episode .preview.selected {
+  background-color: #ffffff;
+}
+.episode .arrow-container {
+  height: 10px;
+}
+.episode .arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #ffffff;
+}
