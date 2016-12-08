@@ -1,7 +1,7 @@
 import express from 'express'
 import staticAssets from './static'
 import login from './login'
-import getSeries from './getSeries'
+import getSeries from './api/series/getSeries'
 import err from './err'
 import key from './jwt-key'
 import db from './db'
@@ -16,5 +16,5 @@ staticAssets(app)
 err(app)
 
 app.listen(port, function () {
-  console.log('Example app listening on port ' + port)
+  console.log('c2b app listening on port ' + port)
 })

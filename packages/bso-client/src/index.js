@@ -1,7 +1,7 @@
 import regenerator from 'regenerator'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import App from './comp/App'
 
 ReactDOM.render(
   <App />,

@@ -1,6 +1,6 @@
 'use strict';
 
-System.register('bso-client', ['regenerator', 'react', 'react-dom', './App'], function (_export, _context) {
+System.register('bso-client', ['regenerator', 'react', 'react-dom', './comp/App'], function (_export, _context) {
   "use strict";
 
   var regenerator, React, ReactDOM, App;
@@ -11,8 +11,8 @@ System.register('bso-client', ['regenerator', 'react', 'react-dom', './App'], fu
       React = _react.default;
     }, function (_reactDom) {
       ReactDOM = _reactDom.default;
-    }, function (_App) {
-      App = _App.default;
+    }, function (_compApp) {
+      App = _compApp.default;
     }],
     execute: function () {
 

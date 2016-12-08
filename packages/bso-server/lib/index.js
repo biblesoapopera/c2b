@@ -1,6 +1,6 @@
 'use strict';
 
-System.register('bso-server', ['express', './static', './login', './getSeries', './err', './jwt-key', './db', './rbac'], function (_export, _context) {
+System.register('bso-server', ['express', './static', './login', './api/series/getSeries', './err', './jwt-key', './db', './rbac'], function (_export, _context) {
   "use strict";
 
   var express, staticAssets, login, getSeries, err, key, db, rbac, port, app;
@@ -11,8 +11,8 @@ System.register('bso-server', ['express', './static', './login', './getSeries', 
       staticAssets = _static.default;
     }, function (_login) {
       login = _login.default;
-    }, function (_getSeries) {
-      getSeries = _getSeries.default;
+    }, function (_apiSeriesGetSeries) {
+      getSeries = _apiSeriesGetSeries.default;
     }, function (_err) {
       err = _err.default;
     }, function (_jwtKey) {
@@ -33,7 +33,7 @@ System.register('bso-server', ['express', './static', './login', './getSeries', 
       err(app);
 
       app.listen(port, function () {
-        console.log('Example app listening on port ' + port);
+        console.log('c2b app listening on port ' + port);
       });
     }
   };

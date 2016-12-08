@@ -56,6 +56,16 @@ a:hover {
   height: 100vh;
   width: 100vw;
 }
+.btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 5vw 5vw 5vw 5vw;
+  border: thin solid transparent;
+  cursor: pointer;
+}
+.btn:hover {
+  border: thin solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.4);
+}
 .menu {
   width: 100vw;
   height: 50px;
@@ -83,19 +93,22 @@ a:hover {
 .background-1 {
   background-color: rgba(0, 0, 0, 0.7);
 }
-.locale-switcher {
+.lang-switcher {
   color: #ffffff;
-  width: 110px;
-  padding-right: 20px;
 }
-.locale-switcher .head {
+.lang-switcher .head {
+  width: 50px;
+  height: 50px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   cursor: pointer;
 }
-.locale-switcher .dropdown {
+.lang-switcher .head:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.lang-switcher-dropdown {
   position: fixed;
   top: 0;
   left: 0;
@@ -105,8 +118,9 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
-.locale-switcher .dropdown div {
+.lang-switcher-dropdown div {
   width: 80vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.95);
@@ -115,22 +129,22 @@ a:hover {
   justify-content: center;
   align-items: center;
 }
-.locale-switcher .dropdown ul {
+.lang-switcher-dropdown ul {
   list-style: none;
   padding: 0px;
   margin: 0px;
   width: 100%;
 }
-.locale-switcher .dropdown li {
+.lang-switcher-dropdown li {
   width: 100%;
   height: 30px;
   padding-top: 15px;
   cursor: pointer;
 }
-.locale-switcher .dropdown li.selected {
+.lang-switcher-dropdown li.selected {
   background-color: rgba(255, 255, 255, 0.2);
 }
-.locale-switcher .dropdown li:hover {
+.lang-switcher-dropdown li:hover {
   background-color: #017b92;
 }
 .splash {
@@ -141,16 +155,8 @@ a:hover {
   justify-content: center;
   align-items: center;
 }
-.btn {
-  background-color: rgba(255, 255, 255, 0.2);
+.splash .btn {
   margin-top: 20vh;
-  padding: 5vw 5vw 5vw 5vw;
-  border: thin solid transparent;
-  cursor: pointer;
-}
-.btn:hover {
-  border: thin solid #ffffff;
-  background-color: rgba(255, 255, 255, 0.4);
 }
 .episode-chooser {
   overflow: auto;
@@ -184,6 +190,9 @@ a:hover {
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 2px;
 }
+.episode-chooser .empty {
+  margin-top: 5vh;
+}
 .episode-chooser .series-list {
   display: flex;
   flex-direction: column;
@@ -193,7 +202,8 @@ a:hover {
 }
 .episode-chooser .other-languages {
   margin-left: 3vw;
-  width: 40vw;
+  margin-right: 3vw;
+  margin-top: 5vh;
 }
 .series {
   display: flex;
