@@ -36,7 +36,6 @@
     "gulp-concat": "^2.6.1",
     "gulp-eslint": "^3.0.1",
     "gulp-if": "^2.0.2",
-    "gulp-istanbul": "^1.1.1",
     "gulp-less": "^3.3.0",
     "gulp-livereload": "^3.8.1",
     "gulp-minify-html": "^1.0.6",
@@ -44,6 +43,8 @@
     "gulp-rename": "^1.2.2",
     "gulp-standard": "^8.0.2",
     "gulp-uglify": "^2.0.0",
+    "istanbul": "^0.4.5",
+    "istanbul-threshold-checker": "^0.2.1",
     "mocha": "^3.2.0",
     "supertest": "^2.0.1",
     "yargs": "^6.4.0"

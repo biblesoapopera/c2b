@@ -17,6 +17,9 @@ let del = require('del')
 let mocha = require('gulp-mocha')
 let eslint = require('gulp-eslint')
 let standard = require('gulp-standard')
+let through = require('through2').obj
+let checker = require('istanbul-threshold-checker')
+let istanbul = require('istanbul')
 
 let buildType = 'dev';
 if (argv.dist) buildType = 'dist'
@@ -36,14 +39,6 @@ let compile = pkg => {
       }
     }))
     .pipe(gulp.dest('packages/' + pkg + '/lib'))
-}
-
-let cleanLib = pkg => {
-  return del(['packages/' + pkg + '/lib/**/*'])
-}
-
-let cleanDist = pkg => {
-  return del(['packages/' + pkg + '/dist/**/*'])
 }
 
 let test = pkg => {
@@ -84,9 +79,12 @@ let lint = pkg => {
 }
 
 // bso-client
-gulp.task('clean-bso-client-lib', () => cleanLib('bso-client'))
-gulp.task('clean-bso-client-dist', () => cleanDist('bso-client'))
-gulp.task('clean-bso-client', ['clean-bso-client-lib', 'clean-bso-client-dist'])
+gulp.task('clean-bso-client', () => {
+  return del([
+    'packages/bso-client/lib/**/*',
+    'packages/bso-client/dist/**/*'
+  ])
+})
 gulp.task('compile-bso-client-vendor', () => {
   gulp.src('node_modules/regenerator-runtime/runtime.js')
     .pipe(gap.prependText("System.register('regenerator', [], function (_export, _context) {return {setters: [], execute: function () {"))
@@ -165,9 +163,12 @@ gulp.task('compile-bso-client', [
 ])
 
 // up-system
-gulp.task('clean-up-system-lib', () => cleanLib('up-system'))
-gulp.task('clean-up-system-dist', () => cleanDist('up-system'))
-gulp.task('clean-up-system', ['clean-up-system-lib', 'clean-up-system-dist'])
+gulp.task('clean-up-system', () => {
+  return del([
+    'packages/up-system/lib/**/*',
+    'packages/up-system/dist/**/*'
+  ])
+})
 gulp.task('compile-up-system', () => {
   gulp.src('packages/up-system/src/*.js')
     .pipe(babel({
@@ -185,13 +186,19 @@ gulp.task('compile-up-system', () => {
 })
 
 // bso-server
-gulp.task('clean-bso-server', () => cleanLib('bso-server'))
+gulp.task('clean-bso-server', () => {
+  return del([
+    'packages/bso-server/lib/**/*',
+    'packages/bso-server/instrumented-lib',
+    'packages/bso-server/coverage'
+  ])
+})
 gulp.task('compile-bso-server', () => compile('bso-server'))
 gulp.task('test-bso-server', ['compile-bso-server'], () => test('bso-server'))
 gulp.task('complexity-bso-server', ['test-bso-server'], () => complexity('bso-server'))
 gulp.task('lint-bso-server', ['complexity-bso-server'], () => lint('bso-server'))
 
-gulp.task('pre-cover-bso-server', () => {
+gulp.task('instrument-bso-server', () => {
   return gulp.src('packages/bso-server/src/**/*.js')
     .pipe(babel({
       presets: ['es2015', 'babel-preset-stage-3', 'react'],
@@ -205,48 +212,98 @@ gulp.task('pre-cover-bso-server', () => {
         return mid
       }
     }))
-    .pipe(gulp.dest('packages/bso-server/tmp-test'))
+    .pipe(gulp.dest('packages/bso-server/instrumented-lib'))
 })
 
-gulp.task('cover-bso-server', () => {
+gulp.task('coverage-bso-server', ['instrument-bso-server'], (done) => {
   require('up-system')
   let resolve = System.resolve
   System.resolve = mid => {
     let m = resolve(mid)
-    return m.replace('bso-server/lib', 'bso-server/tmp-test')
+    return m.replace('bso-server/lib', 'bso-server/instrumented-lib')
   }
 
-  return gulp.src('packages/bso-server/mocha.js')
+  let collector = new istanbul.Collector()
+  let reporter = new istanbul.Reporter(false, './packages/bso-server/coverage')
+  reporter.addAll(['text-summary', 'html'])
+
+  let results
+
+  gulp.src('packages/bso-server/mocha.js')
     .pipe(mocha({
       ui: 'exports',
       reporter: 'spec'
     }))
+    .on('error', err => done(err))
+    .on('end', () => {
+      collector.add(global.__coverage__);
 
-    //.pipe(istanbul.summarizeCoverage({coverageVariable: '__coverage__'}))
-})
+      gulp.src('packages/bso-server/instrumented-lib/**/*.js')
+      .pipe(through(function (file, enc, cb) {
+        let instrumentedSrc = file.contents.toString()
+        try {
+          let start = instrumentedSrc.search(/coverageData = {/)
+          let end = instrumentedSrc.search(/_coverageSchema: '.+'/)
+          if (start !== -1 && end !== -1) {
+            let coverageData
+            eval(instrumentedSrc.slice(start, end + 69))
+            let coverageObj = {}
+            coverageObj[coverageData.path] = coverageData
+            collector.add(coverageObj)
+          }
+        } catch (err) {cb(err)}
+        return cb(null, file)
+      }))
+      .on('error', err => done(err))
+      .on('data', () => {})
+      .on('end', () => {
+        reporter.write(collector, true, () => {})
 
-gulp.task('tmp', ['cover-bso-server'], () => {
+        let thresholds = {
+          global: {
+            statements: 100,
+            branches: 90,
+            lines: 90,
+            functions: -2
+          },
+          each: {
+            statements: 100,
+            branches: -1,
+            lines: 80,
+            functions: -1
+          }
+        }
 
-  var istanbul = require('istanbul')
-var Collector = istanbul.Collector;
-  var collector = new Collector();
-  collector.add(global.__coverage__);
+        results = checker.checkFailures(thresholds, collector.getFinalCoverage())
 
-var Report = istanbul.Report;
-  let report = Report.create('text')
+        if (results.some(type => (type.global && type.global.failed) || (type.each && type.each.failed))){
+          done(new Error('Coverage failed: \n' + results.filter(result => result.global.failed || result.each.failed).map(result => {
+            return result.type.toUpperCase() + '\n' +
+              (result.global.failed ? 'global: ' + result.global.value + '% of target ' + thresholds.global[result.type] + '%\n' : '') +
+              (result.each.failed ? 'each: target ' + thresholds.each[result.type] + '%\n' + result.each.failures.join('\n') : '')
+          }).join('\n\n')))
+          return
+        }
 
-  report.writeReport(collector)
-
-let h = Report.create('html')
-report.writeReport(collector, {dir: 'c:/bso/htm-report'})
+        done()
+      })
+    })
 })
 
 // up-fs
-gulp.task('clean-up-fs', () => cleanLib('up-fs'))
+gulp.task('clean-up-fs', () => {
+  return del([
+    'packages/up-fs/lib/**/*'
+  ])
+})
 gulp.task('compile-up-fs', () => compile('up-fs'))
 
 // bso-model
-gulp.task('clean-bso-model', () => cleanLib('bso-model'))
+gulp.task('clean-bso-model', () => {
+  return del([
+    'packages/bso-model/lib/**/*'
+  ])
+})
 gulp.task('compile-bso-model', () => compile('bso-model'))
 gulp.task('test-bso-model', ['compile-bso-model'], () => test('bso-model'))
 
