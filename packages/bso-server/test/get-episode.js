@@ -1,29 +1,33 @@
 import chai from 'chai'
 import request from 'supertest'
 import express from 'express'
-import login from 'bso-server/login'
+import getEpisode from 'bso-server/api/episode/getEpisode'
 import db from 'bso-server/db'
+import rbac from 'bso-server/rbac'
 import err from 'bso-server/err'
+import jwt from 'jsonwebtoken'
 
 let assert = chai.assert
 let app = express()
 let key = 'testing testing'
 
-login(app, key, db)
+let token = jwt.sign({sub: 'test@test.com', name: 'John Test'}, key)
+
+getEpisode(app, key, rbac, db)
 err(app)
 
 export default () => {
   return new Promise((resolve, reject) => {
     request(app)
-      .post('/login')
+      .get('/episode/en/0/1')
       .set('Accept', 'application/json')
-      .send({username: 'bad user', password: 'test123'})
-      .expect(401)
+      .set('authorization', 'jwt ' + token)
+      .expect(200)
       .expect('Content-Type', /json/)
       .expect(res => {
-        assert.isNotOk(res.headers.authorization, 'Authorization header should not be set on a failed login')
+        // TODO add proper tests on response body
+        // console.log(res.body)
       })
-      .expect({msg: 'login fail'})
       .end((err, res) => {
         if (err) reject(err)
         else resolve()
