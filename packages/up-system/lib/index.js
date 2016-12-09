@@ -12,16 +12,12 @@ var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
 
 var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
-var _keys = require('babel-runtime/core-js/object/keys');
-
-var _keys2 = _interopRequireDefault(_keys);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (function () {
   var System = {};
 
-  var store = {};
+  var store = { a: 1 };
 
   System.resolve = function (mid) {
     var parts = mid.split('/');
@@ -34,10 +30,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
   var requireMid = function requireMid(mid) {
     return require(System.resolve(mid));
-  };
-
-  System.registeredMids = function () {
-    return (0, _keys2.default)(store);
   };
 
   System.register = function (mid, deps, fn) {

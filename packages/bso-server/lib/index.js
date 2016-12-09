@@ -1,36 +1,29 @@
 'use strict';
 
-System.register('bso-server', ['express', './static', './login', './api/series/getSeries', './err', './jwt-key', './db', './rbac'], function (_export, _context) {
+System.register('bso-server', ['express', './db', './rbac', './config', './router'], function (_export, _context) {
   "use strict";
 
-  var express, staticAssets, login, getSeries, err, key, db, rbac, port, app;
+  var express, dbFn, rbac, config, router, port, app, db, key;
   return {
     setters: [function (_express) {
       express = _express.default;
-    }, function (_static) {
-      staticAssets = _static.default;
-    }, function (_login) {
-      login = _login.default;
-    }, function (_apiSeriesGetSeries) {
-      getSeries = _apiSeriesGetSeries.default;
-    }, function (_err) {
-      err = _err.default;
-    }, function (_jwtKey) {
-      key = _jwtKey.default;
     }, function (_db) {
-      db = _db.default;
+      dbFn = _db.default;
     }, function (_rbac) {
       rbac = _rbac.default;
+    }, function (_config) {
+      config = _config.default;
+    }, function (_router) {
+      router = _router.default;
     }],
     execute: function () {
       port = 8080;
       app = express();
+      db = dbFn(config.dbUrl);
+      key = config.jwkKey;
 
 
-      login(app, key, db);
-      getSeries(app, key, rbac, db);
-      staticAssets(app);
-      err(app);
+      app.use('/', router(key, rbac, db));
 
       app.listen(port, function () {
         console.log('c2b app listening on port ' + port);

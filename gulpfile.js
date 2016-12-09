@@ -346,3 +346,4 @@ gulp.task('watch', ['default'], () => {
   gulp.watch('packages/up-fs/src/**/*.js', ['compile-up-fs'])
   gulp.watch('packages/up-system/src/**/*.js', ['compile-up-system'])
 })
+

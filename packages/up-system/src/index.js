@@ -1,7 +1,7 @@
 (() => {
   let System = {}
 
-  let store = {}
+  let store = {a: 1}
 
   System.resolve = mid => {
     let parts = mid.split('/')
@@ -13,8 +13,6 @@
   }
 
   let requireMid = mid => require(System.resolve(mid))
-
-  System.registeredMids = () => Object.keys(store)
 
   System.register = (mid, deps, fn) => {
     store[mid] = {
@@ -28,6 +26,7 @@
   System.import = async mid => {
     if (!store[mid]) {
       let mod = requireMid(mid)
+
       if (mod.__esModule) {
         store[mid] = {
           deps: [],

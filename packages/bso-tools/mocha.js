@@ -3,8 +3,10 @@
 require('up-system')
 let path = require('path')
 let glob = require('glob')
+let argv = require('yargs').argv
 
 module.exports = pkg => {
+
   let testDir = path.join(__dirname, '../', pkg, 'test')
 
   require('babel-register')({
@@ -17,19 +19,21 @@ module.exports = pkg => {
     moduleIds: true,
     sourceRoot: testDir,
     moduleRoot: pkg + '/test',
-    getModuleId: mid => {
-      let parts = mid.split('/')
-      if (parts.pop() === 'index') mid = parts.join('/')
-      return mid
-    },
-    only: testDir
+    only: testDir + '/**/*.js'
   })
 
   let ret = {}
   ret[pkg] = {}
 
-  glob.sync(testDir + '/**/*.js', {nodir: true}).forEach(file => {
-    let name = path.relative(testDir, file).replace(/.js$/, '')
+  let globDef
+  if (argv.test) {
+    globDef = path.join(__dirname, '..') + '/' + argv.test + '.js'
+  } else {
+    globDef = testDir + '/**/*.js'
+  }
+console.log(globDef)
+  glob.sync(globDef, {nodir: true}).forEach(file => {
+    let name = path.relative(testDir, file).replace(/.js$/, '').replace(/\\/g, '/')
 
     ret[pkg][name] = done => {
       System.import(pkg + '/test/' + name)

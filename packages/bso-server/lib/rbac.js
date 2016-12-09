@@ -16,7 +16,7 @@ System.register('bso-server/rbac', ['rbac', 'bso-model/role'], function (_export
         permissions: {
           password: ['change', 'forgot'],
           user: ['create', 'read', 'update', 'delete'],
-          series: ['create', 'read', 'update', 'delete'],
+          series: ['create', 'read', 'update', 'delete', 'publish', 'unpublish'],
           episode: ['create', 'read', 'update', 'delete']
         },
         grants: {
@@ -24,7 +24,7 @@ System.register('bso-server/rbac', ['rbac', 'bso-model/role'], function (_export
           student: ['change_password', 'read_series', 'read_episode'],
           donor: ['student'],
           agent: ['student'],
-          admin: ['student', 'create-series', 'update-series', 'create-episode', 'update-episode'],
+          admin: ['student', 'create-series', 'update-series', 'publish-series', 'unpublish-series', 'create-episode', 'update-episode'],
           superadmin: ['admin', 'delete-series', 'delete-episode']
         }
       }));

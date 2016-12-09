@@ -1,22 +1,33 @@
-import bodyParser from 'body-parser'
 import jwt from 'jsonwebtoken'
+import hash from 'password-hash'
 
-export default (app, key, db) => {
-  app.post('/login', bodyParser.json(), (req, res) => {
+const fail = (res, next) => {
+  res.status(401)
+  res.type('json')
+  res.send({msg: 'login fail'})
+  next('route')
+}
+
+export default (key, db) => {
+  return (req, res, next) => {
+
     let username = req.body.username
     let password = req.body.password
 
-    let user = db.user.find(username)
+    if (!username || !password) return fail(res, next)
 
-    if (!user || user.password !== req.body.password) {
-      res.status(401)
-      res.send({msg: 'login fail'})
-    } else {
-      let token = jwt.sign({sub: user.username, name: user.name}, key)
-      res.set('authorization', 'jwt ' + token)
-      res.type('json')
-      res.status(200)
-      res.send({msg: 'logged in'})
-    }
-  })
+    let user = db.user.find(username)
+    if (!user) return fail(res, next)
+
+    if (!hash.verify(password, user.password)) return fail(res, next)
+
+    let token = jwt.sign({sub: user.username, name: user.name}, key)
+    res.set('authorization', 'jwt ' + token)
+    res.type('json')
+    res.status(200)
+    res.send({msg: 'logged in'})
+
+    req.user = user
+    next()
+  }
 }

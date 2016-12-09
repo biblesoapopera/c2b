@@ -99,8 +99,10 @@ System.register('bso-server/db/series/find', [], function (_export, _context) {
         }]
       };
 
-      _export('default', function (lang) {
-        return store[lang];
+      _export('default', function (url) {
+        return function (lang) {
+          return store[lang];
+        };
       });
     }
   };

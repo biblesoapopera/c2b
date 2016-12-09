@@ -1,19 +1,15 @@
 import express from 'express'
-import staticAssets from './static'
-import login from './login'
-import getSeries from './api/series/getSeries'
-import err from './err'
-import key from './jwt-key'
-import db from './db'
+import dbFn from './db'
 import rbac from './rbac'
+import config from './config'
+import router from './router'
 
 let port = 8080
 let app = express()
+let db = dbFn(config.dbUrl)
+let key = config.jwkKey
 
-login(app, key, db)
-getSeries(app, key, rbac, db)
-staticAssets(app)
-err(app)
+app.use('/', router(key, rbac, db))
 
 app.listen(port, function () {
   console.log('c2b app listening on port ' + port)
