@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-System.register("bso-client/comp/DeliveryChooser", ["react"], function (_export, _context) {
+System.register('bso-client/comp/DeliveryChooser', ['react'], function (_export, _context) {
   "use strict";
 
   var React, _createClass, DeliveryChooser;
@@ -68,65 +68,70 @@ System.register("bso-client/comp/DeliveryChooser", ["react"], function (_export,
         }
 
         _createClass(DeliveryChooser, [{
-          key: "render",
+          key: 'play',
+          value: function play() {
+            this.props.go(['player', this.props.episode]);
+          }
+        }, {
+          key: 'render',
           value: function render() {
             return React.createElement(
-              "div",
-              { className: "delivery-chooser" },
+              'div',
+              { className: 'delivery-chooser' },
               React.createElement(
-                "div",
-                { className: "font2" },
-                "How would you like to listen to this episode?"
+                'div',
+                { className: 'font2' },
+                'How would you like to listen to this episode?'
               ),
               React.createElement(
-                "div",
+                'div',
                 null,
                 this.props.lang,
-                ":S",
+                ':S',
                 this.props.series,
-                ":E",
+                ':E',
                 this.props.episode
               ),
               React.createElement(
-                "div",
-                { className: "btn" },
+                'div',
+                { className: 'btn', onClick: this.play.bind(this) },
                 React.createElement(
-                  "div",
-                  { className: "font2" },
-                  "Play episode now"
+                  'div',
+                  { className: 'font2' },
+                  'Play episode now'
                 ),
                 React.createElement(
-                  "div",
-                  { className: "font3" },
-                  "using streaming audio"
+                  'div',
+                  { className: 'font3' },
+                  'using streaming audio'
                 )
               ),
               React.createElement(
-                "div",
-                { className: "btn" },
+                'div',
+                { className: 'btn' },
                 React.createElement(
-                  "div",
-                  { className: "font2" },
-                  "Play episode now"
+                  'div',
+                  { className: 'font2' },
+                  'Play episode now'
                 ),
                 React.createElement(
-                  "div",
-                  { className: "font3" },
-                  "using an audio file on this device"
+                  'div',
+                  { className: 'font3' },
+                  'using an audio file on this device'
                 )
               ),
               React.createElement(
-                "div",
-                { className: "btn" },
+                'div',
+                { className: 'btn' },
                 React.createElement(
-                  "div",
-                  { className: "font2" },
-                  "Download episode audio"
+                  'div',
+                  { className: 'font2' },
+                  'Download episode audio'
                 ),
                 React.createElement(
-                  "div",
-                  { className: "font3" },
-                  "to listen offline and share with friends"
+                  'div',
+                  { className: 'font3' },
+                  'to listen offline and share with friends'
                 )
               )
             );
@@ -136,7 +141,7 @@ System.register("bso-client/comp/DeliveryChooser", ["react"], function (_export,
         return DeliveryChooser;
       }(React.Component);
 
-      _export("default", DeliveryChooser);
+      _export('default', DeliveryChooser);
     }
   };
 });

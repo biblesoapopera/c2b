@@ -80,6 +80,12 @@ System.register('bso-model/Episode', ['babel-runtime/core-js/object/keys', 'babe
         feedback: { type: feedback }
       });
       schema = new mongoose.Schema({
+        id: {
+          type: Number,
+          required: true,
+          unique: true,
+          min: 0
+        },
         lang: {
           type: String,
           required: true,
@@ -118,7 +124,7 @@ System.register('bso-model/Episode', ['babel-runtime/core-js/object/keys', 'babe
           type: Array,
           required: true,
           validate: function validate(val) {
-            return val.length;
+            return val.length >= 1;
           }
         },
         slides: [{

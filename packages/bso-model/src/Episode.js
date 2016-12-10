@@ -67,6 +67,12 @@ let questionSlide = new mongoose.Schema({
 })
 
 let schema = new mongoose.Schema({
+  id: {
+    type: Number,
+    required: true,
+    unique: true,
+    min: 0
+  },
   lang: {
     type: String,
     required: true,
@@ -102,7 +108,7 @@ let schema = new mongoose.Schema({
   audio: {
     type: Array,
     required: true,
-    validate: val => val.length
+    validate: val => val.length >= 1
   },
   slides: [{
     text: {type: content},

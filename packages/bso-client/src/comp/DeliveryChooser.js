@@ -1,6 +1,10 @@
 import React from 'react'
 
 class DeliveryChooser extends React.Component {
+  play() {
+    this.props.go(['player', this.props.episode])
+  }
+
   render() {
     return (
       <div className="delivery-chooser">
@@ -8,7 +12,7 @@ class DeliveryChooser extends React.Component {
 
         <div>{this.props.lang}:S{this.props.series}:E{this.props.episode}</div>
 
-        <div className="btn">
+        <div className="btn" onClick={::this.play}>
           <div className="font2">Play episode now</div>
           <div className="font3">using streaming audio</div>
         </div>

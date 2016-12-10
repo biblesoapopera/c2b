@@ -4,6 +4,7 @@ import Menu from './Menu'
 import Splash from './Splash'
 import EpisodeChooser from './EpisodeChooser'
 import DeliveryChooser from './DeliveryChooser'
+import PlayerContainer from './PlayerContainer'
 import translate from '../translate'
 import store from '../store'
 
@@ -15,7 +16,8 @@ class App extends React.Component {
       lang: 'en',
       //route: ['splash']
       //route: ['choose-episode']
-      route: ['choose-delivery', 4]
+      //route: ['choose-delivery', 4]
+      route: ['player', 4]
     }
 
     this.switchLang(this.state.lang)
@@ -67,8 +69,13 @@ class App extends React.Component {
           />
         }
 
-        {route === 'episode' &&
-          <div></div>
+        {route === 'player' &&
+          <PlayerContainer
+            go={::this.go}
+            episode={this.state.route[1]}
+            tr={this.tr(this.state.lang)}
+            store={store}
+          />
         }
       </div>
     );

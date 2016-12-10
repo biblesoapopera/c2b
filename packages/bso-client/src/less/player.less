@@ -1,0 +1,55 @@
+.player {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  .slide {
+    .font-slide1;
+
+    min-height: 85%;
+    padding: 2.5%;
+  }
+
+  .nav {
+    position: absolute;
+    left: 2.5%;
+    bottom: 2.5%;
+    width: 95%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    .btn {
+      width: 5%;
+      border-radius: 50%;
+
+      div {
+        width: 100%;
+        padding-top: 100%;
+        position: relative;
+
+        div {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+
+          background-size: cover;
+          background-position: 50%, 50%;
+        }
+      }
+    }
+
+    .previous div div {
+      background: url('img/left.png');
+    }
+
+    .next div div {
+      background: url('img/right.png');
+    }
+  }
+}

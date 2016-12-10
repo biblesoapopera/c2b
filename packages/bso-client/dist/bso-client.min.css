@@ -28,6 +28,21 @@
   font-weight: 300;
   font-size: 18px;
 }
+.font-slide0 {
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 250%;
+}
+.font-slide1 {
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 170%;
+}
+.font-slide2 {
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 100%;
+}
 html,
 body {
   height: 100%;
@@ -384,4 +399,67 @@ a:hover {
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 10px solid #ffffff;
+}
+.delivery-chooser .btn {
+  margin-left: 3vw;
+  margin-right: 3vw;
+  margin-top: 3vh;
+}
+.player-container {
+  height: calc(100vh - 50px );
+  width: 100vw;
+}
+.player {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.player .slide {
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 170%;
+  min-height: 85%;
+  padding: 2.5%;
+}
+.player .nav {
+  position: absolute;
+  left: 2.5%;
+  bottom: 2.5%;
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.player .nav .btn {
+  width: 5%;
+  border-radius: 50%;
+}
+.player .nav .btn div {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+}
+.player .nav .btn div div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.player .nav .previous div div {
+  background: url('img/left.png');
+}
+.player .nav .next div div {
+  background: url('img/right.png');
+}
+.slide.text {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
 }

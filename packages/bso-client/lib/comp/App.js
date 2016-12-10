@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/App', ['react', './Background', './Menu', './Splash', './EpisodeChooser', './DeliveryChooser', '../translate', '../store'], function (_export, _context) {
+System.register('bso-client/comp/App', ['react', './Background', './Menu', './Splash', './EpisodeChooser', './DeliveryChooser', './PlayerContainer', '../translate', '../store'], function (_export, _context) {
   "use strict";
 
-  var React, Background, Menu, Splash, EpisodeChooser, DeliveryChooser, translate, store, _createClass, App;
+  var React, Background, Menu, Splash, EpisodeChooser, DeliveryChooser, PlayerContainer, translate, store, _createClass, App;
 
   function _asyncToGenerator(fn) {
     return function () {
@@ -77,6 +77,8 @@ System.register('bso-client/comp/App', ['react', './Background', './Menu', './Sp
       EpisodeChooser = _EpisodeChooser.default;
     }, function (_DeliveryChooser) {
       DeliveryChooser = _DeliveryChooser.default;
+    }, function (_PlayerContainer) {
+      PlayerContainer = _PlayerContainer.default;
     }, function (_translate) {
       translate = _translate.default;
     }, function (_store) {
@@ -114,7 +116,8 @@ System.register('bso-client/comp/App', ['react', './Background', './Menu', './Sp
             lang: 'en',
             //route: ['splash']
             //route: ['choose-episode']
-            route: ['choose-delivery', 4]
+            //route: ['choose-delivery', 4]
+            route: ['player', 4]
           };
 
           _this.switchLang(_this.state.lang);
@@ -184,7 +187,12 @@ System.register('bso-client/comp/App', ['react', './Background', './Menu', './Sp
                 episode: this.state.route[1],
                 tr: this.tr(this.state.lang)
               }),
-              route === 'episode' && React.createElement('div', null)
+              route === 'player' && React.createElement(PlayerContainer, {
+                go: this.go.bind(this),
+                episode: this.state.route[1],
+                tr: this.tr(this.state.lang),
+                store: store
+              })
             );
           }
         }]);
