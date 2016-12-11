@@ -5,6 +5,8 @@ import Splash from './Splash'
 import EpisodeChooser from './EpisodeChooser'
 import DeliveryChooser from './DeliveryChooser'
 import PlayerContainer from './PlayerContainer'
+import Editor from './editor/Editor'
+import AudioEditor from './editor/AudioEditor'
 import translate from '../translate'
 import store from '../store'
 
@@ -17,7 +19,8 @@ class App extends React.Component {
       //route: ['splash']
       //route: ['choose-episode']
       //route: ['choose-delivery', 4]
-      route: ['player', 4]
+      //route: ['player', 4]
+      route: ['editor']
     }
 
     this.switchLang(this.state.lang)
@@ -45,7 +48,13 @@ class App extends React.Component {
       <div className="app">
         <Background />
 
-        <Menu lang={this.state.lang} store={store} switchLang={::this.switchLang} />
+        <Menu
+          go={::this.go}
+          lang={this.state.lang}
+          store={store}
+          switchLang={::this.switchLang}
+          route={this.state.route}
+        />
 
         {route === 'splash' &&
           <Splash go={::this.go} tr={this.tr(this.state.lang)}/>
@@ -73,6 +82,21 @@ class App extends React.Component {
           <PlayerContainer
             go={::this.go}
             episode={this.state.route[1]}
+            tr={this.tr(this.state.lang)}
+            store={store}
+          />
+        }
+
+        {route === 'editor' &&
+          <Editor
+            go={::this.go}
+            tr={this.tr(this.state.lang)}
+          />
+        }
+
+        {route === 'audio-editor' &&
+          <AudioEditor
+            lang={this.state.lang}
             tr={this.tr(this.state.lang)}
             store={store}
           />

@@ -1,20 +1,26 @@
 .lang-switcher {
-  color: @white;
+  width: @menu-height;
+  height: @menu-height;
 
-  .head {
-    width: @menu-height;
-    height: @menu-height;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
-    cursor: pointer;
+  cursor: pointer;
+
+  .lang{
+    width: 50%;
+    height: 50%;
+
+    background: url('img/globe.png');
+    background-size: cover;
+    background-position: 50%, 50%;
   }
+}
 
-  .head:hover {
-    background-color: fade(@white, 10%);
-  }
+.lang-switcher:hover {
+  background-color: fade(@white, 10%);
 }
 
 .lang-switcher-dropdown {

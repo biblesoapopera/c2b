@@ -70,8 +70,37 @@ System.register('bso-client/comp/Menu', ['react', './LangSwitcher'], function (_
         }
 
         _createClass(Menu, [{
+          key: 'edit',
+          value: function edit() {
+            this.props.go(['editor']);
+          }
+        }, {
+          key: 'editAudio',
+          value: function editAudio() {
+            this.props.go(['audio-editor']);
+          }
+        }, {
+          key: 'editSeries',
+          value: function editSeries() {
+            this.props.go(['series-editor']);
+          }
+        }, {
+          key: 'editEpisode',
+          value: function editEpisode() {
+            this.props.go(['episode-editor']);
+          }
+        }, {
           key: 'render',
           value: function render() {
+            var items = [];
+
+            if (this.props.route[0] === 'splash') items = ['lang', 'login'];
+            if (this.props.route[0] === 'choose-episode') items = ['edit', 'lang'];
+            if (this.props.route[0] === 'choose-delivery') items = ['lang'];
+            if (this.props.route[0] === 'player') items = ['lang'];
+            if (this.props.route[0] === 'editor') items = ['edit-audio', 'edit-series', 'edit-episode'];
+            if (this.props.route[0] === 'audio-editor') items = ['edit', 'edit-series', 'edit-episode'];
+
             return React.createElement(
               'div',
               { className: 'menu' },
@@ -80,12 +109,35 @@ System.register('bso-client/comp/Menu', ['react', './LangSwitcher'], function (_
                 { className: 'logo font-logo' },
                 'C2B'
               ),
-              React.createElement(LangSwitcher, {
-                lang: this.props.lang,
-                country: this.props.country,
-                switchLang: this.props.switchLang,
-                store: this.props.store
-              })
+              React.createElement(
+                'div',
+                { className: 'items' },
+                items.indexOf('edit') !== -1 && React.createElement(
+                  'div',
+                  { className: 'item edit', onClick: this.edit.bind(this) },
+                  React.createElement('div', null)
+                ),
+                items.indexOf('lang') !== -1 && React.createElement(LangSwitcher, {
+                  lang: this.props.lang,
+                  switchLang: this.props.switchLang,
+                  store: this.props.store
+                }),
+                items.indexOf('edit-audio') !== -1 && React.createElement(
+                  'div',
+                  { className: 'item edit-audio', onClick: this.editAudio.bind(this) },
+                  React.createElement('div', null)
+                ),
+                items.indexOf('edit-series') !== -1 && React.createElement(
+                  'div',
+                  { className: 'item edit-series', onClick: this.editSeries.bind(this) },
+                  React.createElement('div', null)
+                ),
+                items.indexOf('edit-episode') !== -1 && React.createElement(
+                  'div',
+                  { className: 'item edit-episode', onClick: this.editEpisode.bind(this) },
+                  React.createElement('div', null)
+                )
+              )
             );
           }
         }]);

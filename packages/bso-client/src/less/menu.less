@@ -11,4 +11,50 @@
   .logo {
     padding-left: 20px;
   }
+
+  .items {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .item {
+      width: @menu-height;
+      height: @menu-height;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      cursor: pointer;
+    }
+
+    .item:hover {
+      background-color: fade(@white, 10%);
+    }
+
+    .item div{
+      width: 50%;
+      height: 50%;
+      background-size: cover;
+      background-position: 50%, 50%;
+    }
+
+    .edit div {
+      background: url('img/edit.png');
+    }
+
+    .edit-audio div {
+      background: url('img/edit-audio.png');
+    }
+
+    .edit-series div {
+      background: url('img/edit-series.png');
+    }
+
+    .edit-episode div {
+      background: url('img/edit-episode.png');
+    }
+  }
 }

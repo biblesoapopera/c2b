@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/LangSwitcher', ['react', './LangSwitcherDropdown'], function (_export, _context) {
+System.register('bso-client/comp/editor/AudioEditor', ['react'], function (_export, _context) {
   "use strict";
 
-  var React, LangSwitcherDropdown, _createClass, LangSwitcher;
+  var React, _createClass, AudioEditor;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -38,8 +38,6 @@ System.register('bso-client/comp/LangSwitcher', ['react', './LangSwitcherDropdow
   return {
     setters: [function (_react) {
       React = _react.default;
-    }, function (_LangSwitcherDropdown) {
-      LangSwitcherDropdown = _LangSwitcherDropdown.default;
     }],
     execute: function () {
       _createClass = function () {
@@ -60,55 +58,35 @@ System.register('bso-client/comp/LangSwitcher', ['react', './LangSwitcherDropdow
         };
       }();
 
-      LangSwitcher = function (_React$Component) {
-        _inherits(LangSwitcher, _React$Component);
+      AudioEditor = function (_React$Component) {
+        _inherits(AudioEditor, _React$Component);
 
-        function LangSwitcher(props) {
-          _classCallCheck(this, LangSwitcher);
+        function AudioEditor() {
+          _classCallCheck(this, AudioEditor);
 
-          var _this = _possibleConstructorReturn(this, (LangSwitcher.__proto__ || Object.getPrototypeOf(LangSwitcher)).call(this, props));
-
-          _this.state = {
-            visible: false
-          };
-          return _this;
+          return _possibleConstructorReturn(this, (AudioEditor.__proto__ || Object.getPrototypeOf(AudioEditor)).apply(this, arguments));
         }
 
-        _createClass(LangSwitcher, [{
-          key: 'show',
-          value: function show() {
-            this.setState({ visible: true });
-          }
-        }, {
-          key: 'newLang',
-          value: function newLang(lang) {
-            this.setState({ visible: false });
-            if (lang !== this.props.lang) this.props.switchLang(lang);
+        _createClass(AudioEditor, [{
+          key: 'tr',
+          value: function tr(str) {
+            return this.props.tr('audio-editor', str);
           }
         }, {
           key: 'render',
           value: function render() {
             return React.createElement(
               'div',
-              { className: 'lang-switcher' },
-              React.createElement(
-                'div',
-                { className: 'lang', onClick: this.show.bind(this) },
-                React.createElement('div', null)
-              ),
-              this.state.visible && React.createElement(LangSwitcherDropdown, {
-                store: this.props.store,
-                lang: this.props.lang,
-                newLang: this.newLang.bind(this)
-              })
+              { className: 'audio-editor' },
+              'Audio Editor'
             );
           }
         }]);
 
-        return LangSwitcher;
+        return AudioEditor;
       }(React.Component);
 
-      _export('default', LangSwitcher);
+      _export('default', AudioEditor);
     }
   };
 });

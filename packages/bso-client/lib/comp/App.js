@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/App', ['react', './Background', './Menu', './Splash', './EpisodeChooser', './DeliveryChooser', './PlayerContainer', '../translate', '../store'], function (_export, _context) {
+System.register('bso-client/comp/App', ['react', './Background', './Menu', './Splash', './EpisodeChooser', './DeliveryChooser', './PlayerContainer', './editor/Editor', './editor/AudioEditor', '../translate', '../store'], function (_export, _context) {
   "use strict";
 
-  var React, Background, Menu, Splash, EpisodeChooser, DeliveryChooser, PlayerContainer, translate, store, _createClass, App;
+  var React, Background, Menu, Splash, EpisodeChooser, DeliveryChooser, PlayerContainer, Editor, AudioEditor, translate, store, _createClass, App;
 
   function _asyncToGenerator(fn) {
     return function () {
@@ -79,6 +79,10 @@ System.register('bso-client/comp/App', ['react', './Background', './Menu', './Sp
       DeliveryChooser = _DeliveryChooser.default;
     }, function (_PlayerContainer) {
       PlayerContainer = _PlayerContainer.default;
+    }, function (_editorEditor) {
+      Editor = _editorEditor.default;
+    }, function (_editorAudioEditor) {
+      AudioEditor = _editorAudioEditor.default;
     }, function (_translate) {
       translate = _translate.default;
     }, function (_store) {
@@ -117,7 +121,8 @@ System.register('bso-client/comp/App', ['react', './Background', './Menu', './Sp
             //route: ['splash']
             //route: ['choose-episode']
             //route: ['choose-delivery', 4]
-            route: ['player', 4]
+            //route: ['player', 4]
+            route: ['editor']
           };
 
           _this.switchLang(_this.state.lang);
@@ -173,7 +178,13 @@ System.register('bso-client/comp/App', ['react', './Background', './Menu', './Sp
               'div',
               { className: 'app' },
               React.createElement(Background, null),
-              React.createElement(Menu, { lang: this.state.lang, store: store, switchLang: this.switchLang.bind(this) }),
+              React.createElement(Menu, {
+                go: this.go.bind(this),
+                lang: this.state.lang,
+                store: store,
+                switchLang: this.switchLang.bind(this),
+                route: this.state.route
+              }),
               route === 'splash' && React.createElement(Splash, { go: this.go.bind(this), tr: this.tr(this.state.lang) }),
               route === 'choose-episode' && React.createElement(EpisodeChooser, {
                 lang: this.state.lang,
@@ -190,6 +201,15 @@ System.register('bso-client/comp/App', ['react', './Background', './Menu', './Sp
               route === 'player' && React.createElement(PlayerContainer, {
                 go: this.go.bind(this),
                 episode: this.state.route[1],
+                tr: this.tr(this.state.lang),
+                store: store
+              }),
+              route === 'editor' && React.createElement(Editor, {
+                go: this.go.bind(this),
+                tr: this.tr(this.state.lang)
+              }),
+              route === 'audio-editor' && React.createElement(AudioEditor, {
+                lang: this.state.lang,
                 tr: this.tr(this.state.lang),
                 store: store
               })

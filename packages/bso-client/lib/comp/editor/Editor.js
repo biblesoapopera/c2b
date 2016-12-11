@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/LangSwitcher', ['react', './LangSwitcherDropdown'], function (_export, _context) {
+System.register('bso-client/comp/editor/Editor', ['react'], function (_export, _context) {
   "use strict";
 
-  var React, LangSwitcherDropdown, _createClass, LangSwitcher;
+  var React, _createClass, Editor;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -38,8 +38,6 @@ System.register('bso-client/comp/LangSwitcher', ['react', './LangSwitcherDropdow
   return {
     setters: [function (_react) {
       React = _react.default;
-    }, function (_LangSwitcherDropdown) {
-      LangSwitcherDropdown = _LangSwitcherDropdown.default;
     }],
     execute: function () {
       _createClass = function () {
@@ -60,55 +58,69 @@ System.register('bso-client/comp/LangSwitcher', ['react', './LangSwitcherDropdow
         };
       }();
 
-      LangSwitcher = function (_React$Component) {
-        _inherits(LangSwitcher, _React$Component);
+      Editor = function (_React$Component) {
+        _inherits(Editor, _React$Component);
 
-        function LangSwitcher(props) {
-          _classCallCheck(this, LangSwitcher);
+        function Editor() {
+          _classCallCheck(this, Editor);
 
-          var _this = _possibleConstructorReturn(this, (LangSwitcher.__proto__ || Object.getPrototypeOf(LangSwitcher)).call(this, props));
-
-          _this.state = {
-            visible: false
-          };
-          return _this;
+          return _possibleConstructorReturn(this, (Editor.__proto__ || Object.getPrototypeOf(Editor)).apply(this, arguments));
         }
 
-        _createClass(LangSwitcher, [{
-          key: 'show',
-          value: function show() {
-            this.setState({ visible: true });
+        _createClass(Editor, [{
+          key: 'editAudio',
+          value: function editAudio() {
+            this.props.go(['audio-editor']);
           }
         }, {
-          key: 'newLang',
-          value: function newLang(lang) {
-            this.setState({ visible: false });
-            if (lang !== this.props.lang) this.props.switchLang(lang);
+          key: 'editSeries',
+          value: function editSeries() {
+            this.props.go(['series-editor']);
+          }
+        }, {
+          key: 'editEpisode',
+          value: function editEpisode() {
+            this.props.go(['episode-editor']);
+          }
+        }, {
+          key: 'tr',
+          value: function tr(str) {
+            return this.props.tr('editor', str);
           }
         }, {
           key: 'render',
           value: function render() {
             return React.createElement(
               'div',
-              { className: 'lang-switcher' },
+              { className: 'editor' },
               React.createElement(
                 'div',
-                { className: 'lang', onClick: this.show.bind(this) },
-                React.createElement('div', null)
+                { className: 'text font1' },
+                this.tr('What would you like to edit?')
               ),
-              this.state.visible && React.createElement(LangSwitcherDropdown, {
-                store: this.props.store,
-                lang: this.props.lang,
-                newLang: this.newLang.bind(this)
-              })
+              React.createElement(
+                'div',
+                { className: 'btn font2', onClick: this.editAudio.bind(this) },
+                this.tr('Audio Library')
+              ),
+              React.createElement(
+                'div',
+                { className: 'btn font2', onClick: this.editSeries.bind(this) },
+                this.tr('Series')
+              ),
+              React.createElement(
+                'div',
+                { className: 'btn font2', onClick: this.editEpisode.bind(this) },
+                this.tr('Episode')
+              )
             );
           }
         }]);
 
-        return LangSwitcher;
+        return Editor;
       }(React.Component);
 
-      _export('default', LangSwitcher);
+      _export('default', Editor);
     }
   };
 });

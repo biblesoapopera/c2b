@@ -20,9 +20,9 @@ class LangSwitcher extends React.Component {
 
   render() {
     return (
-      <div className="lang-switcher font-menu">
-        <div className="head" onClick={::this.show}>
-          <img src="img/globe.png" />
+      <div className="lang-switcher">
+        <div className="lang" onClick={::this.show}>
+          <div></div>
         </div>
 
         {this.state.visible &&
