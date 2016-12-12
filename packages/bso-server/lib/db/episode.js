@@ -1,18 +1,18 @@
 'use strict';
 
-System.register('bso-server/db/episode', ['./episode/find'], function (_export, _context) {
+System.register('bso-server/db/episode', ['bso-model/Episode', 'mongoose'], function (_export, _context) {
   "use strict";
 
-  var find;
+  var mongoose;
   return {
-    setters: [function (_episodeFind) {
-      find = _episodeFind.default;
+    setters: [function (_bsoModelEpisode) {}, function (_mongoose) {
+      mongoose = _mongoose.default;
     }],
     execute: function () {
-      _export('default', function (url) {
-        return {
-          find: find(url)
-        };
+      _export('default', {
+        find: function find(id) {
+          return mongoose.model('Episode').findOne({ id: id }).exec();
+        }
       });
     }
   };

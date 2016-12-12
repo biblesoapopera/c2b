@@ -1,11 +1,13 @@
 'use strict';
 
-System.register('bso-server/db', ['./db/user', './db/series', './db/episode'], function (_export, _context) {
+System.register('bso-server/db', ['mongoose', './db/user', './db/series', './db/episode'], function (_export, _context) {
   "use strict";
 
-  var user, series, episode;
+  var mongoose, user, series, episode;
   return {
-    setters: [function (_dbUser) {
+    setters: [function (_mongoose) {
+      mongoose = _mongoose.default;
+    }, function (_dbUser) {
       user = _dbUser.default;
     }, function (_dbSeries) {
       series = _dbSeries.default;
@@ -14,10 +16,11 @@ System.register('bso-server/db', ['./db/user', './db/series', './db/episode'], f
     }],
     execute: function () {
       _export('default', function (url) {
+        mongoose.connect(url);
         return {
-          user: user(url),
-          series: series(url),
-          episode: episode(url)
+          user: user,
+          series: series,
+          episode: episode
         };
       });
     }

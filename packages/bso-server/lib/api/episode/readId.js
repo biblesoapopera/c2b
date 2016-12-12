@@ -1,18 +1,48 @@
 'use strict';
 
-System.register('bso-server/api/episode/readId', [], function (_export, _context) {
+System.register('bso-server/api/episode/readId', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator'], function (_export, _context) {
   "use strict";
 
+  var _regeneratorRuntime, _asyncToGenerator;
+
   return {
-    setters: [],
+    setters: [function (_babelRuntimeRegenerator) {
+      _regeneratorRuntime = _babelRuntimeRegenerator.default;
+    }, function (_babelRuntimeHelpersAsyncToGenerator) {
+      _asyncToGenerator = _babelRuntimeHelpersAsyncToGenerator.default;
+    }],
     execute: function () {
       _export('default', function (db) {
-        return function (req, res, next) {
-          var episode = db.series.find(req.params.id);
-          res.type('json');
-          res.status(200);
-          res.send(episode);
-        };
+        return function () {
+          var _ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(req, res, next) {
+            var episode;
+            return _regeneratorRuntime.wrap(function _callee$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    _context2.next = 2;
+                    return db.episode.find(req.params.id);
+
+                  case 2:
+                    episode = _context2.sent;
+
+                    res.type('json');
+                    res.status(200);
+                    res.send(episode);
+                    next();
+
+                  case 7:
+                  case 'end':
+                    return _context2.stop();
+                }
+              }
+            }, _callee, undefined);
+          }));
+
+          return function (_x, _x2, _x3) {
+            return _ref.apply(this, arguments);
+          };
+        }();
       });
     }
   };

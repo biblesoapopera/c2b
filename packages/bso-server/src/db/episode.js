@@ -1,7 +1,6 @@
-import find from './episode/find'
+import 'bso-model/Episode'
+import mongoose from 'mongoose'
 
-export default url => {
-  return {
-    find: find(url)
-  }
+export default {
+  find: id => mongoose.model('Episode').findOne({id: id}).exec()
 }

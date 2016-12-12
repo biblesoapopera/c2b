@@ -57,6 +57,7 @@ let questionSlide = new mongoose.Schema({
     required: true
   },
   answers: [answer],
+  audio: audio,
   completeWhen: {
     type: String,
     required: true,
@@ -105,7 +106,7 @@ let schema = new mongoose.Schema({
     required: true,
     maxlength: 180
   },
-  audio: {
+  audioFiles: {
     type: Array,
     required: true,
     validate: val => val.length >= 1
@@ -119,4 +120,4 @@ let schema = new mongoose.Schema({
   }]
 })
 
-export default mongoose.model('Episode', schema)
+mongoose.model('Episode', schema)

@@ -190,7 +190,8 @@ gulp.task('clean-bso-server', () => {
   return del([
     'packages/bso-server/lib/**/*',
     'packages/bso-server/instrumented-lib',
-    'packages/bso-server/coverage'
+    'packages/bso-server/coverage',
+    'packages/bso-server/test/temp/**/*'
   ])
 })
 gulp.task('compile-bso-server', () => compile('bso-server'))

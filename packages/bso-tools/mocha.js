@@ -31,7 +31,7 @@ module.exports = pkg => {
   } else {
     globDef = testDir + '/**/*.js'
   }
-console.log(globDef)
+
   glob.sync(globDef, {nodir: true}).forEach(file => {
     let name = path.relative(testDir, file).replace(/.js$/, '').replace(/\\/g, '/')
 

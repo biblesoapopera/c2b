@@ -9,10 +9,8 @@ System.register('bso-server/db/user', ['./user/find'], function (_export, _conte
       find = _userFind.default;
     }],
     execute: function () {
-      _export('default', function (url) {
-        return {
-          find: find(url)
-        };
+      _export('default', {
+        find: find
       });
     }
   };

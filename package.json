@@ -12,12 +12,14 @@
     "babel-runtime": "^6.18.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "express-fileupload": "0.0.5",
     "jsonwebtoken": "^7.1.9",
     "mongoose": "^4.7.1",
     "password-hash": "^1.2.2",
     "rbac": "^4.0.1",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "del": "^2.2.2"
   },
   "devDependencies": {
     "babel-plugin-istanbul": "^3.0.0",
@@ -30,7 +32,6 @@
     "babel-preset-stage-3": "^6.17.0",
     "babel-register": "^6.18.0",
     "chai": "^3.5.0",
-    "del": "^2.2.2",
     "glob": "^7.1.1",
     "gulp": "^3.9.1",
     "gulp-append-prepend": "^1.0.3",
@@ -48,8 +49,11 @@
     "istanbul": "^0.4.5",
     "istanbul-threshold-checker": "^0.2.1",
     "mocha": "^3.2.0",
-    "node-mocks-http": "^1.5.4",
+    "mock-express-request": "^0.2.0",
+    "mock-express-response": "^0.2.0",
+    "sinon": "^1.17.6",
     "supertest": "^2.0.1",
+    "through2": "^2.0.3",
     "yargs": "^6.4.0"
   }
 }

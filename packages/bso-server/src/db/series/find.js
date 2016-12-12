@@ -115,6 +115,5 @@ const store = {
   ]
 }
 
-export default url => {
-  return lang => store[lang]
-}
+export default lang => store[lang]
+

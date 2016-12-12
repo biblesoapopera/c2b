@@ -9,10 +9,8 @@ System.register('bso-server/db/series', ['./series/find'], function (_export, _c
       find = _seriesFind.default;
     }],
     execute: function () {
-      _export('default', function (url) {
-        return {
-          find: find(url)
-        };
+      _export('default', {
+        find: find
       });
     }
   };
