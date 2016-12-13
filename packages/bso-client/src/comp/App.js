@@ -1,10 +1,10 @@
 import React from 'react'
 import Background from './Background'
-import Menu from './Menu'
+import Menu from './menu/Menu'
 import Splash from './Splash'
-import EpisodeChooser from './EpisodeChooser'
+import EpisodeChooser from './episodeChooser/EpisodeChooser'
 import DeliveryChooser from './DeliveryChooser'
-import PlayerContainer from './PlayerContainer'
+import PlayerContainer from './player/PlayerContainer'
 import Editor from './editor/Editor'
 import AudioEditor from './editor/AudioEditor'
 import translate from '../translate'
@@ -16,11 +16,13 @@ class App extends React.Component {
     this.state = {
       country: 'australia',
       lang: 'en',
-      //route: ['splash']
+      menu: [],
+      user: false,
+      route: []
       //route: ['choose-episode']
       //route: ['choose-delivery', 4]
       //route: ['player', 4]
-      route: ['editor']
+      //route: ['editor']
     }
 
     this.switchLang(this.state.lang)
@@ -29,6 +31,23 @@ class App extends React.Component {
   async switchLang(lang) {
     await store.lang.load(lang)
     this.setState({lang: lang})
+  }
+
+  setUser(user) {
+    this.setState({user: user})
+  }
+
+  menu(buttons) {
+    buttons.forEach(btn => {
+      if (btn.name === 'login') {
+        btn.fn = ::this.login
+      } else if (btn.name === 'lang') {
+        btn.fn = ::this.switchLang
+        btn.lang = this.state.lang
+        btn.store = store
+      }
+    })
+    this.setState({menu: buttons})
   }
 
   go(to) {
@@ -49,15 +68,11 @@ class App extends React.Component {
         <Background />
 
         <Menu
-          go={::this.go}
-          lang={this.state.lang}
-          store={store}
-          switchLang={::this.switchLang}
-          route={this.state.route}
+          buttons={this.state.menu}
         />
 
-        {route === 'splash' &&
-          <Splash go={::this.go} tr={this.tr(this.state.lang)}/>
+        {route === void 0 &&
+          <Splash go={::this.go} menu={::this.menu} tr={this.tr(this.state.lang)}/>
         }
 
         {route === 'choose-episode' &&

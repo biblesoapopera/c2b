@@ -7,5 +7,5 @@ export default {
   create: create,
   readId: readId,
   update: update,
-  episodeDelete: episodeDelete
+  'delete': episodeDelete
 }

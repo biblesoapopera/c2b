@@ -9,6 +9,7 @@ let app = express()
 let db = dbFn(config.dbUrl)
 let key = config.jwkKey
 let audioDir = config.audioDir
+
 app.use('/', router({
   key:key,
   rbac: rbac,

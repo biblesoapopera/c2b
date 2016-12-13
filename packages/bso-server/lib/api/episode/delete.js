@@ -5,6 +5,10 @@ System.register("bso-server/api/episode/delete", [], function (_export, _context
 
   return {
     setters: [],
-    execute: function () {}
+    execute: function () {
+      _export("default", function () {
+        return function () {};
+      });
+    }
   };
 });

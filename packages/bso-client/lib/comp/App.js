@@ -1,6 +1,6 @@
 'use strict';
 
-System.register('bso-client/comp/App', ['react', './Background', './Menu', './Splash', './EpisodeChooser', './DeliveryChooser', './PlayerContainer', './editor/Editor', './editor/AudioEditor', '../translate', '../store'], function (_export, _context) {
+System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', './Splash', './episodeChooser/EpisodeChooser', './DeliveryChooser', './player/PlayerContainer', './editor/Editor', './editor/AudioEditor', '../translate', '../store'], function (_export, _context) {
   "use strict";
 
   var React, Background, Menu, Splash, EpisodeChooser, DeliveryChooser, PlayerContainer, Editor, AudioEditor, translate, store, _createClass, App;
@@ -69,16 +69,16 @@ System.register('bso-client/comp/App', ['react', './Background', './Menu', './Sp
       React = _react.default;
     }, function (_Background) {
       Background = _Background.default;
-    }, function (_Menu) {
-      Menu = _Menu.default;
+    }, function (_menuMenu) {
+      Menu = _menuMenu.default;
     }, function (_Splash) {
       Splash = _Splash.default;
-    }, function (_EpisodeChooser) {
-      EpisodeChooser = _EpisodeChooser.default;
+    }, function (_episodeChooserEpisodeChooser) {
+      EpisodeChooser = _episodeChooserEpisodeChooser.default;
     }, function (_DeliveryChooser) {
       DeliveryChooser = _DeliveryChooser.default;
-    }, function (_PlayerContainer) {
-      PlayerContainer = _PlayerContainer.default;
+    }, function (_playerPlayerContainer) {
+      PlayerContainer = _playerPlayerContainer.default;
     }, function (_editorEditor) {
       Editor = _editorEditor.default;
     }, function (_editorAudioEditor) {
@@ -118,11 +118,12 @@ System.register('bso-client/comp/App', ['react', './Background', './Menu', './Sp
           _this.state = {
             country: 'australia',
             lang: 'en',
-            //route: ['splash']
+            menu: [],
+            route: []
             //route: ['choose-episode']
             //route: ['choose-delivery', 4]
             //route: ['player', 4]
-            route: ['editor']
+            //route: ['editor']
           };
 
           _this.switchLang(_this.state.lang);
@@ -158,6 +159,25 @@ System.register('bso-client/comp/App', ['react', './Background', './Menu', './Sp
             return switchLang;
           }()
         }, {
+          key: 'login',
+          value: function login() {}
+        }, {
+          key: 'menu',
+          value: function menu(buttons) {
+            var _this2 = this;
+
+            buttons.forEach(function (btn) {
+              if (btn.name === 'login') {
+                btn.fn = _this2.login.bind(_this2);
+              } else if (btn.name === 'lang') {
+                btn.fn = _this2.switchLang.bind(_this2);
+                btn.lang = _this2.state.lang;
+                btn.store = store;
+              }
+            });
+            this.setState({ menu: buttons });
+          }
+        }, {
           key: 'go',
           value: function go(to) {
             this.setState({ route: to });
@@ -179,13 +199,9 @@ System.register('bso-client/comp/App', ['react', './Background', './Menu', './Sp
               { className: 'app' },
               React.createElement(Background, null),
               React.createElement(Menu, {
-                go: this.go.bind(this),
-                lang: this.state.lang,
-                store: store,
-                switchLang: this.switchLang.bind(this),
-                route: this.state.route
+                buttons: this.state.menu
               }),
-              route === 'splash' && React.createElement(Splash, { go: this.go.bind(this), tr: this.tr(this.state.lang) }),
+              route === void 0 && React.createElement(Splash, { go: this.go.bind(this), menu: this.menu.bind(this), tr: this.tr(this.state.lang) }),
               route === 'choose-episode' && React.createElement(EpisodeChooser, {
                 lang: this.state.lang,
                 switchLang: this.switchLang.bind(this),

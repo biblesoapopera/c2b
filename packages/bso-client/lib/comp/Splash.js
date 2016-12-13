@@ -68,6 +68,11 @@ System.register('bso-client/comp/Splash', ['react'], function (_export, _context
         }
 
         _createClass(Splash, [{
+          key: 'componentWillMount',
+          value: function componentWillMount() {
+            this.props.menu([{ name: 'lang' }, { name: 'login' }]);
+          }
+        }, {
           key: 'enter',
           value: function enter() {
             this.props.go(['choose-episode']);

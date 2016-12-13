@@ -23,6 +23,7 @@ System.register('bso-server', ['express', './db', './rbac', './config', './route
       key = config.jwkKey;
       audioDir = config.audioDir;
 
+
       app.use('/', router({
         key: key,
         rbac: rbac,

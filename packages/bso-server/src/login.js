@@ -9,14 +9,14 @@ const fail = (res, next) => {
 }
 
 export default (key, db) => {
-  return (req, res, next) => {
+  return async (req, res, next) => {
 
     let username = req.body.username
     let password = req.body.password
 
     if (!username || !password) return fail(res, next)
 
-    let user = db.user.find(username)
+    let user = await db.user.find(username)
     if (!user) return fail(res, next)
 
     if (!hash.verify(password, user.password)) return fail(res, next)

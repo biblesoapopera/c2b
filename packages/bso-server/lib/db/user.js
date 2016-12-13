@@ -1,16 +1,23 @@
 'use strict';
 
-System.register('bso-server/db/user', ['./user/find'], function (_export, _context) {
+System.register('bso-server/db/user', ['bso-model/User', 'mongoose'], function (_export, _context) {
   "use strict";
 
-  var find;
+  var mongoose;
   return {
-    setters: [function (_userFind) {
-      find = _userFind.default;
+    setters: [function (_bsoModelUser) {}, function (_mongoose) {
+      mongoose = _mongoose.default;
     }],
     execute: function () {
       _export('default', {
-        find: find
+        find: function find(username) {
+          return mongoose.model('User').findOne({ username: username }).exec();
+        },
+        create: function create(userObj) {
+          var Model = mongoose.model('User');
+          var model = new Model(userObj);
+          return model.save();
+        }
       });
     }
   };

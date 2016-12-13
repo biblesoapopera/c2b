@@ -1,6 +1,13 @@
 import React from 'react'
 
 class Splash extends React.Component {
+  componentWillMount() {
+    this.props.menu([
+      {name: 'lang'},
+      {name: 'login'}
+    ])
+  }
+
   enter() {
     this.props.go(['choose-episode'])
   }

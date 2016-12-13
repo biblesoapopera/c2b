@@ -7,6 +7,7 @@ import authenticate from './authenticate'
 import authorize from './authorize'
 import express from 'express'
 import fileUpload from 'express-fileupload'
+import audioLib from './audioLib'
 
 export default (cfg) => {
   let router = express.Router()
@@ -73,7 +74,7 @@ export default (cfg) => {
     api.audio.delete(cfg.audioDir)
   )
 
-  router.use(audioLib())
+  router.use('/audio', audioLib(cfg.audioDir))
   router.use(staticAssets())
   router.use(err())
 

@@ -11,8 +11,8 @@ System.register('bso-server/audioLib', ['path', 'express'], function (_export, _
       express = _express.default;
     }],
     execute: function () {
-      _export('default', function () {
-        return express.static('/audio', path.join(__dirname, '..', '..', '..', 'audio_lib'));
+      _export('default', function (audioDir) {
+        return express.static(audioDir);
       });
     }
   };

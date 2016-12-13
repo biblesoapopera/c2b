@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-server/router', ['./static', './login', 'body-parser', './api', './err', './authenticate', './authorize', 'express', 'express-fileupload'], function (_export, _context) {
+System.register('bso-server/router', ['./static', './login', 'body-parser', './api', './err', './authenticate', './authorize', 'express', 'express-fileupload', './audioLib'], function (_export, _context) {
   "use strict";
 
-  var staticAssets, login, bodyParser, api, err, authenticate, authorize, express, fileUpload;
+  var staticAssets, login, bodyParser, api, err, authenticate, authorize, express, fileUpload, audioLib;
   return {
     setters: [function (_static) {
       staticAssets = _static.default;
@@ -23,6 +23,8 @@ System.register('bso-server/router', ['./static', './login', 'body-parser', './a
       express = _express.default;
     }, function (_expressFileupload) {
       fileUpload = _expressFileupload.default;
+    }, function (_audioLib) {
+      audioLib = _audioLib.default;
     }],
     execute: function () {
       _export('default', function (cfg) {
@@ -41,7 +43,7 @@ System.register('bso-server/router', ['./static', './login', 'body-parser', './a
         router.patch('/audio/:file', authenticate(cfg.key, cfg.db), authorize(cfg.rbac, 'update', 'audio'), fileUpload(), api.audio.update(cfg.audioDir));
         router.delete('/audio/:file', authenticate(cfg.key, cfg.db), authorize(cfg.rbac, 'delete', 'audio'), bodyParser.json(), api.audio.delete(cfg.audioDir));
 
-        router.use(audioLib());
+        router.use('/audio', audioLib(cfg.audioDir));
         router.use(staticAssets());
         router.use(err());
 
