@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-server/db', ['mongoose', './db/user', './db/series', './db/episode'], function (_export, _context) {
+System.register('bso-server/db', ['mongoose', './db/user', './db/series', './db/episode', './db/audioHash'], function (_export, _context) {
   "use strict";
 
-  var mongoose, user, series, episode;
+  var mongoose, user, series, episode, audioHash;
   return {
     setters: [function (_mongoose) {
       mongoose = _mongoose.default;
@@ -13,6 +13,8 @@ System.register('bso-server/db', ['mongoose', './db/user', './db/series', './db/
       series = _dbSeries.default;
     }, function (_dbEpisode) {
       episode = _dbEpisode.default;
+    }, function (_dbAudioHash) {
+      audioHash = _dbAudioHash.default;
     }],
     execute: function () {
       _export('default', function (url) {
@@ -20,7 +22,8 @@ System.register('bso-server/db', ['mongoose', './db/user', './db/series', './db/
         return {
           user: user,
           series: series,
-          episode: episode
+          episode: episode,
+          audioHash: audioHash
         };
       });
     }

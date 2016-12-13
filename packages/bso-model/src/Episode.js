@@ -106,11 +106,18 @@ let schema = new mongoose.Schema({
     required: true,
     maxlength: 180
   },
-  audioFiles: {
-    type: Array,
-    required: true,
-    validate: val => val.length >= 1
-  },
+  audioFiles: [{
+    name: {
+      type: String,
+      required: true,
+      maxlength: 180
+    },
+    hash: {
+      type: String,
+      required: true,
+      maxlength: 255
+    }
+  }],
   slides: [{
     text: {type: content},
     slider: {type: questionSlide},

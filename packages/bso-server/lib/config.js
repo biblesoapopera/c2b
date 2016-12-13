@@ -1,14 +1,18 @@
 'use strict';
 
-System.register('bso-server/config', [], function (_export, _context) {
+System.register('bso-server/config', ['path'], function (_export, _context) {
   "use strict";
 
+  var path;
   return {
-    setters: [],
+    setters: [function (_path) {
+      path = _path.default;
+    }],
     execute: function () {
       _export('default', {
         jwtKey: 'D3zXfkA157ISE3i7S74YUF3qFcY0sicn',
-        dbUrl: 'mydb'
+        dbUrl: 'mydb',
+        audioDir: path.join(__dirname, '..', '..', '..', 'audio_lib')
       });
     }
   };

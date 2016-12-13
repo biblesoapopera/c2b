@@ -69,6 +69,7 @@ System.register('bso-model/Episode', ['babel-runtime/core-js/object/keys', 'babe
           required: true
         },
         answers: [answer],
+        audio: audio,
         completeWhen: {
           type: String,
           required: true,
@@ -120,13 +121,18 @@ System.register('bso-model/Episode', ['babel-runtime/core-js/object/keys', 'babe
           required: true,
           maxlength: 180
         },
-        audio: {
-          type: Array,
-          required: true,
-          validate: function validate(val) {
-            return val.length >= 1;
+        audioFiles: [{
+          name: {
+            type: String,
+            required: true,
+            maxlength: 180
+          },
+          hash: {
+            type: String,
+            required: true,
+            maxlength: 255
           }
-        },
+        }],
         slides: [{
           text: { type: content },
           slider: { type: questionSlide },
@@ -136,7 +142,8 @@ System.register('bso-model/Episode', ['babel-runtime/core-js/object/keys', 'babe
         }]
       });
 
-      _export('default', mongoose.model('Episode', schema));
+
+      mongoose.model('Episode', schema);
     }
   };
 });

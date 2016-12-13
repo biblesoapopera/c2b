@@ -1,6 +1,7 @@
 import chai from 'chai'
 import login from 'bso-server/login'
-import httpMocks from 'node-mocks-http'
+import MockRequest from 'mock-express-request'
+import MockResponse from 'mock-express-response'
 import jwt from 'jsonwebtoken'
 import hash from 'password-hash'
 
@@ -15,7 +16,7 @@ let mockDb = {user: {find: () => {return {
 export default () => {
   let fn = login(key, mockDb)
 
-  let req = httpMocks.createRequest({
+  let req = new MockRequest({
     method: 'post',
     body: {
       username: 'test@test.com',
@@ -23,12 +24,12 @@ export default () => {
     }
   })
 
-  let res = httpMocks.createResponse()
+  let res = new MockResponse()
 
   fn(req, res, (arg) => {
     assert.notEqual(arg, 'route')
     assert.equal(res.statusCode, 200)
-    assert.equal(res.getHeader('Content-Type'), 'application/json')
+    assert.ok(/application\/json/.test(res.get('content-type')))
 
     let token = res.getHeader('authorization').slice(4)
     let payload = jwt.verify(token, key)

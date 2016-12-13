@@ -18,11 +18,8 @@ export default async () => {
   let res = new MockResponse({})
 
   let arg = await new Promise((resolve, reject) => {
-    try {
-      fn(req, res, arg => {
-        resolve(arg)
-      })
-    } catch (err) {reject(err)}
+    try {fn(req, res, arg => {resolve(arg)})}
+    catch (err) {reject(err)}
   })
 
   assert.calledOnce(stub)

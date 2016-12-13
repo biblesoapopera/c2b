@@ -1,6 +1,7 @@
 import chai from 'chai'
 import authenticate from 'bso-server/authenticate'
-import httpMocks from 'node-mocks-http'
+import MockRequest from 'mock-express-request'
+import MockResponse from 'mock-express-response'
 
 let assert = chai.assert
 let key = 'testing testing'
@@ -9,8 +10,8 @@ let mockDb = {}
 export default () => {
   let fn = authenticate(key, mockDb)
 
-  let req = httpMocks.createRequest()
-  let res = httpMocks.createResponse()
+  let req = new MockRequest({})
+  let res = new MockResponse({})
 
   fn(req, res, (arg) => {
     assert.equal(arg, 'route')

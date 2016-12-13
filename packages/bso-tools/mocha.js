@@ -27,7 +27,7 @@ module.exports = pkg => {
 
   let globDef
   if (argv.test) {
-    globDef = path.join(__dirname, '..') + '/' + argv.test + '.js'
+    globDef = path.join(__dirname, '..') + '/' + argv.test
   } else {
     globDef = testDir + '/**/*.js'
   }
