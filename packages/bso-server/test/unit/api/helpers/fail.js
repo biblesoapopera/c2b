@@ -1,8 +1,6 @@
 import assert from 'bso-tools/assert'
 import fail from 'bso-server/api/helpers/fail'
 import sinon from 'sinon'
-import path from 'path'
-import crypto from 'crypto'
 
 export default async () => {
   let res = {

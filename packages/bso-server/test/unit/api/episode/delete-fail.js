@@ -3,8 +3,6 @@ import deleteEpisode from 'bso-server/api/episode/delete'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
 import sinon from 'sinon'
-import path from 'path'
-import crypto from 'crypto'
 
 let db = {episode: {delete: () => {}}}
 let stub = sinon.stub(db.episode, 'delete')

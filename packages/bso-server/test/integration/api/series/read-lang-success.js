@@ -1,13 +1,10 @@
-import chai from 'chai'
 import request from 'supertest'
 import express from 'express'
 import router from 'bso-server/router'
 import dbFn from 'bso-server/db'
 import rbac from 'bso-server/rbac'
-import err from 'bso-server/err'
 import jwt from 'jsonwebtoken'
 
-let assert = chai.assert
 let app = express()
 let key = 'testing testing'
 let db = dbFn('test')

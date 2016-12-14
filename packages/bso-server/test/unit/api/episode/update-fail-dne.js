@@ -3,9 +3,6 @@ import update from 'bso-server/api/episode/update'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
 import sinon from 'sinon'
-import path from 'path'
-import crypto from 'crypto'
-import mongoose from 'mongoose'
 
 let db = {episode: {update: () => {}}}
 let stub = sinon.stub(db.episode, 'update')

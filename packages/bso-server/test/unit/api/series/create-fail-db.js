@@ -3,9 +3,6 @@ import create from 'bso-server/api/series/create'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
 import sinon from 'sinon'
-import path from 'path'
-import crypto from 'crypto'
-import mongoose from 'mongoose'
 
 let db = {series: {create: () => {}}}
 let stub = sinon.stub(db.series, 'create')

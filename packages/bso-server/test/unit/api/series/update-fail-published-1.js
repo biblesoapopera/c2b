@@ -2,10 +2,6 @@ import assert from 'bso-tools/assert'
 import update from 'bso-server/api/series/update'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
-import sinon from 'sinon'
-import path from 'path'
-import crypto from 'crypto'
-import mongoose from 'mongoose'
 
 let db = {}
 

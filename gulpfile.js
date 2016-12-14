@@ -71,7 +71,9 @@ let complexity = pkg => {
 
 let lint = pkg => {
   return gulp.src(['packages/' + pkg + '/src/**/*.js', 'packages/' + pkg + '/test/**/*.js'])
-    .pipe(standard())
+    .pipe(standard({
+      fix: true
+    }))
     .pipe(standard.reporter('default', {
       breakOnError: true,
       breakOnWarning: true,

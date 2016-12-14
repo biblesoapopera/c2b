@@ -3,7 +3,6 @@ import readLangPublished from 'bso-server/api/series/readLangPublished'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
 import sinon from 'sinon'
-import mongoose from 'mongoose'
 
 let db = {series: {find: () => {}}}
 let stub = sinon.stub(db.series, 'find')
