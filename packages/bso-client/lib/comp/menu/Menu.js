@@ -74,6 +74,8 @@ System.register('bso-client/comp/menu/Menu', ['react', './LangSwitcher', './Logi
         _createClass(Menu, [{
           key: 'render',
           value: function render() {
+            var _this2 = this;
+
             var items = this.props.buttons.map(function (btn) {
               if (btn.name === 'lang') {
                 return React.createElement(LangSwitcher, {
@@ -83,7 +85,11 @@ System.register('bso-client/comp/menu/Menu', ['react', './LangSwitcher', './Logi
                   store: btn.store
                 });
               } else if (btn.name === 'login') {
-                return React.createElement(Login, { key: btn.name, setUser: btn.fn });
+                return React.createElement(Login, {
+                  key: btn.name,
+                  setUser: btn.fn,
+                  tr: _this2.props.tr
+                });
               }
             });
 

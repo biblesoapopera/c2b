@@ -13,21 +13,26 @@ class Login extends React.Component {
     this.setState({visible: true})
   }
 
-  newUser(user) {
+  setUser(user) {
     this.setState({visible: false})
     this.props.setUser(user)
+  }
+
+  tr(str) {
+    return this.props.tr('login', str)
   }
 
   render() {
     return (
       <div className="login">
-        <div className="lang" onClick={::this.show}>
-          <div></div>
+        <div className="btn font-menu" onClick={::this.show}>
+          <div>{this.tr('login')}</div>
         </div>
 
         {this.state.visible &&
           <LoginModal
-            newUser={::this.newUser}
+            setUser={::this.setUser}
+            tr={::this.tr}
           />
         }
       </div>

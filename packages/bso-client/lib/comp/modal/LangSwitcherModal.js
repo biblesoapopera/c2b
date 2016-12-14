@@ -76,7 +76,7 @@ System.register('bso-client/comp/modal/LangSwitcherModal', ['react', './LangSwit
 
             return React.createElement(
               'div',
-              { className: 'lang-switcher-dropdown', onClick: function onClick() {
+              { className: 'modal lang-switcher-modal', onClick: function onClick() {
                   return _this2.props.newLang(_this2.props.lang);
                 } },
               React.createElement(

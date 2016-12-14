@@ -1,6 +1,6 @@
 'use strict';
 
-System.register('bso-server/routes/audioFile', ['./authenticate', './authorize', './api', 'body-parser', 'express-fileupload', './audioLib'], function (_export, _context) {
+System.register('bso-server/routes/audioFile', ['../authenticate', '../authorize', '../api', 'body-parser', 'express-fileupload', '../audioLib'], function (_export, _context) {
   "use strict";
 
   var authenticate, authorize, api, bodyParser, fileUpload, audioLib;

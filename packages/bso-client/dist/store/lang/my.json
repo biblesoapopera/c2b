@@ -7,5 +7,10 @@
   "episode-chooser": {
     "other languages": "အခြားဘာသာစကားများ",
     "No episodes available in selected language": "ရှေးခယျြဘာသာစကားမှာမရှိနိုင်ပါဖြစ်စဉ်များ။"
+  },
+  "login": {
+    "login": "လော့ဂ်အင်",
+    "username": "အသုံးပြုသူအမည်",
+    "password": "စကားဝှက်ကို"
   }
 }

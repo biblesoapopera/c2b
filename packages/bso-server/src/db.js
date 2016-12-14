@@ -5,7 +5,13 @@ import episode from './db/episode'
 import audioHash from './db/audioHash'
 
 export default url => {
-  mongoose.connect(url)
+  if (
+    mongoose.connection.readyState === 0 || //disconnected
+    mongoose.connection.readyState === 3    //disconnecting
+  ){
+    mongoose.connect(url)
+  }
+
   return {
     user: user,
     series: series,

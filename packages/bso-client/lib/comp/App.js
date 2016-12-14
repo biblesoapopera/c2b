@@ -143,9 +143,11 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
                       return store.lang.load(lang);
 
                     case 2:
-                      this.setState({ lang: lang });
 
-                    case 3:
+                      this.setState({ lang: lang });
+                      this.menu(this.state.menu);
+
+                    case 4:
                     case 'end':
                       return _context2.stop();
                   }
@@ -171,7 +173,7 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
 
             buttons.forEach(function (btn) {
               if (btn.name === 'login') {
-                btn.fn = _this2.login.bind(_this2);
+                btn.fn = _this2.setUser.bind(_this2);
               } else if (btn.name === 'lang') {
                 btn.fn = _this2.switchLang.bind(_this2);
                 btn.lang = _this2.state.lang;
@@ -202,7 +204,8 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
               { className: 'app' },
               React.createElement(Background, null),
               React.createElement(Menu, {
-                buttons: this.state.menu
+                buttons: this.state.menu,
+                tr: this.tr(this.state.lang)
               }),
               route === void 0 && React.createElement(Splash, { go: this.go.bind(this), menu: this.menu.bind(this), tr: this.tr(this.state.lang) }),
               route === 'choose-episode' && React.createElement(EpisodeChooser, {

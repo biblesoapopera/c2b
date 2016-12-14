@@ -18,7 +18,12 @@ System.register('bso-server/db', ['mongoose', './db/user', './db/series', './db/
     }],
     execute: function () {
       _export('default', function (url) {
-        mongoose.connect(url);
+        if (mongoose.connection.readyState === 0 || //disconnected
+        mongoose.connection.readyState === 3 //disconnecting
+        ) {
+            mongoose.connect(url);
+          }
+
         return {
           user: user,
           series: series,

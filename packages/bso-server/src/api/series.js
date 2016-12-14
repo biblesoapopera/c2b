@@ -13,5 +13,5 @@ export default {
   publish: publish,
   unpublish: unpublish,
   update: update,
-  seriesDelete: seriesDelete
+  'delete': seriesDelete
 }

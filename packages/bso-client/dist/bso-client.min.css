@@ -26,7 +26,7 @@
 .font-menu {
   font-family: Sans-Serif;
   font-weight: 300;
-  font-size: 18px;
+  font-size: 16px;
 }
 .font-slide0 {
   font-family: Sans-Serif;
@@ -81,54 +81,6 @@ a:hover {
   border: thin solid #ffffff;
   background-color: rgba(255, 255, 255, 0.4);
 }
-.menu {
-  width: 100vw;
-  height: 50px;
-  background-color: #001129;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.menu .logo {
-  padding-left: 20px;
-}
-.menu .items {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.menu .items .item {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-.menu .items .item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-.menu .items .item div {
-  width: 50%;
-  height: 50%;
-  background-size: cover;
-  background-position: 50%, 50%;
-}
-.menu .items .edit div {
-  background: url('img/edit.png');
-}
-.menu .items .edit-audio div {
-  background: url('img/edit-audio.png');
-}
-.menu .items .edit-series div {
-  background: url('img/edit-series.png');
-}
-.menu .items .edit-episode div {
-  background: url('img/edit-episode.png');
-}
 .background-0,
 .background-1 {
   height: 100vh;
@@ -144,26 +96,7 @@ a:hover {
 .background-1 {
   background-color: rgba(0, 0, 0, 0.7);
 }
-.lang-switcher {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-.lang-switcher .lang {
-  width: 50%;
-  height: 50%;
-  background: url('img/globe.png');
-  background-size: cover;
-  background-position: 50%, 50%;
-}
-.lang-switcher:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-.lang-switcher-dropdown {
+.modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -175,7 +108,7 @@ a:hover {
   align-items: center;
   z-index: 100;
 }
-.lang-switcher-dropdown div {
+.modal div {
   width: 80vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.95);
@@ -183,24 +116,6 @@ a:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-.lang-switcher-dropdown ul {
-  list-style: none;
-  padding: 0px;
-  margin: 0px;
-  width: 100%;
-}
-.lang-switcher-dropdown li {
-  width: 100%;
-  height: 30px;
-  padding-top: 15px;
-  cursor: pointer;
-}
-.lang-switcher-dropdown li.selected {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-.lang-switcher-dropdown li:hover {
-  background-color: #017b92;
 }
 .splash {
   height: calc(100vh - 50px );
@@ -495,6 +410,102 @@ a:hover {
 }
 .player .nav .next div div {
   background: url('img/right.png');
+}
+.menu {
+  width: 100vw;
+  height: 50px;
+  background-color: #001129;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu .logo {
+  padding-left: 20px;
+}
+.menu .items {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.menu .items .item {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.menu .items .item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.menu .items .item div {
+  width: 50%;
+  height: 50%;
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.menu .items .edit div {
+  background: url('img/edit.png');
+}
+.menu .items .edit-audio div {
+  background: url('img/edit-audio.png');
+}
+.menu .items .edit-series div {
+  background: url('img/edit-series.png');
+}
+.menu .items .edit-episode div {
+  background: url('img/edit-episode.png');
+}
+.login .btn {
+  padding: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #001129;
+}
+.login .btn:hover {
+  border: thin solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.lang-switcher {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.lang-switcher .lang {
+  width: 50%;
+  height: 50%;
+  background: url('img/globe.png');
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.lang-switcher:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.lang-switcher-modal ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+}
+.lang-switcher-modal li {
+  width: 100%;
+  height: 30px;
+  padding-top: 15px;
+  cursor: pointer;
+}
+.lang-switcher-modal li.selected {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.lang-switcher-modal li:hover {
+  background-color: #017b92;
 }
 .slide.text {
   display: flex;

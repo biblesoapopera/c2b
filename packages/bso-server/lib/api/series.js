@@ -28,7 +28,7 @@ System.register('bso-server/api/series', ['./series/create', './series/readLangA
         publish: publish,
         unpublish: unpublish,
         update: update,
-        seriesDelete: seriesDelete
+        'delete': seriesDelete
       });
     }
   };

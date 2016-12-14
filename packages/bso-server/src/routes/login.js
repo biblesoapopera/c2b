@@ -1,4 +1,4 @@
-import login from './login'
+import login from '../login'
 import bodyParser from 'body-parser'
 
 export default (cfg, router) => {

@@ -30,7 +30,9 @@ class App extends React.Component {
 
   async switchLang(lang) {
     await store.lang.load(lang)
+
     this.setState({lang: lang})
+    this.menu(this.state.menu)
   }
 
   setUser(user) {
@@ -40,7 +42,7 @@ class App extends React.Component {
   menu(buttons) {
     buttons.forEach(btn => {
       if (btn.name === 'login') {
-        btn.fn = ::this.login
+        btn.fn = ::this.setUser
       } else if (btn.name === 'lang') {
         btn.fn = ::this.switchLang
         btn.lang = this.state.lang
@@ -69,6 +71,7 @@ class App extends React.Component {
 
         <Menu
           buttons={this.state.menu}
+          tr={this.tr(this.state.lang)}
         />
 
         {route === void 0 &&

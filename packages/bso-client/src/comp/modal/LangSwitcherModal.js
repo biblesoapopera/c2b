@@ -4,7 +4,7 @@ import LangSwitcherItem from './LangSwitcherItem'
 class LangSwitcherModal extends React.Component {
   render() {
     return (
-      <div className="lang-switcher-dropdown" onClick={() => this.props.newLang(this.props.lang)}>
+      <div className="modal lang-switcher-modal" onClick={() => this.props.newLang(this.props.lang)}>
         <div>
           <ul>
             {this.props.store.lang.listNames().map((item, key) => {

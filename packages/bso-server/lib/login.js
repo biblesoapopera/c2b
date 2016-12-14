@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-server/login', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', 'jsonwebtoken', 'password-hash'], function (_export, _context) {
+System.register('bso-server/login', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', 'jsonwebtoken', 'password-hash', './api/helpers/fail'], function (_export, _context) {
     "use strict";
 
-    var _regeneratorRuntime, _asyncToGenerator, jwt, hash, fail;
+    var _regeneratorRuntime, _asyncToGenerator, jwt, hash, fail, authenticaionFail;
 
     return {
         setters: [function (_babelRuntimeRegenerator) {
@@ -14,9 +14,11 @@ System.register('bso-server/login', ['babel-runtime/regenerator', 'babel-runtime
             jwt = _jsonwebtoken.default;
         }, function (_passwordHash) {
             hash = _passwordHash.default;
+        }, function (_apiHelpersFail) {
+            fail = _apiHelpersFail.default;
         }],
         execute: function () {
-            fail = function fail(res, next) {
+            authenticaionFail = function authenticaionFail(res, next) {
                 res.status(401);
                 res.type('json');
                 res.send({ msg: 'login fail' });
@@ -39,31 +41,41 @@ System.register('bso-server/login', ['babel-runtime/regenerator', 'babel-runtime
                                             break;
                                         }
 
-                                        return _context2.abrupt('return', fail(res, next));
+                                        return _context2.abrupt('return', authenticaionFail(res, next));
 
                                     case 4:
-                                        _context2.next = 6;
-                                        return db.user.find(username);
+                                        user = void 0;
+                                        _context2.prev = 5;
+                                        _context2.next = 8;
+                                        return db.user.find({ username: username });
 
-                                    case 6:
+                                    case 8:
                                         user = _context2.sent;
-
-                                        if (user) {
-                                            _context2.next = 9;
-                                            break;
-                                        }
-
-                                        return _context2.abrupt('return', fail(res, next));
-
-                                    case 9:
-                                        if (hash.verify(password, user.password)) {
-                                            _context2.next = 11;
-                                            break;
-                                        }
-
-                                        return _context2.abrupt('return', fail(res, next));
+                                        _context2.next = 14;
+                                        break;
 
                                     case 11:
+                                        _context2.prev = 11;
+                                        _context2.t0 = _context2['catch'](5);
+                                        return _context2.abrupt('return', fail(res, 'database error', next));
+
+                                    case 14:
+                                        if (user) {
+                                            _context2.next = 16;
+                                            break;
+                                        }
+
+                                        return _context2.abrupt('return', authenticaionFail(res, next));
+
+                                    case 16:
+                                        if (hash.verify(password, user.password)) {
+                                            _context2.next = 18;
+                                            break;
+                                        }
+
+                                        return _context2.abrupt('return', authenticaionFail(res, next));
+
+                                    case 18:
                                         token = jwt.sign({ sub: user.username, name: user.name }, key);
 
                                         res.set('authorization', 'jwt ' + token);
@@ -74,12 +86,12 @@ System.register('bso-server/login', ['babel-runtime/regenerator', 'babel-runtime
                                         req.user = user;
                                         next();
 
-                                    case 18:
+                                    case 25:
                                     case 'end':
                                         return _context2.stop();
                                 }
                             }
-                        }, _callee, undefined);
+                        }, _callee, undefined, [[5, 11]]);
                     }));
 
                     return function (_x, _x2, _x3) {

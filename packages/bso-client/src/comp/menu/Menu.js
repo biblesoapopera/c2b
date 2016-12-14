@@ -16,7 +16,11 @@ class Menu extends React.Component {
         )
       } else if (btn.name === 'login') {
         return (
-          <Login key={btn.name} setUser={btn.fn} />
+          <Login
+            key={btn.name}
+            setUser={btn.fn}
+            tr={this.props.tr}
+          />
         )
       }
     })

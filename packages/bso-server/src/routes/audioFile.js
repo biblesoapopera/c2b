@@ -1,9 +1,9 @@
-import authenticate from './authenticate'
-import authorize from './authorize'
-import api from './api'
+import authenticate from '../authenticate'
+import authorize from '../authorize'
+import api from '../api'
 import bodyParser from 'body-parser'
 import fileUpload from 'express-fileupload'
-import audioLib from './audioLib'
+import audioLib from '../audioLib'
 
 export default (cfg, router) => {
   router.put(

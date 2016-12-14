@@ -7,5 +7,10 @@
   "episode-chooser": {
     "other languages": "otros idiomas",
     "No episodes available in selected language": "No hay episodios disponibles en el idioma seleccionado."
+  },
+  "login": {
+    "login": "iniciar sesión",
+    "username": "Nombre de usuario",
+    "password": "contraseña"
   }
 }

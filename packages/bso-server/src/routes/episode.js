@@ -1,6 +1,6 @@
-import authenticate from './authenticate'
-import authorize from './authorize'
-import api from './api'
+import authenticate from '../authenticate'
+import authorize from '../authorize'
+import api from '../api'
 import bodyParser from 'body-parser'
 
 export default (cfg, router) => {
