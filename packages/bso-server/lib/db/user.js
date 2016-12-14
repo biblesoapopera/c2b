@@ -10,8 +10,8 @@ System.register('bso-server/db/user', ['bso-model/User', 'mongoose'], function (
     }],
     execute: function () {
       _export('default', {
-        find: function find(username) {
-          return mongoose.model('User').findOne({ username: username }).exec();
+        find: function find(criteria) {
+          return mongoose.model('User').findOne(criteria).exec();
         },
         create: function create(userObj) {
           var Model = mongoose.model('User');

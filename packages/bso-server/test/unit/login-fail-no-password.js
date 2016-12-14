@@ -1,15 +1,14 @@
-import chai from 'chai'
+import assert from 'bso-tools/assert'
 import login from 'bso-server/login'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
 import jwt from 'jsonwebtoken'
 import hash from 'password-hash'
 
-let assert = chai.assert
 let key = 'testing testing'
 let mockDb = {user: {find: () => false}}
 
-export default () => {
+export default async () => {
   let fn = login(key, mockDb)
 
   let req = new MockRequest({
@@ -21,10 +20,13 @@ export default () => {
 
   let res = new MockResponse({})
 
-  fn(req, res, (arg) => {
-    assert.equal(arg, 'route')
-    assert.equal(res.statusCode, 401)
-    assert.isNotOk(res.get('authorization'))
-    assert.isNotOk(req.user)
+  let arg = await new Promise((resolve, reject) => {
+    try {fn(req, res, arg => resolve(arg))}
+    catch (err) {reject(err)}
   })
+
+  assert.equal(arg, 'route')
+  assert.equal(res.statusCode, 401)
+  assert.isNotOk(res.get('authorization'))
+  assert.isNotOk(req.user)
 }

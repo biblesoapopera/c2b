@@ -61,6 +61,7 @@ let complexity = pkg => {
         'max-statements': [2, 20]
       },
       parserOptions: {
+        ecmaVersion: 8,
         sourceType: 'module'
       }
     }))

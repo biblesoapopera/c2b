@@ -68,12 +68,6 @@ let questionSlide = new mongoose.Schema({
 })
 
 let schema = new mongoose.Schema({
-  id: {
-    type: Number,
-    required: true,
-    unique: true,
-    min: 0
-  },
   lang: {
     type: String,
     required: true,
@@ -81,13 +75,6 @@ let schema = new mongoose.Schema({
   },
   series: {
     type: Number,
-    required: true,
-    unique: true,
-    min: 0
-  },
-  number: {
-    type: Number,
-    required: true,
     unique: true,
     min: 0
   },

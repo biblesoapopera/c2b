@@ -3,13 +3,13 @@ import mongoose from 'mongoose'
 import sinon from 'sinon'
 import assert from 'bso-tools/assert'
 
-let stub = sinon.stub(mongoose.model('Episode'), 'findOne')
-stub.returns({exec: ()=>{return {id: 1}}})
+let stub = sinon.stub(mongoose.model('Episode'), 'find')
+stub.returns({exec: ()=>'result'})
 
 export default async () => {
-  let result = episode.find(1)
+  let result = episode.find({series: null})
 
-  assert.equal(1, result.id)
+  assert.equal('result', result)
   assert.calledOnce(stub)
-  assert.calledWith(stub, {id: 1})
+  assert.calledWith(stub, {series: null})
 }

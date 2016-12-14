@@ -2,7 +2,7 @@ import 'bso-model/User'
 import mongoose from 'mongoose'
 
 export default {
-  find: username => mongoose.model('User').findOne({username: username}).exec(),
+  find: criteria => mongoose.model('User').findOne(criteria).exec(),
   create: (userObj) => {
     let Model = mongoose.model('User')
     let model = new Model(userObj)

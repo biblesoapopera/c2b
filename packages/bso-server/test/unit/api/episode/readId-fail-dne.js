@@ -23,7 +23,7 @@ export default async () => {
   })
 
   assert.calledOnce(stub)
-  assert.calledWith(stub, 1)
+  assert.calledWith(stub, {_id: 1, series: {$exists: true}})
 
   assert.equal(arg, 'route')
 

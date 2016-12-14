@@ -8,6 +8,8 @@ export default {
     let model = new Model({name: name, hash: hash})
     return model.save()
   },
-  update: (name, hash) => mongoose.model('AudioHash').findOneAndUpdate({name: name}, {hash: hash}, {runValidators: true}).exec(),
+  update: (name, hash) => {
+    return mongoose.model('AudioHash').findOneAndUpdate({name: name}, {hash: hash}, {runValidators: true}).exec()
+  },
   delete: (name) => mongoose.model('AudioHash').findOneAndRemove({name: name}).exec()
 }

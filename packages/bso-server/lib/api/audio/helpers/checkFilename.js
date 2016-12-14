@@ -12,7 +12,11 @@ System.register('bso-server/api/audio/helpers/checkFilename', ['../../helpers/fa
     }],
     execute: function () {
       _export('default', function (req, res, next) {
-        if (!req.params || !req.params.file || filenameReservedRegex().test(req.params.file)) fail(res, 'invalid filename', next);else return true;
+        if (!req.params || !req.params.file || filenameReservedRegex().test(req.params.file)) {
+          fail(res, 'invalid filename', next);
+        } else {
+          return true;
+        }
       });
     }
   };

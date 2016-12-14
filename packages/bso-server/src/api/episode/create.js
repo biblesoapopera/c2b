@@ -1,4 +1,6 @@
 import fail from '../helpers/fail'
+import validationFail from '../helpers/validationFail'
+import mongoose from 'mongoose'
 
 export default (db) => {
   return async (req, res, next) => {
@@ -6,7 +8,7 @@ export default (db) => {
     try {
       result = await db.episode.create(req.body)
     } catch (err) {
-      //TODO add validation error handling
+      if (err instanceof mongoose.Error.ValidationError) return validationFail(res, err, next)
       return fail(res, 'database error', next)
     }
 

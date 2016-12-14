@@ -66,7 +66,8 @@ System.register('bso-model/User', ['babel-runtime/core-js/object/keys', 'babel-r
         }
       });
 
-      _export('default', mongoose.model('User', schema));
+
+      mongoose.model('User', schema);
     }
   };
 });

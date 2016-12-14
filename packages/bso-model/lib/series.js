@@ -43,6 +43,10 @@ System.register('bso-model/Series', ['babel-runtime/core-js/object/keys', 'babel
           type: String,
           maxlength: 180
         },
+        published: {
+          type: Boolean,
+          default: false
+        },
         episodes: [{
           number: {
             type: Number,
@@ -68,7 +72,8 @@ System.register('bso-model/Series', ['babel-runtime/core-js/object/keys', 'babel
         }]
       });
 
-      _export('default', mongoose.model('Series', schema));
+
+      mongoose.model('Series', schema);
     }
   };
 });

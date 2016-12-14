@@ -1,1 +1,1 @@
-module.exports = require('bso-tools/suite')('bso-model')
+module.exports = require('bso-tools/mocha')('bso-model')

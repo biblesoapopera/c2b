@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-server/api/episode/create', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', '../helpers/fail'], function (_export, _context) {
+System.register('bso-server/api/episode/create', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', '../helpers/fail', '../helpers/validationFail', 'mongoose'], function (_export, _context) {
   "use strict";
 
-  var _regeneratorRuntime, _asyncToGenerator, fail;
+  var _regeneratorRuntime, _asyncToGenerator, fail, validationFail, mongoose;
 
   return {
     setters: [function (_babelRuntimeRegenerator) {
@@ -12,6 +12,10 @@ System.register('bso-server/api/episode/create', ['babel-runtime/regenerator', '
       _asyncToGenerator = _babelRuntimeHelpersAsyncToGenerator.default;
     }, function (_helpersFail) {
       fail = _helpersFail.default;
+    }, function (_helpersValidationFail) {
+      validationFail = _helpersValidationFail.default;
+    }, function (_mongoose) {
+      mongoose = _mongoose.default;
     }],
     execute: function () {
       _export('default', function (db) {
@@ -29,22 +33,31 @@ System.register('bso-server/api/episode/create', ['babel-runtime/regenerator', '
 
                   case 4:
                     result = _context2.sent;
-                    _context2.next = 10;
+                    _context2.next = 12;
                     break;
 
                   case 7:
                     _context2.prev = 7;
                     _context2.t0 = _context2['catch'](1);
+
+                    if (!(_context2.t0 instanceof mongoose.Error.ValidationError)) {
+                      _context2.next = 11;
+                      break;
+                    }
+
+                    return _context2.abrupt('return', validationFail(res, _context2.t0, next));
+
+                  case 11:
                     return _context2.abrupt('return', fail(res, 'database error', next));
 
-                  case 10:
+                  case 12:
 
                     res.type('json');
                     res.status(200);
                     res.send(result);
                     next();
 
-                  case 14:
+                  case 16:
                   case 'end':
                     return _context2.stop();
                 }

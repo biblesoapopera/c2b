@@ -1,14 +1,16 @@
 'use strict';
 
-System.register('bso-server/api/series', ['./series/create', './series/readLang', './series/publish', './series/unpublish', './series/update', './series/delete'], function (_export, _context) {
+System.register('bso-server/api/series', ['./series/create', './series/readLangAll', './series/readLangPublished', './series/publish', './series/unpublish', './series/update', './series/delete'], function (_export, _context) {
   "use strict";
 
-  var create, readLang, publish, unpublish, update, seriesDelete;
+  var create, readLangAll, readLangPublished, publish, unpublish, update, seriesDelete;
   return {
     setters: [function (_seriesCreate) {
       create = _seriesCreate.default;
-    }, function (_seriesReadLang) {
-      readLang = _seriesReadLang.default;
+    }, function (_seriesReadLangAll) {
+      readLangAll = _seriesReadLangAll.default;
+    }, function (_seriesReadLangPublished) {
+      readLangPublished = _seriesReadLangPublished.default;
     }, function (_seriesPublish) {
       publish = _seriesPublish.default;
     }, function (_seriesUnpublish) {
@@ -21,7 +23,8 @@ System.register('bso-server/api/series', ['./series/create', './series/readLang'
     execute: function () {
       _export('default', {
         create: create,
-        readLang: readLang,
+        readLangAll: readLangAll,
+        readLangPublished: readLangPublished,
         publish: publish,
         unpublish: unpublish,
         update: update,

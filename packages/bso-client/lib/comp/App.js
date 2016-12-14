@@ -119,6 +119,7 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
             country: 'australia',
             lang: 'en',
             menu: [],
+            user: false,
             route: []
             //route: ['choose-episode']
             //route: ['choose-delivery', 4]
@@ -159,8 +160,10 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
             return switchLang;
           }()
         }, {
-          key: 'login',
-          value: function login() {}
+          key: 'setUser',
+          value: function setUser(user) {
+            this.setState({ user: user });
+          }
         }, {
           key: 'menu',
           value: function menu(buttons) {

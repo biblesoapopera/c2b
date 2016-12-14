@@ -25,6 +25,10 @@ let schema = new mongoose.Schema({
     type: String,
     maxlength: 180
   },
+  published: {
+    type: Boolean,
+    default: false
+  },
   episodes: [{
     number: {
       type: Number,
@@ -50,4 +54,4 @@ let schema = new mongoose.Schema({
   }]
 })
 
-export default mongoose.model('Series', schema)
+mongoose.model('Series', schema)

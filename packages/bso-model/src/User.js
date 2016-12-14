@@ -40,4 +40,4 @@ let schema = new mongoose.Schema({
   }
 })
 
-export default mongoose.model('User', schema)
+mongoose.model('User', schema)

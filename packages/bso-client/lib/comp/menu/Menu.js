@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/menu/Menu', ['react', './LangSwitcher'], function (_export, _context) {
+System.register('bso-client/comp/menu/Menu', ['react', './LangSwitcher', './Login'], function (_export, _context) {
   "use strict";
 
-  var React, LangSwitcher, _createClass, Menu;
+  var React, LangSwitcher, Login, _createClass, Menu;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -40,6 +40,8 @@ System.register('bso-client/comp/menu/Menu', ['react', './LangSwitcher'], functi
       React = _react.default;
     }, function (_LangSwitcher) {
       LangSwitcher = _LangSwitcher.default;
+    }, function (_Login) {
+      Login = _Login.default;
     }],
     execute: function () {
       _createClass = function () {
@@ -81,11 +83,7 @@ System.register('bso-client/comp/menu/Menu', ['react', './LangSwitcher'], functi
                   store: btn.store
                 });
               } else if (btn.name === 'login') {
-                return React.createElement(
-                  'div',
-                  { key: btn.name },
-                  'login'
-                );
+                return React.createElement(Login, { key: btn.name, setUser: btn.fn });
               }
             });
 
