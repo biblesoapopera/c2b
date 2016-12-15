@@ -5,6 +5,7 @@ import episode from './db/episode'
 import audioHash from './db/audioHash'
 
 export default url => {
+  mongoose.Promise = Promise
   if (
     mongoose.connection.readyState === 0 || //disconnected
     mongoose.connection.readyState === 3    //disconnecting

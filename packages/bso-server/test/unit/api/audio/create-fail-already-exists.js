@@ -3,13 +3,15 @@ import create from 'bso-server/api/audio/create'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
 import sinon from 'sinon'
-import path from 'path'
+import crypto from 'crypto'
 
 let audioDir = 'test/audioDir'
 let db = {audioHash: {create: () => new Promise((resolve, reject)=>reject())}}
 let dbSpy = sinon.spy(db.audioHash, 'create')
 
 let data = Buffer.from('this is a dummy audio file')
+const hash = crypto.createHash('sha256')
+let dataHash = hash.update(data).digest('base64')
 
 export default async () => {
   let fn = create(audioDir, db)
@@ -37,4 +39,9 @@ export default async () => {
   assert.equal(res.statusCode, 500)
   assert.ok(/application\/json/.test(res.get('content-type')))
   assert.deepEqual({msg: 'file name already taken'}, res._getJSON())
+
+  assert.notCalled(mvSpy)
+
+  assert.calledOnce(dbSpy)
+  assert.calledWith(dbSpy, 'myaudio.mp3', dataHash)
 }

@@ -2,7 +2,6 @@ import assert from 'bso-tools/assert'
 import fn from 'bso-server/api/audio/helpers/checkFile'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
-import path from 'path'
 import sinon from 'sinon'
 
 let stub = sinon.stub()

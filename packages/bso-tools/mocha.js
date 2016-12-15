@@ -35,9 +35,10 @@ module.exports = pkg => {
   glob.sync(globDef, {nodir: true}).forEach(file => {
     let name = path.relative(testDir, file).replace(/.js$/, '').replace(/\\/g, '/')
 
-    ret[pkg][name] = done => {
+    ret[pkg][name] = function(done) {
       System.import(pkg + '/test/' + name)
         .then(mod => {
+          if (mod.timeout) this.timeout(mod.timeout)
           try {
             let ret = mod.default(done)
             if (ret !== void 0 && ret.then) {

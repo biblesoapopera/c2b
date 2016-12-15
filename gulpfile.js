@@ -236,7 +236,7 @@ gulp.task('coverage-bso-server', ['instrument-bso-server'], (done) => {
   gulp.src('packages/bso-server/mocha.js')
     .pipe(mocha({
       ui: 'exports',
-      reporter: 'spec'
+      reporter: 'progress'
     }))
     .on('error', err => done(err))
     .on('end', () => {
@@ -246,11 +246,11 @@ gulp.task('coverage-bso-server', ['instrument-bso-server'], (done) => {
       .pipe(through(function (file, enc, cb) {
         let instrumentedSrc = file.contents.toString()
         try {
-          let start = instrumentedSrc.search(/coverageData = {/)
-          let end = instrumentedSrc.search(/_coverageSchema: '.+'/)
-          if (start !== -1 && end !== -1) {
+          let start = /coverageData = {/.exec(instrumentedSrc)
+          let end = /_coverageSchema: '.+'/.exec(instrumentedSrc)
+          if (start && end) {
             let coverageData
-            eval(instrumentedSrc.slice(start, end + 69))
+            eval(instrumentedSrc.slice(start.index, end.index + end[0].length) + '}')
             let coverageObj = {}
             coverageObj[coverageData.path] = coverageData
             collector.add(coverageObj)
@@ -281,11 +281,7 @@ gulp.task('coverage-bso-server', ['instrument-bso-server'], (done) => {
         results = checker.checkFailures(thresholds, collector.getFinalCoverage())
 
         if (results.some(type => (type.global && type.global.failed) || (type.each && type.each.failed))){
-          done(new Error('Coverage failed: \n' + results.filter(result => result.global.failed || result.each.failed).map(result => {
-            return result.type.toUpperCase() + '\n' +
-              (result.global.failed ? 'global: ' + result.global.value + '% of target ' + thresholds.global[result.type] + '%\n' : '') +
-              (result.each.failed ? 'each: target ' + thresholds.each[result.type] + '%\n' + result.each.failures.join('\n') : '')
-          }).join('\n\n')))
+          done(new Error('Coverage failed: \n' + JSON.stringify(results, null, '  ')))
           return
         }
 

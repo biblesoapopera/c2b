@@ -1,14 +1,14 @@
 'use strict';
 
-System.register('bso-server/router', ['./static', './err', 'express', './routes/login', './routes/series', './routes/episode', './routes/audioFile'], function (_export, _context) {
+System.register('bso-server/router', ['./static', './errHandler', 'express', './routes/login', './routes/series', './routes/episode', './routes/audioFile'], function (_export, _context) {
   "use strict";
 
-  var staticAssets, err, express, login, series, episode, audioFile;
+  var staticAssets, errHandler, express, login, series, episode, audioFile;
   return {
     setters: [function (_static) {
       staticAssets = _static.default;
-    }, function (_err) {
-      err = _err.default;
+    }, function (_errHandler) {
+      errHandler = _errHandler.default;
     }, function (_express) {
       express = _express.default;
     }, function (_routesLogin) {
@@ -32,7 +32,7 @@ System.register('bso-server/router', ['./static', './err', 'express', './routes/
         audioFile(cfg, router);
 
         router.use(staticAssets());
-        router.use(err());
+        router.use(errHandler());
 
         return router;
       });

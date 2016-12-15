@@ -3,8 +3,6 @@ import role from './role'
 import locale from './locale'
 import lang from './lang'
 
-mongoose.Promise = Promise
-
 let schema = new mongoose.Schema({
   username: {
     type: String,

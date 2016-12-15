@@ -3,7 +3,6 @@ import deleteAudio from 'bso-server/api/audio/delete'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
 import sinon from 'sinon'
-import path from 'path'
 
 let audioDir = 'test/audioDir'
 let db = {audioHash: {delete: () => {}}}

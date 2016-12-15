@@ -2,7 +2,6 @@ import assert from 'bso-tools/assert'
 import login from 'bso-server/login'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
-import jwt from 'jsonwebtoken'
 import hash from 'password-hash'
 
 let key = 'testing testing'

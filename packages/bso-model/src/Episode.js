@@ -1,8 +1,6 @@
 import mongoose from 'mongoose'
 import lang from './lang'
 
-mongoose.Promise = Promise
-
 let audio = new mongoose.Schema({
   file: {
     type: String,
@@ -75,7 +73,6 @@ let schema = new mongoose.Schema({
   },
   series: {
     type: Number,
-    unique: true,
     min: 0
   },
   title: {

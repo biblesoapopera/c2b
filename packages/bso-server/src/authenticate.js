@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken'
 
 const fail = (res, next) => {
   res.status(401)
+  res.type('json')
+  res.send({msg: 'not authorized'})
   next('route')
 }
 
@@ -9,7 +11,14 @@ export default (key, db) => {
   return (req, res, next) => {
     let authHeader = req.get('authorization')
 
-    if (!authHeader || authHeader.slice(0,3) !== 'jwt') return fail(res, next)
+    // not authentication attempted. identify as guest
+    if (!authHeader) {
+      req.user = {roles: ['guest']}
+      next()
+      return
+    }
+
+    if (authHeader.slice(0,3) !== 'jwt') return fail(res, next)
 
     let token = authHeader.slice(4)
     let payload

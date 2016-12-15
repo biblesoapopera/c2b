@@ -1,8 +1,6 @@
 import mongoose from 'mongoose'
 import lang from './lang'
 
-mongoose.Promise = Promise
-
 let schema = new mongoose.Schema({
   lang: {
     type: String,

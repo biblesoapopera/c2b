@@ -60,7 +60,7 @@ System.register('bso-server/api/audio/update', ['babel-runtime/regenerator', 'ba
                   case 6:
                     file = req.files.audio;
 
-                    // save hash
+                    // update hash
 
                     hash = crypto.createHash('sha256');
                     _context2.prev = 8;

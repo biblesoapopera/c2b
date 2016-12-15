@@ -11,7 +11,7 @@ System.register('bso-server/db/series', ['bso-model/Series', 'mongoose'], functi
     execute: function () {
       _export('default', {
         find: function find(conditions) {
-          return mongoose.model('Series').find(conditions).exec();
+          return mongoose.model('Series').find(conditions).sort('number').exec();
         },
         findId: function findId(id) {
           return mongoose.model('Series').findById(id).exec();

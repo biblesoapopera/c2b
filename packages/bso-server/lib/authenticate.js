@@ -11,6 +11,8 @@ System.register('bso-server/authenticate', ['jsonwebtoken'], function (_export, 
         execute: function () {
             fail = function fail(res, next) {
                 res.status(401);
+                res.type('json');
+                res.send({ msg: 'not authorized' });
                 next('route');
             };
 
@@ -18,7 +20,14 @@ System.register('bso-server/authenticate', ['jsonwebtoken'], function (_export, 
                 return function (req, res, next) {
                     var authHeader = req.get('authorization');
 
-                    if (!authHeader || authHeader.slice(0, 3) !== 'jwt') return fail(res, next);
+                    // not authentication attempted. identify as guest
+                    if (!authHeader) {
+                        req.user = { roles: ['guest'] };
+                        next();
+                        return;
+                    }
+
+                    if (authHeader.slice(0, 3) !== 'jwt') return fail(res, next);
 
                     var token = authHeader.slice(4);
                     var payload = void 0;

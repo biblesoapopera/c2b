@@ -2,7 +2,7 @@ import 'bso-model/Series'
 import mongoose from 'mongoose'
 
 export default {
-  find: conditions => mongoose.model('Series').find(conditions).exec(),
+  find: conditions => mongoose.model('Series').find(conditions).sort('number').exec(),
   findId: id => mongoose.model('Series').findById(id).exec(),
   create: (seriesObj) => {
     let Model = mongoose.model('Series')

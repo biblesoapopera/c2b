@@ -4,19 +4,15 @@ import rbac from './rbac'
 import config from './config'
 import router from './router'
 
-let port = 8080
 let app = express()
-let db = dbFn(config.dbUrl)
-let key = config.jwkKey
-let audioDir = config.audioDir
 
 app.use('/', router({
-  key:key,
+  key: config.jwkKey,
   rbac: rbac,
-  db: db,
-  audioDir: audioDir
+  db: dbFn(config.dbUrl),
+  audioDir: config.audioDir
 }))
 
-app.listen(port, function () {
-  console.log('c2b app listening on port ' + port)
+app.listen(config.port, function () {
+  console.log('c2b app listening on port ' + config.port)
 })

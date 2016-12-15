@@ -3,7 +3,7 @@
 System.register('bso-server', ['express', './db', './rbac', './config', './router'], function (_export, _context) {
   "use strict";
 
-  var express, dbFn, rbac, config, router, port, app, db, key, audioDir;
+  var express, dbFn, rbac, config, router, app;
   return {
     setters: [function (_express) {
       express = _express.default;
@@ -17,22 +17,18 @@ System.register('bso-server', ['express', './db', './rbac', './config', './route
       router = _router.default;
     }],
     execute: function () {
-      port = 8080;
       app = express();
-      db = dbFn(config.dbUrl);
-      key = config.jwkKey;
-      audioDir = config.audioDir;
 
 
       app.use('/', router({
-        key: key,
+        key: config.jwkKey,
         rbac: rbac,
-        db: db,
-        audioDir: audioDir
+        db: dbFn(config.dbUrl),
+        audioDir: config.audioDir
       }));
 
-      app.listen(port, function () {
-        console.log('c2b app listening on port ' + port);
+      app.listen(config.port, function () {
+        console.log('c2b app listening on port ' + config.port);
       });
     }
   };

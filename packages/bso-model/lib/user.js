@@ -1,15 +1,13 @@
 'use strict';
 
-System.register('bso-model/User', ['babel-runtime/core-js/object/keys', 'babel-runtime/core-js/promise', 'mongoose', './role', './locale', './lang'], function (_export, _context) {
+System.register('bso-model/User', ['babel-runtime/core-js/object/keys', 'mongoose', './role', './locale', './lang'], function (_export, _context) {
   "use strict";
 
-  var _Object$keys, _Promise, mongoose, role, locale, lang, schema;
+  var _Object$keys, mongoose, role, locale, lang, schema;
 
   return {
     setters: [function (_babelRuntimeCoreJsObjectKeys) {
       _Object$keys = _babelRuntimeCoreJsObjectKeys.default;
-    }, function (_babelRuntimeCoreJsPromise) {
-      _Promise = _babelRuntimeCoreJsPromise.default;
     }, function (_mongoose) {
       mongoose = _mongoose.default;
     }, function (_role) {
@@ -20,9 +18,6 @@ System.register('bso-model/User', ['babel-runtime/core-js/object/keys', 'babel-r
       lang = _lang.default;
     }],
     execute: function () {
-
-      mongoose.Promise = _Promise;
-
       schema = new mongoose.Schema({
         username: {
           type: String,

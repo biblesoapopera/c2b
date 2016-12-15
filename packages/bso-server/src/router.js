@@ -1,5 +1,5 @@
 import staticAssets from './static'
-import err from './err'
+import errHandler from './errHandler'
 import express from 'express'
 import login from './routes/login'
 import series from './routes/series'
@@ -17,7 +17,7 @@ export default (cfg) => {
   audioFile(cfg, router)
 
   router.use(staticAssets())
-  router.use(err())
+  router.use(errHandler())
 
   return router
 }

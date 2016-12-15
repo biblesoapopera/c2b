@@ -4,7 +4,7 @@ import sinon from 'sinon'
 import assert from 'bso-tools/assert'
 
 let stub = sinon.stub(mongoose.model('Series'), 'find')
-stub.returns({exec: ()=>'result'})
+stub.returns({sort: () =>{return {exec: ()=>'result'}}})
 
 export default async () => {
   let result = series.find({published: true})

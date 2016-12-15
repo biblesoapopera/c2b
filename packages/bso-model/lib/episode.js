@@ -1,24 +1,19 @@
 'use strict';
 
-System.register('bso-model/Episode', ['babel-runtime/core-js/object/keys', 'babel-runtime/core-js/promise', 'mongoose', './lang'], function (_export, _context) {
+System.register('bso-model/Episode', ['babel-runtime/core-js/object/keys', 'mongoose', './lang'], function (_export, _context) {
   "use strict";
 
-  var _Object$keys, _Promise, mongoose, lang, audio, content, answer, feedback, questionSlide, schema;
+  var _Object$keys, mongoose, lang, audio, content, answer, feedback, questionSlide, schema;
 
   return {
     setters: [function (_babelRuntimeCoreJsObjectKeys) {
       _Object$keys = _babelRuntimeCoreJsObjectKeys.default;
-    }, function (_babelRuntimeCoreJsPromise) {
-      _Promise = _babelRuntimeCoreJsPromise.default;
     }, function (_mongoose) {
       mongoose = _mongoose.default;
     }, function (_lang) {
       lang = _lang.default;
     }],
     execute: function () {
-
-      mongoose.Promise = _Promise;
-
       audio = new mongoose.Schema({
         file: {
           type: String,
@@ -90,7 +85,6 @@ System.register('bso-model/Episode', ['babel-runtime/core-js/object/keys', 'babe
         },
         series: {
           type: Number,
-          unique: true,
           min: 0
         },
         title: {

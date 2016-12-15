@@ -3,6 +3,9 @@ import RBAC from 'rbac'
 import authorize from 'bso-server/authorize'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
+import mongoose from 'mongoose'
+
+mongoose.Promise = Promise
 
 let rbac = new RBAC({
   roles: ['user'],

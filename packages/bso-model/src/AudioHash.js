@@ -1,7 +1,5 @@
 import mongoose from 'mongoose'
 
-mongoose.Promise = Promise
-
 let schema = new mongoose.Schema({
   name: {
     type: String,
