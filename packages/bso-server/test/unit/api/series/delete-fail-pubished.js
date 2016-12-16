@@ -18,12 +18,12 @@ export default async () => {
 
   let res = new MockResponse({})
 
-  let arg = await new Promise((resolve, reject) => {
-    try {fn(req, res, arg => {resolve(arg)})}
-    catch (err) {reject(err)}
-  })
+  let next = sinon.stub()
 
-  assert.equal(arg, 'route')
+  await fn(req, res, next)
+
+  assert.calledOnce(next)
+  assert.calledWith(next, 'route')
   assert.equal(res.statusCode, 401)
   assert.ok(/application\/json/.test(res.get('content-type')))
   assert.deepEqual({errors: {published: {msg: 'Unpublish series before deletion'}}}, res._getJSON())

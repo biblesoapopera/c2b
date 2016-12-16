@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-server/login', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', 'jsonwebtoken', 'password-hash', './api/helpers/fail'], function (_export, _context) {
+System.register('bso-server/login', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', 'jsonwebtoken', 'password-hash'], function (_export, _context) {
     "use strict";
 
-    var _regeneratorRuntime, _asyncToGenerator, jwt, hash, fail, authenticaionFail;
+    var _regeneratorRuntime, _asyncToGenerator, jwt, hash, authenticaionFail;
 
     return {
         setters: [function (_babelRuntimeRegenerator) {
@@ -14,8 +14,6 @@ System.register('bso-server/login', ['babel-runtime/regenerator', 'babel-runtime
             jwt = _jsonwebtoken.default;
         }, function (_passwordHash) {
             hash = _passwordHash.default;
-        }, function (_apiHelpersFail) {
-            fail = _apiHelpersFail.default;
         }],
         execute: function () {
             authenticaionFail = function authenticaionFail(res, next) {
@@ -57,7 +55,7 @@ System.register('bso-server/login', ['babel-runtime/regenerator', 'babel-runtime
                                     case 11:
                                         _context2.prev = 11;
                                         _context2.t0 = _context2['catch'](5);
-                                        return _context2.abrupt('return', fail(res, 'database error', next));
+                                        throw new Error('db.user.find database error. username: ' + username);
 
                                     case 14:
                                         if (user) {
@@ -76,7 +74,12 @@ System.register('bso-server/login', ['babel-runtime/regenerator', 'babel-runtime
                                         return _context2.abrupt('return', authenticaionFail(res, next));
 
                                     case 18:
-                                        token = jwt.sign({ sub: user.username, name: user.name }, key);
+                                        token = jwt.sign({
+                                            sub: user.username,
+                                            name: user.name,
+                                            pwv: user.passwordVersion,
+                                            exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 10 // Expires in ten days
+                                        }, key);
 
                                         res.set('authorization', 'jwt ' + token);
                                         res.type('json');

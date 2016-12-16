@@ -1,17 +1,15 @@
 'use strict';
 
-System.register('bso-server/api/episode/readId', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', '../helpers/fail'], function (_export, _context) {
+System.register('bso-server/api/episode/readId', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator'], function (_export, _context) {
   "use strict";
 
-  var _regeneratorRuntime, _asyncToGenerator, fail;
+  var _regeneratorRuntime, _asyncToGenerator;
 
   return {
     setters: [function (_babelRuntimeRegenerator) {
       _regeneratorRuntime = _babelRuntimeRegenerator.default;
     }, function (_babelRuntimeHelpersAsyncToGenerator) {
       _asyncToGenerator = _babelRuntimeHelpersAsyncToGenerator.default;
-    }, function (_helpersFail) {
-      fail = _helpersFail.default;
     }],
     execute: function () {
       _export('default', function (db) {
@@ -22,34 +20,24 @@ System.register('bso-server/api/episode/readId', ['babel-runtime/regenerator', '
               while (1) {
                 switch (_context2.prev = _context2.next) {
                   case 0:
-                    result = void 0;
-                    _context2.prev = 1;
-                    _context2.next = 4;
+                    _context2.next = 2;
                     return db.episode.find({ _id: req.params.id, series: { $exists: true } });
 
-                  case 4:
+                  case 2:
                     result = _context2.sent;
-                    _context2.next = 10;
-                    break;
 
-                  case 7:
-                    _context2.prev = 7;
-                    _context2.t0 = _context2['catch'](1);
-                    return _context2.abrupt('return', fail(res, 'database error', next));
-
-                  case 10:
 
                     res.type('json');
                     res.status(200);
                     res.send(result);
                     next();
 
-                  case 14:
+                  case 7:
                   case 'end':
                     return _context2.stop();
                 }
               }
-            }, _callee, undefined, [[1, 7]]);
+            }, _callee, undefined);
           }));
 
           return function (_x, _x2, _x3) {

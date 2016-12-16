@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-server/authorize', ['babel-runtime/regenerator', 'babel-runtime/core-js/promise', 'babel-runtime/helpers/asyncToGenerator', './api/helpers/fail'], function (_export, _context) {
+System.register('bso-server/authorize', ['babel-runtime/regenerator', 'babel-runtime/core-js/promise', 'babel-runtime/helpers/asyncToGenerator'], function (_export, _context) {
   "use strict";
 
-  var _regeneratorRuntime, _Promise, _asyncToGenerator, fail;
+  var _regeneratorRuntime, _Promise, _asyncToGenerator;
 
   return {
     setters: [function (_babelRuntimeRegenerator) {
@@ -12,8 +12,6 @@ System.register('bso-server/authorize', ['babel-runtime/regenerator', 'babel-run
       _Promise = _babelRuntimeCoreJsPromise.default;
     }, function (_babelRuntimeHelpersAsyncToGenerator) {
       _asyncToGenerator = _babelRuntimeHelpersAsyncToGenerator.default;
-    }, function (_apiHelpersFail) {
-      fail = _apiHelpersFail.default;
     }],
     execute: function () {
       _export('default', function (rbac, action, resource) {
@@ -30,14 +28,13 @@ System.register('bso-server/authorize', ['babel-runtime/regenerator', 'babel-run
 
                   case 3:
                     if (!(i < req.user.roles.length)) {
-                      _context2.next = 20;
+                      _context2.next = 14;
                       break;
                     }
 
                     role = req.user.roles[i];
 
-                    _context2.prev = 5;
-                    _context2.next = 8;
+                    _context2.next = 7;
                     return new _Promise(function (resolve, reject) {
                       rbac.can(role, action, resource, function (err, can) {
                         if (err) {
@@ -48,43 +45,35 @@ System.register('bso-server/authorize', ['babel-runtime/regenerator', 'babel-run
                       });
                     });
 
-                  case 8:
+                  case 7:
                     allow = _context2.sent;
-                    _context2.next = 14;
-                    break;
 
-                  case 11:
-                    _context2.prev = 11;
-                    _context2.t0 = _context2['catch'](5);
-                    return _context2.abrupt('return', fail(res, 'internal error', next));
-
-                  case 14:
                     if (!allow) {
-                      _context2.next = 17;
+                      _context2.next = 11;
                       break;
                     }
 
                     next();
                     return _context2.abrupt('return');
 
-                  case 17:
+                  case 11:
                     i++;
                     _context2.next = 3;
                     break;
 
-                  case 20:
+                  case 14:
 
                     res.status(403);
                     res.type('json');
                     res.send({ msg: 'not authorized' });
                     next('route');
 
-                  case 24:
+                  case 18:
                   case 'end':
                     return _context2.stop();
                 }
               }
-            }, _callee, undefined, [[5, 11]]);
+            }, _callee, undefined);
           }));
 
           return function (_x, _x2, _x3) {

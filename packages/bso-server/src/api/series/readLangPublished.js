@@ -1,13 +1,8 @@
-import fail from '../helpers/fail'
-
 export default (db) => {
   return async (req, res, next) => {
     let result
-    try {
-      result = await db.series.find({lang: req.params.lang, published: true})
-    } catch (err) {
-      return fail(res, 'database error', next)
-    }
+
+    result = await db.series.find({lang: req.params.lang, published: true})
 
     res.type('json')
     res.status(200)

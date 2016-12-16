@@ -22,7 +22,7 @@ export default async () => {
     files: {audio: {
       mimetype: 'audio/mpeg3',
       data: data,
-      mv: (path, cb) => cb(new Error())
+      mv: (path, cb) => cb(new Error('disk error'))
     }}
   })
 
@@ -30,15 +30,17 @@ export default async () => {
 
   let res = new MockResponse({})
 
-  let arg = await new Promise((resolve, reject) => {
-    try {fn(req, res, arg => {resolve(arg)})}
-    catch (err) {reject(err)}
-  })
+  let next = sinon.stub()
 
-  assert.equal(arg, 'route')
-  assert.equal(res.statusCode, 500)
-  assert.ok(/application\/json/.test(res.get('content-type')))
-  assert.deepEqual({msg: 'error uploading file'}, res._getJSON())
+  let caughtErr
+  try {
+    await fn(req, res, next)
+  } catch (err) {
+    caughtErr = err
+  }
+
+  assert.equal('disk error', caughtErr.message)
+  assert.notCalled(next)
 
   assert.calledOnce(mvSpy)
 

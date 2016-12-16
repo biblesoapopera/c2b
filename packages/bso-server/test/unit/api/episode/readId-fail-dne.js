@@ -6,7 +6,7 @@ import sinon from 'sinon'
 
 let db = {episode: {find: () => {}}}
 let stub = sinon.stub(db.episode, 'find')
-stub.returns(new Promise((resolve, reject) => reject()))
+stub.returns(new Promise((resolve, reject) => reject(new Error('database error'))))
 
 export default async () => {
 
@@ -17,17 +17,18 @@ export default async () => {
   })
   let res = new MockResponse({})
 
-  let arg = await new Promise((resolve, reject) => {
-    try {fn(req, res, arg => {resolve(arg)})}
-    catch (err) {reject(err)}
-  })
+  let next = sinon.stub()
+
+  let caughtErr
+  try {
+    await fn(req, res, next)
+  } catch (err) {
+    caughtErr = err
+  }
+
+  assert.equal('database error', caughtErr.message)
+  assert.notCalled(next)
 
   assert.calledOnce(stub)
   assert.calledWith(stub, {_id: 1, series: {$exists: true}})
-
-  assert.equal(arg, 'route')
-
-  assert.equal(res.statusCode, 500)
-  assert.ok(/application\/json/.test(res.get('content-type')))
-  assert.deepEqual({msg: 'database error'}, res._getJSON())
 }

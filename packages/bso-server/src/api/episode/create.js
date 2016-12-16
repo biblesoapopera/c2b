@@ -1,4 +1,3 @@
-import fail from '../helpers/fail'
 import validationFail from '../helpers/validationFail'
 import mongoose from 'mongoose'
 
@@ -9,7 +8,7 @@ export default (db) => {
       result = await db.episode.create(req.body)
     } catch (err) {
       if (err instanceof mongoose.Error.ValidationError) return validationFail(res, err, next)
-      return fail(res, 'database error', next)
+      throw err
     }
 
     res.type('json')

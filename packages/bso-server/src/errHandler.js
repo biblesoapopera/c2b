@@ -1,7 +1,6 @@
-export default () => {
+export default (logger) => {
   return (err, req, res, next) => {
-    // TODO log to server log file
-    let log = err
+    logger(err)
 
     res.status(500)
     res.type('json')

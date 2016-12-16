@@ -6,7 +6,7 @@ import sinon from 'sinon'
 
 let db = {series: {create: () => {}}}
 let stub = sinon.stub(db.series, 'create')
-stub.returns(new Promise((resolve, reject)=>reject(new Error())))
+stub.returns(new Promise((resolve, reject)=>reject(new Error('database error'))))
 
 export default async () => {
   let fn = create(db)
@@ -18,15 +18,17 @@ export default async () => {
 
   let res = new MockResponse({})
 
-  let arg = await new Promise((resolve, reject) => {
-    try {fn(req, res, arg => {resolve(arg)})}
-    catch (err) {reject(err)}
-  })
+  let next = sinon.stub()
 
-  assert.equal(arg, 'route')
-  assert.equal(res.statusCode, 500)
-  assert.ok(/application\/json/.test(res.get('content-type')))
-  assert.deepEqual({msg: 'database error'}, res._getJSON())
+  let caughtErr
+  try {
+    await fn(req, res, next)
+  } catch (err) {
+    caughtErr = err
+  }
+
+  assert.equal('database error', caughtErr.message)
+  assert.notCalled(next)
 
   assert.calledOnce(stub)
   assert.calledWith(stub, {})

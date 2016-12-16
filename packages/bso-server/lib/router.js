@@ -32,7 +32,7 @@ System.register('bso-server/router', ['./static', './errHandler', 'express', './
         audioFile(cfg, router);
 
         router.use(staticAssets());
-        router.use(errHandler());
+        router.use(errHandler(cfg.logger));
 
         return router;
       });

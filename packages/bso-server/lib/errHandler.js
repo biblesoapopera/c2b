@@ -6,10 +6,9 @@ System.register('bso-server/errHandler', [], function (_export, _context) {
   return {
     setters: [],
     execute: function () {
-      _export('default', function () {
+      _export('default', function (logger) {
         return function (err, req, res, next) {
-          // TODO log to server log file
-          var log = err;
+          logger(err);
 
           res.status(500);
           res.type('json');

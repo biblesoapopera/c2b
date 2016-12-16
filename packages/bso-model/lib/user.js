@@ -31,6 +31,12 @@ System.register('bso-model/User', ['babel-runtime/core-js/object/keys', 'mongoos
           maxlength: 120,
           minlength: 8
         },
+        passwordVersion: {
+          type: Number,
+          required: true,
+          min: 0,
+          default: 0
+        },
         name: {
           type: String,
           maxlength: 120,

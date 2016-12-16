@@ -18,12 +18,13 @@ export default async () => {
 
   let res = new MockResponse({})
 
-  let arg = await new Promise((resolve, reject) => {
-    try {fn(req, res, arg => {resolve(arg)})}
-    catch (err) {reject(err)}
-  })
+  let next = sinon.stub()
 
-  assert.notEqual(arg, 'route')
+  await fn(req, res, next)
+
+  assert.calledOnce(next)
+  assert.calledWith(next)
+
   assert.equal(res.statusCode, 200)
   assert.ok(/application\/json/.test(res.get('content-type')))
   assert.deepEqual({_id: 'asdf', title: 'myseries'}, res._getJSON())

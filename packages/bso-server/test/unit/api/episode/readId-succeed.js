@@ -17,15 +17,15 @@ export default async () => {
   })
   let res = new MockResponse({})
 
-  let arg = await new Promise((resolve, reject) => {
-    try {fn(req, res, arg => {resolve(arg)})}
-    catch (err) {reject(err)}
-  })
+  let next = sinon.stub()
+
+  await fn(req, res, next)
+
+  assert.calledOnce(next)
+  assert.calledWith(next)
 
   assert.calledOnce(stub)
   assert.calledWith(stub, {_id: 1, series: {$exists: true}})
-
-  assert.notEqual(arg, 'route')
 
   assert.equal(res.statusCode, 200)
   assert.ok(/application\/json/.test(res.get('content-type')))

@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-server', ['express', './db', './rbac', './config', './router'], function (_export, _context) {
+System.register('bso-server', ['express', './db', './rbac', './config', './router', './logger'], function (_export, _context) {
   "use strict";
 
-  var express, dbFn, rbac, config, router, app;
+  var express, dbFn, rbac, config, router, logger, app;
   return {
     setters: [function (_express) {
       express = _express.default;
@@ -15,6 +15,8 @@ System.register('bso-server', ['express', './db', './rbac', './config', './route
       config = _config.default;
     }, function (_router) {
       router = _router.default;
+    }, function (_logger) {
+      logger = _logger.default;
     }],
     execute: function () {
       app = express();
@@ -24,7 +26,8 @@ System.register('bso-server', ['express', './db', './rbac', './config', './route
         key: config.jwkKey,
         rbac: rbac,
         db: dbFn(config.dbUrl),
-        audioDir: config.audioDir
+        audioDir: config.audioDir,
+        logger: logger
       }));
 
       app.listen(config.port, function () {

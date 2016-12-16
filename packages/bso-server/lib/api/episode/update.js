@@ -1,17 +1,15 @@
 'use strict';
 
-System.register('bso-server/api/episode/update', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', '../helpers/fail', '../helpers/validationFail', 'mongoose'], function (_export, _context) {
+System.register('bso-server/api/episode/update', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', '../helpers/validationFail', 'mongoose'], function (_export, _context) {
   "use strict";
 
-  var _regeneratorRuntime, _asyncToGenerator, fail, validationFail, mongoose;
+  var _regeneratorRuntime, _asyncToGenerator, validationFail, mongoose;
 
   return {
     setters: [function (_babelRuntimeRegenerator) {
       _regeneratorRuntime = _babelRuntimeRegenerator.default;
     }, function (_babelRuntimeHelpersAsyncToGenerator) {
       _asyncToGenerator = _babelRuntimeHelpersAsyncToGenerator.default;
-    }, function (_helpersFail) {
-      fail = _helpersFail.default;
     }, function (_helpersValidationFail) {
       validationFail = _helpersValidationFail.default;
     }, function (_mongoose) {
@@ -48,7 +46,7 @@ System.register('bso-server/api/episode/update', ['babel-runtime/regenerator', '
                     return _context2.abrupt('return', validationFail(res, _context2.t0, next));
 
                   case 11:
-                    return _context2.abrupt('return', fail(res, 'database error', next));
+                    throw _context2.t0;
 
                   case 12:
 

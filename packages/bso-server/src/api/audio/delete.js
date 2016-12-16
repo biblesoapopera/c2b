@@ -1,24 +1,15 @@
 import path from 'path'
 import del from 'del'
-import fail from '../helpers/fail'
 import checkFilename from './helpers/checkFilename'
 
 export default (audioDir, db) => {
   return async (req, res, next) => {
-    if (!checkFilename(req, res, next)) return
+    if (!checkFilename(req)) return
 
     // delete hash
-    try {
-      await db.audioHash.delete(req.params.file + '.mp3')
-    } catch (err) {
-      return fail(res, 'file delete error', next)
-    }
+    await db.audioHash.delete(req.params.file + '.mp3')
 
-    try {
-      await del([path.join(audioDir, req.params.file + '.mp3')])
-    } catch (err) {
-      return fail(req, 'file delete error', next)
-    }
+    await del([path.join(audioDir, req.params.file + '.mp3')])
 
     res.type('json')
     res.status(200)

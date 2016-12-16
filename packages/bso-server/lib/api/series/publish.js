@@ -1,17 +1,15 @@
 'use strict';
 
-System.register('bso-server/api/series/publish', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', '../helpers/fail', '../helpers/validationFail', 'mongoose'], function (_export, _context) {
+System.register('bso-server/api/series/publish', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', '../helpers/validationFail', 'mongoose'], function (_export, _context) {
   "use strict";
 
-  var _regeneratorRuntime, _asyncToGenerator, fail, validationFail, mongoose;
+  var _regeneratorRuntime, _asyncToGenerator, validationFail, mongoose;
 
   return {
     setters: [function (_babelRuntimeRegenerator) {
       _regeneratorRuntime = _babelRuntimeRegenerator.default;
     }, function (_babelRuntimeHelpersAsyncToGenerator) {
       _asyncToGenerator = _babelRuntimeHelpersAsyncToGenerator.default;
-    }, function (_helpersFail) {
-      fail = _helpersFail.default;
     }, function (_helpersValidationFail) {
       validationFail = _helpersValidationFail.default;
     }, function (_mongoose) {
@@ -48,24 +46,16 @@ System.register('bso-server/api/series/publish', ['babel-runtime/regenerator', '
                     return _context2.abrupt('return', validationFail(res, _context2.t0, next));
 
                   case 11:
-                    return _context2.abrupt('return', fail(res, 'database error', next));
+                    throw _context2.t0;
 
                   case 12:
-                    if (result) {
-                      _context2.next = 14;
-                      break;
-                    }
-
-                    return _context2.abrupt('return', fail(res, 'database error', next));
-
-                  case 14:
 
                     res.type('json');
                     res.status(200);
                     res.send(result);
                     next();
 
-                  case 18:
+                  case 16:
                   case 'end':
                     return _context2.stop();
                 }
