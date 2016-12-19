@@ -14,6 +14,13 @@ let key = 'testing testing'
 let db = dbFn('mongodb://localhost:27017/test-login-success')
 let audioDir = path.join(__dirname, '..', 'temp')
 
+let token = jwt.sign({
+  sub: 'test@test.com',
+  name: 'John Test',
+  lv: 1,
+  exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 10)
+}, key)
+
 app.use('/', router({
   key:key,
   rbac: rbac,
@@ -42,26 +49,23 @@ export default async () => {
 
   // do the testing
   request(app)
-    .post('/login')
+    .get('/logout')
     .set('Accept', 'application/json')
     .set('Content-Type', 'application/json')
-    .send({username: 'test@test.com', password: 'test123'})
+    .set('authorization', 'jwt ' + token)
     .expect(200)
     .expect('Content-Type', /json/)
-    .expect(res => {
-      let token = res.headers.authorization.slice(4)
-      let payload = jwt.verify(token, key)
-      assert.equal(payload.sub, 'test@test.com', 'login user.username not as expected')
-      assert.equal(payload.name, 'John Test', 'login user.name not as expected')
-      assert.equal(1, payload.lv)
-    })
-    .expect({msg: 'logged in'})
+    .expect({msg: 'logged out'})
     .end((err, res) => {
       if (err) pReject(err)
       else pResolve()
     })
 
   await p
+
+  // check token added to revokedTokens
+  let count = await db.revokedToken.exists(token)
+  assert.equal(1, count)
 
   // cleanup
   await new Promise((resolve, reject) => {

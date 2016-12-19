@@ -4,6 +4,7 @@ import authorize from 'bso-server/authorize'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
 import mongoose from 'mongoose'
+import sinon from 'sinon'
 
 mongoose.Promise = Promise
 
@@ -17,6 +18,8 @@ let rbac = new RBAC({
   }
 })
 
+let next = sinon.stub()
+
 export default async () => {
   let fn = authorize(rbac, 'read', 'resource')
 
@@ -25,11 +28,9 @@ export default async () => {
   })
   let res = new MockResponse({})
 
-  let arg = await new Promise((resolve, reject) => {
-    try {fn(req, res, arg => resolve(arg))}
-    catch (err) {reject(err)}
-  })
+  await fn(req, res, next)
 
-  assert.notEqual(arg, 'route')
+  assert.calledOnce(next)
+  assert.calledWith(next)
   assert.equal(res.statusCode, 200)
 }

@@ -3,6 +3,7 @@ import RBAC from 'rbac'
 import authorize from 'bso-server/authorize'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
+import sinon from 'sinon'
 
 let rbac = new RBAC({
   roles: ['user'],
@@ -14,6 +15,8 @@ let rbac = new RBAC({
   }
 })
 
+let next = sinon.stub()
+
 export default async () => {
   let fn = authorize(rbac, 'delete', 'resource')
 
@@ -22,12 +25,10 @@ export default async () => {
   })
   let res = new MockResponse({})
 
-  let arg = await new Promise((resolve, reject) => {
-    try {fn(req, res, arg => resolve(arg))}
-    catch (err) {reject(err)}
-  })
+  await fn(req, res, next)
 
-  assert.equal(arg, 'route')
+  assert.calledOnce(next)
+  assert.calledWith(next, 'route')
   assert.equal(res.statusCode, 403)
   assert.ok(/application\/json/.test(res.get('content-type')))
   assert.deepEqual({msg: 'not authorized'}, res._getJSON())

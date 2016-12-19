@@ -16,7 +16,7 @@ let schema = new mongoose.Schema({
     maxlength: 120,
     minlength: 8
   },
-  passwordVersion: {
+  loginVersion: {
     type: Number,
     required: true,
     min: 0,

@@ -3,10 +3,11 @@ import authenticate from 'bso-server/authenticate'
 import MockRequest from 'mock-express-request'
 import MockResponse from 'mock-express-response'
 import jwt from 'jsonwebtoken'
+import sinon from 'sinon'
 
 let key = 'testing testing'
 let mockDb = {}
-
+let next = sinon.stub()
 let token = jwt.sign({sub: 'test@test.com', name: 'John Test'}, key)
 
 export default async () => {
@@ -17,12 +18,10 @@ export default async () => {
   })
   let res = new MockResponse({})
 
-  let arg = await new Promise((resolve, reject) => {
-    try {fn(req, res, arg => resolve(arg))}
-    catch (err) {reject(err)}
-  })
+  await fn(req, res, next)
 
-  assert.equal(arg, 'route')
+  assert.calledOnce(next)
+  assert.calledWith(next, 'route')
   assert.equal(res.statusCode, 401)
   assert.notOk(req.user)
 }

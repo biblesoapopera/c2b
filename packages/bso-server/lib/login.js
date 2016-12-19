@@ -77,7 +77,7 @@ System.register('bso-server/login', ['babel-runtime/regenerator', 'babel-runtime
                                         token = jwt.sign({
                                             sub: user.username,
                                             name: user.name,
-                                            pwv: user.passwordVersion,
+                                            lv: user.loginVersion,
                                             exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 10 // Expires in ten days
                                         }, key);
 

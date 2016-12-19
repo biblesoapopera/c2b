@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-server/db', ['babel-runtime/core-js/promise', 'mongoose', './db/user', './db/series', './db/episode', './db/audioHash'], function (_export, _context) {
+System.register('bso-server/db', ['babel-runtime/core-js/promise', 'mongoose', './db/user', './db/series', './db/episode', './db/audioHash', './db/revokedToken'], function (_export, _context) {
   "use strict";
 
-  var _Promise, mongoose, user, series, episode, audioHash;
+  var _Promise, mongoose, user, series, episode, audioHash, revokedToken;
 
   return {
     setters: [function (_babelRuntimeCoreJsPromise) {
@@ -18,6 +18,8 @@ System.register('bso-server/db', ['babel-runtime/core-js/promise', 'mongoose', '
       episode = _dbEpisode.default;
     }, function (_dbAudioHash) {
       audioHash = _dbAudioHash.default;
+    }, function (_dbRevokedToken) {
+      revokedToken = _dbRevokedToken.default;
     }],
     execute: function () {
       _export('default', function (url) {
@@ -32,7 +34,8 @@ System.register('bso-server/db', ['babel-runtime/core-js/promise', 'mongoose', '
           user: user,
           series: series,
           episode: episode,
-          audioHash: audioHash
+          audioHash: audioHash,
+          revokedToken: revokedToken
         };
       });
     }

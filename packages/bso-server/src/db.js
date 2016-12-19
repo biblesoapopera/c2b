@@ -3,6 +3,7 @@ import user from './db/user'
 import series from './db/series'
 import episode from './db/episode'
 import audioHash from './db/audioHash'
+import revokedToken from './db/revokedToken'
 
 export default url => {
   mongoose.Promise = Promise
@@ -17,6 +18,7 @@ export default url => {
     user: user,
     series: series,
     episode: episode,
-    audioHash: audioHash
+    audioHash: audioHash,
+    revokedToken: revokedToken
   }
 }

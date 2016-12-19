@@ -5,18 +5,17 @@ import MockResponse from 'mock-express-response'
 import jwt from 'jsonwebtoken'
 import sinon from 'sinon'
 
-
 let key = 'testing testing'
 let mockDb = {user: {find: () => {}}, revokedToken: {exists: () => {}}}
 
 let userFind = sinon.stub(mockDb.user, 'find')
 
 let revokedTokenExists = sinon.stub(mockDb.revokedToken, 'exists')
-revokedTokenExists.returns(0)
+revokedTokenExists.returns(1)
 
 let next = sinon.stub()
 
-let token = jwt.sign({name: 'John Test', lv: 1}, key)
+let token = jwt.sign({sub: 'test@test.com', name: 'John Test', lv: 1}, key)
 
 export default async () => {
   let fn = authenticate(key, mockDb)
