@@ -346,7 +346,7 @@ gulp.task('watch', ['default'], () => {
     '!packages/bso-server/test/resource/**/*.*'
   ], ['test-bso-server'])
 
-  gulp.watch('packages/bso-client/src/**/*.js', ['test-bso-client'])
+  gulp.watch('packages/bso-client/src/**/*.js', ['compile-bso-client-js'])
   gulp.watch('packages/bso-client/src/**/*.html', ['compile-bso-client-html'])
   gulp.watch('packages/bso-client/src/less/**/*.less', ['compile-bso-client-less'])
   gulp.watch('packages/bso-client/src/i18n/**/*.json', ['compile-bso-client-json'])

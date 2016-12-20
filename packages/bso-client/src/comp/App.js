@@ -18,10 +18,10 @@ class App extends React.Component {
       lang: 'en',
       menu: [],
       user: false,
-      route: []
+      //route: []
       //route: ['choose-episode']
       //route: ['choose-delivery', 4]
-      //route: ['player', 4]
+      route: ['player', 4]
       //route: ['editor']
     }
 

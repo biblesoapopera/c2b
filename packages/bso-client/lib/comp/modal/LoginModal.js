@@ -67,10 +67,8 @@ System.register('bso-client/comp/modal/LoginModal', ['react'], function (_export
           var _this = _possibleConstructorReturn(this, (LoginModal.__proto__ || Object.getPrototypeOf(LoginModal)).call(this, props));
 
           _this.state = {
-            data: {
-              username: '',
-              password: ''
-            },
+            username: '',
+            password: '',
             valid: false
           };
           return _this;
@@ -79,12 +77,16 @@ System.register('bso-client/comp/modal/LoginModal', ['react'], function (_export
         _createClass(LoginModal, [{
           key: 'usernameChange',
           value: function usernameChange(evt) {
-            this.setState({ data: { username: evt.target.value } });
+            var valid = false;
+            if (this.state.password && evt.target.value) valid = true;
+            this.setState({ username: evt.target.value, valid: valid });
           }
         }, {
           key: 'passwordChange',
           value: function passwordChange(evt) {
-            this.setState({ data: { password: evt.target.value } });
+            var valid = false;
+            if (this.state.username && evt.target.value) valid = true;
+            this.setState({ password: evt.target.value, valid: valid });
           }
         }, {
           key: 'stopPropagation',
@@ -117,18 +119,18 @@ System.register('bso-client/comp/modal/LoginModal', ['react'], function (_export
                     'label',
                     null,
                     this.props.tr('username'),
-                    React.createElement('input', { type: 'text', value: this.state.data.username, onChange: this.usernameChange.bind(this) })
+                    React.createElement('input', { type: 'text', value: this.state.username, onChange: this.usernameChange.bind(this) })
                   ),
                   React.createElement(
                     'label',
                     null,
                     this.props.tr('password'),
-                    React.createElement('input', { type: 'password', value: this.state.data.password, onChange: this.passwordChange.bind(this) })
+                    React.createElement('input', { type: 'password', value: this.state.password, onChange: this.passwordChange.bind(this) })
                   ),
                   React.createElement(
                     'button',
                     {
-                      disabled: this.state.valid ? true : 'disabled',
+                      disabled: this.state.valid ? false : 'disabled',
                       type: 'button',
                       onClick: this.submit.bind(this)
                     },

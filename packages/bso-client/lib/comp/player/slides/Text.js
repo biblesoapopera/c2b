@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-System.register("bso-client/comp/player/slides/Text", ["react"], function (_export, _context) {
+System.register('bso-client/comp/player/slides/Text', ['react'], function (_export, _context) {
   "use strict";
 
   var React, _createClass, Text;
@@ -68,16 +68,19 @@ System.register("bso-client/comp/player/slides/Text", ["react"], function (_expo
         }
 
         _createClass(Text, [{
-          key: "render",
+          key: 'render',
           value: function render() {
-            return React.createElement("div", { className: "slide text", dangerouslySetInnerHTML: { __html: this.props.text } });
+            return React.createElement('div', {
+              className: 'slide text' + (this.props.active ? ' active' : '') + (this.props.dir ? ' ' + this.props.dir : ''),
+              dangerouslySetInnerHTML: { __html: this.props.text }
+            });
           }
         }]);
 
         return Text;
       }(React.Component);
 
-      _export("default", Text);
+      _export('default', Text);
     }
   };
 });

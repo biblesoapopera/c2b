@@ -71,7 +71,7 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
           var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, props));
 
           _this.state = {
-            slide: 1
+            slide: 0
           };
 
           _this.episode = _this.props.store.episode.find(_this.props.episode);
@@ -91,36 +91,43 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
         }, {
           key: 'audio',
           value: function audio() {
-            console.log('A');
+            console.log('Play audio');
           }
         }, {
           key: 'render',
           value: function render() {
-            var slide = this.episode.slides[this.state.slide];
             var type = void 0;
-
-            if (slide.text) type = 'text';else if (slide.slider) type = 'slider';else if (slide.listen) type = 'listen';else if (slide.pick) type = 'pick';else if (slide.multipick) type = 'multipick';
-
-            slide = slide[type];
+            var slide = void 0;
 
             return React.createElement(
               'div',
               { className: 'player' },
-              type === 'text' && React.createElement(Text, {
-                text: slide.text,
-                audio: slide.audio
-              }),
-              type === 'slider' && React.createElement(Slider, {
-                question: slide.question,
-                answers: slide.answers,
-                feedback: slide.feedback
+              this.episode.slides.map(function (slideObj, key) {
+                if (slideObj.text) type = 'text';else if (slideObj.slider) type = 'slider';else if (slideObj.listen) type = 'listen';else if (slideObj.pick) type = 'pick';else if (slideObj.multipick) type = 'multipick';
+
+                slide = slideObj[type];
+
+                if (type === 'text') {
+                  return React.createElement(Text, {
+                    key: key,
+                    text: slide.text,
+                    audio: slide.audio
+                  });
+                } else if (type === 'slider') {
+                  return React.createElement(Slider, {
+                    key: key,
+                    question: slide.question,
+                    answers: slide.answers,
+                    feedback: slide.feedback
+                  });
+                }
               }),
               React.createElement(
                 'div',
                 { className: 'nav' },
                 React.createElement(
                   'div',
-                  { className: 'previous ' + (this.state.slide !== 0 ? 'btn' : ''), onClick: this.previous.bind(this) },
+                  { className: 'previous btn ' + (this.state.slide !== 0 ? '' : 'hide'), onClick: this.previous.bind(this) },
                   React.createElement(
                     'div',
                     null,
@@ -129,7 +136,7 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
                 ),
                 React.createElement(
                   'div',
-                  { className: 'audio ' + (type === 'text' && slide.audio ? 'btn' : ''), onClick: this.audio.bind(this) },
+                  { className: 'audio btn ' + (type === 'text' && slide.audio ? '' : 'hide'), onClick: this.audio.bind(this) },
                   React.createElement(
                     'div',
                     null,
@@ -138,7 +145,7 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
                 ),
                 React.createElement(
                   'div',
-                  { className: 'next ' + (this.state.slide !== this.episode.slides.length - 1 ? 'btn' : ''), onClick: this.next.bind(this) },
+                  { className: 'next btn ' + (this.state.slide !== this.episode.slides.length - 1 ? '' : 'hide'), onClick: this.next.bind(this) },
                   React.createElement(
                     'div',
                     null,

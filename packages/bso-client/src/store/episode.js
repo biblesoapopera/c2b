@@ -48,7 +48,7 @@ let store = [
         ],
         "complete": "always"
       }
-    },
+    }/*,
     {
       "type": "audio",
       "text": "Listen to Paul's story.",
@@ -221,7 +221,7 @@ let store = [
     {
       "type": "html",
       "content": "<small><p>We hope you enjoyed this demo episode.</p><p><small>Written by Martin Olmos and Joe Radkovic.</small></p><p><small>Acting by Samuel Gates, Ruth Lee, Luke Forster, and Harry Martin.</small></p><p>This project aims to help christians with an oral culture learn how the whole Bible fits together, with Jesus at its heart. Follow this project at <a href='http://biblesoapopera.com' target='_blank'>biblesoapopera.com</a></p></small>"
-    }
+    }*/
   ]
 }
 ]

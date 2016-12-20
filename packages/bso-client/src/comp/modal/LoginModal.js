@@ -4,20 +4,22 @@ class LoginModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: {
-        username: '',
-        password: ''
-      },
+      username: '',
+      password: '',
       valid: false
     }
   }
 
   usernameChange(evt) {
-    this.setState({data: {username: evt.target.value}})
+    let valid = false
+    if (this.state.password && evt.target.value) valid = true
+    this.setState({username: evt.target.value, valid: valid})
   }
 
   passwordChange(evt) {
-    this.setState({data: {password: evt.target.value}})
+    let valid = false
+    if (this.state.username && evt.target.value) valid = true
+    this.setState({password: evt.target.value, valid: valid})
   }
 
   stopPropagation(evt) {
@@ -36,14 +38,14 @@ class LoginModal extends React.Component {
           <form onClick={this.stopPropagation}>
             <label>
               {this.props.tr('username')}
-              <input type="text" value={this.state.data.username} onChange={::this.usernameChange} />
+              <input type="text" value={this.state.username} onChange={::this.usernameChange} />
             </label>
             <label>
               {this.props.tr('password')}
-              <input type="password" value={this.state.data.password} onChange={::this.passwordChange} />
+              <input type="password" value={this.state.password} onChange={::this.passwordChange} />
             </label>
             <button
-              disabled={this.state.valid ? true : 'disabled'}
+              disabled={this.state.valid ? false : 'disabled'}
               type="button"
               onClick={::this.submit}
             >

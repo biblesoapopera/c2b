@@ -1,0 +1,50 @@
+form {
+  label {
+    .font3;
+    display: block;
+    margin-bottom: 18px;
+    overflow: hidden;
+    text-align: left;
+    color: fade(@white, 40%);
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="number"],
+  input[type="search"],
+  input[type="date"] {
+    .font3;
+    display: inherit;
+    height: 4vw;
+    padding: 1vw;
+    margin: 1vw 0;
+    width: 52vw;
+    vertical-align: middle;
+    background-color: fade(@white, 20%);
+    border: thin solid transparent;
+  }
+
+  button {
+    .font3;
+    color: @white;
+    margin: 1vw 0;
+    width: 55vw;
+    height: 7vw;
+    background-color: fade(@white, 30%);
+    border: thin solid transparent;
+  }
+
+  button:enabled {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    color: fade(@white, 40%);
+  }
+
+  button:enabled:hover {
+    border: thin solid @white;
+    background-color: fade(@white, 40%);
+  }
+}

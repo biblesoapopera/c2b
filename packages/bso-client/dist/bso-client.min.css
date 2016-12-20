@@ -71,6 +71,9 @@ a:hover {
   height: 100vh;
   width: 100vw;
 }
+.hide {
+  visibility: hidden;
+}
 .btn {
   background-color: rgba(255, 255, 255, 0.2);
   padding: 5vw 5vw 5vw 5vw;
@@ -78,6 +81,55 @@ a:hover {
   cursor: pointer;
 }
 .btn:hover {
+  border: thin solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+form label {
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 3.5vw;
+  display: block;
+  margin-bottom: 18px;
+  overflow: hidden;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.4);
+}
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form input[type="number"],
+form input[type="search"],
+form input[type="date"] {
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 3.5vw;
+  display: inherit;
+  height: 4vw;
+  padding: 1vw;
+  margin: 1vw 0;
+  width: 52vw;
+  vertical-align: middle;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: thin solid transparent;
+}
+form button {
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 3.5vw;
+  color: #ffffff;
+  margin: 1vw 0;
+  width: 55vw;
+  height: 7vw;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: thin solid transparent;
+}
+form button:enabled {
+  cursor: pointer;
+}
+form button:disabled {
+  color: rgba(255, 255, 255, 0.4);
+}
+form button:enabled:hover {
   border: thin solid #ffffff;
   background-color: rgba(255, 255, 255, 0.4);
 }
@@ -407,6 +459,9 @@ a:hover {
 }
 .player .nav .previous div div {
   background: url('img/left.png');
+}
+.player .nav .audio div div {
+  background: url('img/audio.png');
 }
 .player .nav .next div div {
   background: url('img/right.png');
