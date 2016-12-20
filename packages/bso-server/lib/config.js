@@ -1,19 +1,28 @@
 'use strict';
 
-System.register('bso-server/config', ['path'], function (_export, _context) {
+System.register('bso-server/config', ['path', './db', './rbac', './logger'], function (_export, _context) {
   "use strict";
 
-  var path;
+  var path, db, rbac, logger;
   return {
     setters: [function (_path) {
       path = _path.default;
+    }, function (_db) {
+      db = _db.default;
+    }, function (_rbac) {
+      rbac = _rbac.default;
+    }, function (_logger) {
+      logger = _logger.default;
     }],
     execute: function () {
       _export('default', {
-        jwtKey: 'D3zXfkA157ISE3i7S74YUF3qFcY0sicn',
-        dbUrl: 'mongodb://localhost:27017/c2b',
-        audioDir: path.join(__dirname, '..', '..', '..', 'audio_lib'),
-        port: 8080
+        key: 'D3zXfkA157ISE3i7S74YUF3qFcY0sicn',
+        rbac: rbac,
+        db: db('mongodb://localhost:27017/c2b'),
+        audioData: path.join(__dirname, '..', '..', '..', 'data', 'audio'),
+        imgData: path.join(__dirname, '..', '..', '..', 'data', 'img'),
+        port: 8080,
+        logger: logger
       });
     }
   };

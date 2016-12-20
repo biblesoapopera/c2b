@@ -164,6 +164,7 @@ gulp.task('compile-bso-client', [
   'compile-bso-client-img',
   'compile-bso-client-json'
 ])
+gulp.task('test-bso-client', ['compile-bso-client'], () => test('bso-client'))
 
 // up-system
 gulp.task('clean-up-system', () => {
@@ -325,7 +326,8 @@ gulp.task('compile', [
 ])
 
 gulp.task('test', [
-  'test-bso-server'
+  'test-bso-server',
+  'test-bso-client'
 ])
 
 gulp.task('default', ['compile'])
@@ -344,10 +346,17 @@ gulp.task('watch', ['default'], () => {
     '!packages/bso-server/test/resource/**/*.*'
   ], ['test-bso-server'])
 
-  gulp.watch('packages/bso-client/src/**/*.js', ['compile-bso-client-js'])
+  gulp.watch('packages/bso-client/src/**/*.js', ['test-bso-client'])
   gulp.watch('packages/bso-client/src/**/*.html', ['compile-bso-client-html'])
   gulp.watch('packages/bso-client/src/less/**/*.less', ['compile-bso-client-less'])
   gulp.watch('packages/bso-client/src/i18n/**/*.json', ['compile-bso-client-json'])
+  gulp.watch([
+    'packages/bso-client/test/*.js',
+    'packages/bso-client/test/unit/**/*.js',
+    'packages/bso-client/test/integration/**/*.js',
+    '!packages/bso-client/test/resource/**/*.*'
+  ], ['test-bso-client'])
+
   gulp.watch('packages/up-fs/src/**/*.js', ['compile-up-fs'])
   gulp.watch('packages/up-system/src/**/*.js', ['compile-up-system'])
 })

@@ -1,1 +1,1 @@
-mongod --dbpath %~dp0\testdata --storageEngine ephemeralForTest
+mongod --dbpath %~dp0\testdata\mongodb --storageEngine ephemeralForTest
