@@ -1,22 +1,26 @@
 'use strict';
 
-System.register('bso-client', ['regenerator', 'react', 'react-dom', './comp/App'], function (_export, _context) {
+System.register('bso-client', ['react', 'react-dom', './comp/App', './api', './xhr', './jwt'], function (_export, _context) {
   "use strict";
 
-  var regenerator, React, ReactDOM, App;
+  var React, ReactDOM, App, api, xhr, jwt;
   return {
-    setters: [function (_regenerator) {
-      regenerator = _regenerator.default;
-    }, function (_react) {
+    setters: [function (_react) {
       React = _react.default;
     }, function (_reactDom) {
       ReactDOM = _reactDom.default;
     }, function (_compApp) {
       App = _compApp.default;
+    }, function (_api) {
+      api = _api.default;
+    }, function (_xhr) {
+      xhr = _xhr.default;
+    }, function (_jwt) {
+      jwt = _jwt.default;
     }],
     execute: function () {
 
-      ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
+      ReactDOM.render(React.createElement(App, { api: api(xhr(jwt)) }), document.getElementById('root'));
     }
   };
 });

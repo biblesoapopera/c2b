@@ -4,7 +4,7 @@ import express from 'express'
 import login from './routes/login'
 import series from './routes/series'
 import episode from './routes/episode'
-import audioFile from './routes/audioFile'
+import audioData from './routes/audioData'
 
 export default (cfg) => {
   let router = express.Router()
@@ -14,7 +14,7 @@ export default (cfg) => {
   login(cfg, router)
   series(cfg, router)
   episode(cfg, router)
-  audioFile(cfg, router)
+  audioData(cfg, router)
 
   router.use(staticAssets())
   router.use(errHandler(cfg.logger))

@@ -9,8 +9,8 @@ System.register('bso-server/audioData', ['express'], function (_export, _context
       express = _express.default;
     }],
     execute: function () {
-      _export('default', function (audioDir) {
-        return express.static(audioDir);
+      _export('default', function (audioData) {
+        return express.static(audioData);
       });
     }
   };

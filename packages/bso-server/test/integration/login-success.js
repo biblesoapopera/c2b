@@ -11,14 +11,14 @@ import hash from 'password-hash'
 
 let app = express()
 let key = 'testing testing'
-let db = dbFn('mongodb://localhost:27017/test-login-success')
-let audioDir = path.join(__dirname, '..', 'temp')
+let db = dbFn('mongodb://localhost:27020/test-login-success')
+let audioData = path.join(__dirname, '..', 'temp')
 
 app.use('/', router({
   key:key,
   rbac: rbac,
   db: db,
-  audioDir: audioDir
+  audioData: audioData
 }))
 
 export let timeout = 5000
@@ -55,7 +55,12 @@ export default async () => {
       assert.equal(payload.name, 'John Test', 'login user.name not as expected')
       assert.equal(1, payload.lv)
     })
-    .expect({msg: 'logged in'})
+    .expect({
+      username: 'test@test.com',
+      name: 'John Test',
+      roles: ['student'],
+      lang: 'en'
+    })
     .end((err, res) => {
       if (err) pReject(err)
       else pResolve()

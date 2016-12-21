@@ -25,6 +25,7 @@
 
   System.import = async mid => {
     if (!store[mid]) {
+
       let mod = requireMid(mid)
 
       if (mod.__esModule) {

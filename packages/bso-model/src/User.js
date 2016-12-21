@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import role from './role'
-import locale from './locale'
+import country from './country'
 import lang from './lang'
 
 let schema = new mongoose.Schema({
@@ -32,10 +32,10 @@ let schema = new mongoose.Schema({
     default: ['guest'],
     validate: val => val.every(v => role.indexOf(v) !== -1)
   },
-  locale: {
+  country: {
     type: String,
-    default: 'en-au',
-    validate: val => Object.keys(locale).indexOf(val) !== -1
+    default: 'au',
+    validate: val => Object.keys(country).indexOf(val) !== -1
   },
   lang: {
     type: String,

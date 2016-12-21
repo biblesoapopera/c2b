@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-model/User', ['babel-runtime/core-js/object/keys', 'mongoose', './role', './locale', './lang'], function (_export, _context) {
+System.register('bso-model/User', ['babel-runtime/core-js/object/keys', 'mongoose', './role', './country', './lang'], function (_export, _context) {
   "use strict";
 
-  var _Object$keys, mongoose, role, locale, lang, schema;
+  var _Object$keys, mongoose, role, country, lang, schema;
 
   return {
     setters: [function (_babelRuntimeCoreJsObjectKeys) {
@@ -12,8 +12,8 @@ System.register('bso-model/User', ['babel-runtime/core-js/object/keys', 'mongoos
       mongoose = _mongoose.default;
     }, function (_role) {
       role = _role.default;
-    }, function (_locale) {
-      locale = _locale.default;
+    }, function (_country) {
+      country = _country.default;
     }, function (_lang) {
       lang = _lang.default;
     }],
@@ -51,11 +51,11 @@ System.register('bso-model/User', ['babel-runtime/core-js/object/keys', 'mongoos
             });
           }
         },
-        locale: {
+        country: {
           type: String,
-          default: 'en-au',
+          default: 'au',
           validate: function validate(val) {
-            return _Object$keys(locale).indexOf(val) !== -1;
+            return _Object$keys(country).indexOf(val) !== -1;
           }
         },
         lang: {

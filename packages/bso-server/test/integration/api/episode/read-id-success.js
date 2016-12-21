@@ -9,14 +9,14 @@ import mongoose from 'mongoose'
 
 let app = express()
 let key = 'testing testing'
-let db = dbFn('mongodb://localhost:27017/test-api-episode-read-id-success')
-let audioDir = path.join(__dirname, '..', '..', '..', 'temp')
+let db = dbFn('mongodb://localhost:27020/test-api-episode-read-id-success')
+let audioData = path.join(__dirname, '..', '..', '..', 'temp')
 
 app.use('/', router({
   key:key,
   rbac: rbac,
   db: db,
-  audioDir: audioDir
+  audioData: audioData
 }))
 
 export let timeout = 5000

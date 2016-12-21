@@ -1,5 +1,6 @@
 'use strict';
 
+let decache = require('decache')
 let System = {}
 let store = {}
 
@@ -58,5 +59,6 @@ module.exports = entry => {
 
   require(resolve(entry))
 
+  store[entry].forEach(file => decache(file))
   return store[entry]
 }

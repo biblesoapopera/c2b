@@ -1,5 +1,6 @@
 'use strict';
 
+require('regenerator-runtime/runtime') // this is needed for bso-client lib which is transpiled without this runtime
 require('up-system')
 let path = require('path')
 let glob = require('glob')
@@ -32,7 +33,7 @@ module.exports = pkg => {
     globDef = testDir + '/**/*.js'
   }
 
-  glob.sync(globDef, {nodir: true}).forEach(file => {
+  glob.sync(globDef, {nodir: true, ignore: testDir + '/resource/**.*'}).forEach(file => {
     let name = path.relative(testDir, file).replace(/.js$/, '').replace(/\\/g, '/')
 
     ret[pkg][name] = function(done) {

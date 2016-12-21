@@ -33,10 +33,16 @@ export default (key, db) => {
       lv: user.loginVersion,
       exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 10) // Expires in ten days
     }, key)
+
     res.set('authorization', 'jwt ' + token)
     res.type('json')
     res.status(200)
-    res.send({msg: 'logged in'})
+    res.send({
+      username: user.username,
+      name: user.name,
+      lang: user.lang,
+      roles: user.roles
+    })
 
     req.user = user
     next()
