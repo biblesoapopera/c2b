@@ -38,12 +38,10 @@ System.register("bso-client/store/episode", [], function (_export, _context) {
           "slider": {
             "question": "Why do you think God asked Abraham to sacrifice Isaac?",
             "answers": [{
-              "value": "<small>To check Abraham - perhaps he had disobeyed God</small>",
+              "value": "To check Abraham - perhaps he had disobeyed God",
               "score": 100
             }, {
-              "score": 50
-            }, {
-              "value": "<small>To show Abraham what God was like, and teach him about resurrection</small>",
+              "value": "To show Abraham what God was like, and teach him about resurrection",
               "score": 0
             }],
             "complete": "always"

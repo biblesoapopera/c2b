@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-System.register("bso-client/comp/player/slides/Slider", ["react"], function (_export, _context) {
+System.register('bso-client/comp/player/slides/Slider', ['react'], function (_export, _context) {
   "use strict";
 
   var React, _createClass, Slider;
@@ -61,19 +61,52 @@ System.register("bso-client/comp/player/slides/Slider", ["react"], function (_ex
       Slider = function (_React$Component) {
         _inherits(Slider, _React$Component);
 
-        function Slider() {
+        function Slider(props) {
           _classCallCheck(this, Slider);
 
-          return _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).apply(this, arguments));
+          var _this = _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).call(this, props));
+
+          var complete = props.complete === 'always';
+
+          _this.state = {
+            complete: complete,
+            score: 50,
+            gripPos: null
+          };
+          return _this;
         }
 
         _createClass(Slider, [{
-          key: "render",
+          key: 'render',
           value: function render() {
             return React.createElement(
-              "div",
-              { className: "slide slider" },
-              React.createElement("div", { className: "question", dangerouslySetInnerHTML: { __html: this.props.question } })
+              'div',
+              { className: 'slide slider' },
+              React.createElement('div', { className: 'question', dangerouslySetInnerHTML: { __html: this.props.question } }),
+              React.createElement(
+                'div',
+                { className: 'answer-container' },
+                React.createElement(
+                  'div',
+                  { className: 'track-container' },
+                  React.createElement('div', { className: 'track' }),
+                  React.createElement('div', {
+                    className: 'grip',
+                    style: { left: this.state.gripPos + 'px' }
+                  })
+                ),
+                React.createElement(
+                  'div',
+                  { className: 'answers' },
+                  this.props.answers.map(function (answer, key) {
+                    return React.createElement(
+                      'div',
+                      { key: key },
+                      answer.value
+                    );
+                  })
+                )
+              )
             );
           }
         }]);
@@ -81,7 +114,7 @@ System.register("bso-client/comp/player/slides/Slider", ["react"], function (_ex
         return Slider;
       }(React.Component);
 
-      _export("default", Slider);
+      _export('default', Slider);
     }
   };
 });

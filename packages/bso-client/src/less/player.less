@@ -3,11 +3,43 @@
   width: 100%;
   position: relative;
 
-  .slide {
-    .font-slide1;
+  .slide-swipe {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
 
-    min-height: 85%;
-    padding: 2.5%;
+    .slide-list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      position: relative;
+
+      transition-property: left;
+      transition-duration: .7s;
+
+      width: 10000%;
+      height: 1000%;
+
+      .slide-container {
+        width: 1%;
+        min-height: 8.5%;
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .slide {
+        .font-slide1;
+        padding: 2.5%;
+      }
+    }
   }
 
   .nav {

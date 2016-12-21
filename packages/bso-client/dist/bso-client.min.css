@@ -43,6 +43,11 @@
   font-weight: 300;
   font-size: 100%;
 }
+.font-slide3 {
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 80%;
+}
 html,
 body {
   height: 100%;
@@ -421,11 +426,37 @@ form button:enabled:hover {
   width: 100%;
   position: relative;
 }
-.player .slide {
+.player .slide-swipe {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.player .slide-swipe .slide-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+  transition-property: left;
+  transition-duration: .7s;
+  width: 10000%;
+  height: 1000%;
+}
+.player .slide-swipe .slide-list .slide-container {
+  width: 1%;
+  min-height: 8.5%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.player .slide-swipe .slide-list .slide {
   font-family: Sans-Serif;
   font-weight: 300;
   font-size: 170%;
-  min-height: 85%;
   padding: 2.5%;
 }
 .player .nav {
@@ -562,12 +593,54 @@ form button:enabled:hover {
 .lang-switcher-modal li:hover {
   background-color: #017b92;
 }
-.slide.text {
+.slide.slider .answer-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
+}
+.slide.slider .answer-container .track-container {
+  width: 80%;
+  position: relative;
+}
+.slide.slider .answer-container .track-container .track {
+  background-color: red;
+  width: 100%;
+  height: 10px;
+}
+.slide.slider .answer-container .track-container .grip {
+  box-shadow: 0 0 3px #001129;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: thin solid transparent;
+  border-radius: 40px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  transition-property: left;
+  transition-duration: 1s;
+}
+.slide.slider .answer-container .track-container .grip:hover,
+.slide.slider .answer-container .track-container .grip.active {
+  transition: none;
+  border: thin solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.slide.slider .answer-container .answers {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.slide.slider .answer-container .answers div {
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 80%;
+  width: 25%;
 }
 .editor .text {
   margin: 3vw;

@@ -1,0 +1,57 @@
+.slide.slider {
+
+  .answer-container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+
+    .track-container {
+      width: 80%;
+      position: relative;
+
+      .track {
+        background-color: red;
+        width: 100%;
+        height: 10px;
+      }
+
+      .grip {
+        box-shadow: 0 0 3px @dark;
+        width: 40px;
+        height: 40px;
+        background-color: fade(@white, 60%);
+        border: thin solid transparent;
+        border-radius: 40px;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+
+        transition-property: left;
+        transition-duration: 1s;
+      }
+
+      .grip:hover, .grip.active {
+        transition: none;
+        border: thin solid @white;
+        background-color: fade(@white, 80%);
+      }
+    }
+
+    .answers {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      div {
+        .font-slide3;
+        width: 25%;
+      }
+    }
+  }
+}

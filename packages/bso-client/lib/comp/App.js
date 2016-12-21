@@ -116,7 +116,7 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
           var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
           _this.state = {
-            country: 'australia',
+            country: 'au',
             lang: 'en',
             menu: [],
             user: false,

@@ -1,11 +1,11 @@
 'use strict';
 
-System.register('bso-client', ['react', 'react-dom', './comp/App', './api', './xhr', './jwt'], function (_export, _context) {
+System.register('bso-client', ['regenerator', 'react', 'react-dom', './comp/App', './api', './xhr', './jwt'], function (_export, _context) {
   "use strict";
 
   var React, ReactDOM, App, api, xhr, jwt;
   return {
-    setters: [function (_react) {
+    setters: [function (_regenerator) {}, function (_react) {
       React = _react.default;
     }, function (_reactDom) {
       ReactDOM = _reactDom.default;

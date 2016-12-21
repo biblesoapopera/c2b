@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/player/Player', ['react', './slides/Text', './slides/Slider'], function (_export, _context) {
+System.register('bso-client/comp/player/Player', ['react', './slides/Text', './slides/Slider', './slides/Pick', '../Swipe'], function (_export, _context) {
   "use strict";
 
-  var React, Text, Slider, _createClass, Player;
+  var React, Text, Slider, Pick, Swipe, _createClass, Player;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -42,6 +42,10 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
       Text = _slidesText.default;
     }, function (_slidesSlider) {
       Slider = _slidesSlider.default;
+    }, function (_slidesPick) {
+      Pick = _slidesPick.default;
+    }, function (_Swipe) {
+      Swipe = _Swipe.default;
     }],
     execute: function () {
       _createClass = function () {
@@ -71,7 +75,7 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
           var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, props));
 
           _this.state = {
-            slide: 0
+            slide: 2
           };
 
           _this.episode = _this.props.store.episode.find(_this.props.episode);
@@ -81,12 +85,16 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
         _createClass(Player, [{
           key: 'next',
           value: function next() {
-            this.setState({ slide: this.state.slide + 1 });
+            if (this.state.slide !== this.episode.slides.length - 1) {
+              this.setState({ slide: this.state.slide + 1 });
+            }
           }
         }, {
           key: 'previous',
           value: function previous() {
-            this.setState({ slide: this.state.slide - 1 });
+            if (this.state.slide !== 0) {
+              this.setState({ slide: this.state.slide - 1 });
+            }
           }
         }, {
           key: 'audio',
@@ -96,32 +104,65 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
         }, {
           key: 'render',
           value: function render() {
-            var type = void 0;
-            var slide = void 0;
+            var _this2 = this;
+
+            var activeSlide = void 0;
 
             return React.createElement(
               'div',
               { className: 'player' },
-              this.episode.slides.map(function (slideObj, key) {
-                if (slideObj.text) type = 'text';else if (slideObj.slider) type = 'slider';else if (slideObj.listen) type = 'listen';else if (slideObj.pick) type = 'pick';else if (slideObj.multipick) type = 'multipick';
+              React.createElement(
+                Swipe,
+                {
+                  className: 'slide-swipe',
+                  onSwipeLeft: this.next.bind(this),
+                  onSwipeRight: this.previous.bind(this)
+                },
+                React.createElement(
+                  'div',
+                  {
+                    className: 'slide-list',
+                    style: { left: -100 * this.state.slide + '%' }
+                  },
+                  this.episode.slides.map(function (slideObj, key) {
+                    var type = void 0;
+                    var slide = void 0;
+                    var slideJsx = void 0;
 
-                slide = slideObj[type];
+                    if (slideObj.text) type = 'text';else if (slideObj.slider) type = 'slider';else if (slideObj.listen) type = 'listen';else if (slideObj.pick) type = 'pick';else if (slideObj.multipick) type = 'multipick';
 
-                if (type === 'text') {
-                  return React.createElement(Text, {
-                    key: key,
-                    text: slide.text,
-                    audio: slide.audio
-                  });
-                } else if (type === 'slider') {
-                  return React.createElement(Slider, {
-                    key: key,
-                    question: slide.question,
-                    answers: slide.answers,
-                    feedback: slide.feedback
-                  });
-                }
-              }),
+                    slide = slideObj[type];
+
+                    if (key === _this2.state.slide) activeSlide = slide;
+
+                    if (type === 'text') {
+                      slideJsx = React.createElement(Text, {
+                        text: slide.text
+                      });
+                    } else if (type === 'slider') {
+                      slideJsx = React.createElement(Slider, {
+                        question: slide.question,
+                        answers: slide.answers,
+                        feedback: slide.feedback,
+                        complete: slide.complete
+                      });
+                    } else if (type === 'pick') {
+                      slideJsx = React.createElement(Pick, {
+                        question: slide.question,
+                        answers: slide.answers,
+                        feedback: slide.feedback,
+                        complete: slide.complete
+                      });
+                    }
+
+                    return React.createElement(
+                      'div',
+                      { className: 'slide-container', key: key },
+                      slideJsx
+                    );
+                  })
+                )
+              ),
               React.createElement(
                 'div',
                 { className: 'nav' },
@@ -136,7 +177,7 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
                 ),
                 React.createElement(
                   'div',
-                  { className: 'audio btn ' + (type === 'text' && slide.audio ? '' : 'hide'), onClick: this.audio.bind(this) },
+                  { className: 'audio btn ' + (activeSlide.audio ? '' : 'hide'), onClick: this.audio.bind(this) },
                   React.createElement(
                     'div',
                     null,
