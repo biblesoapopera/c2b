@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-server/api/audio', ['./audio/create', './audio/update', './audio/delete'], function (_export, _context) {
+System.register('bso-server/api/audio', ['./audio/create', './audio/update', './audio/delete', './audio/readHash'], function (_export, _context) {
   "use strict";
 
-  var create, update, deleteAudio;
+  var create, update, deleteAudio, readHash;
   return {
     setters: [function (_audioCreate) {
       create = _audioCreate.default;
@@ -11,12 +11,15 @@ System.register('bso-server/api/audio', ['./audio/create', './audio/update', './
       update = _audioUpdate.default;
     }, function (_audioDelete) {
       deleteAudio = _audioDelete.default;
+    }, function (_audioReadHash) {
+      readHash = _audioReadHash.default;
     }],
     execute: function () {
       _export('default', {
         create: create,
         update: update,
-        delete: deleteAudio
+        delete: deleteAudio,
+        readHash: readHash
       });
     }
   };

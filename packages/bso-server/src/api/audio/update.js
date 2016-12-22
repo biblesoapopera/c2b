@@ -13,7 +13,7 @@ export default (audioDir, db) => {
     let file = req.files.audio
 
     // update hash
-    const hash = crypto.createHash('sha256')
+    const hash = crypto.createHash('md5')
 
     await db.audioHash.update(req.params.file + '.mp3', hash.update(file.data).digest('base64'))
 

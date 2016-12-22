@@ -60,7 +60,7 @@ System.register('bso-server/api/audio/update', ['babel-runtime/regenerator', 'ba
 
                                         // update hash
 
-                                        hash = crypto.createHash('sha256');
+                                        hash = crypto.createHash('md5');
                                         _context2.next = 10;
                                         return db.audioHash.update(req.params.file + '.mp3', hash.update(file.data).digest('base64'));
 

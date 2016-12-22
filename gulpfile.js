@@ -89,6 +89,11 @@ gulp.task('clean-bso-client', () => {
   ])
 })
 gulp.task('compile-bso-client-vendor', () => {
+  gulp.src('node_modules/spark-md5/spark-md5.js')
+    .pipe(gap.prependText("System.register('spark-md5', [], function (_export, _context) {return {setters: [], execute: function () {"))
+    .pipe(gap.appendText("_export('default', window.SparkMD5)}}})"))
+    .pipe(gulp.dest('packages/bso-client/lib'))
+
   gulp.src('node_modules/regenerator-runtime/runtime.js')
     .pipe(gap.prependText("System.register('regenerator', [], function (_export, _context) {return {setters: [], execute: function () {"))
     .pipe(gap.appendText("_export('default', window.regenerator)}}})"))

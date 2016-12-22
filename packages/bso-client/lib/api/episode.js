@@ -1,6 +1,6 @@
 'use strict';
 
-System.register('bso-client/api/series', [], function (_export, _context) {
+System.register('bso-client/api/episode', [], function (_export, _context) {
   "use strict";
 
   function _asyncToGenerator(fn) {
@@ -38,37 +38,11 @@ System.register('bso-client/api/series', [], function (_export, _context) {
       _export('default', function (xhr) {
         return {
           create: function () {
-            var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(obj) {
-              var result;
+            var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
               return regeneratorRuntime.wrap(function _callee$(_context2) {
                 while (1) {
                   switch (_context2.prev = _context2.next) {
                     case 0:
-                      _context2.next = 2;
-                      return xhr.post('/series', obj);
-
-                    case 2:
-                      result = _context2.sent;
-
-                      if (!(result.status === 500)) {
-                        _context2.next = 7;
-                        break;
-                      }
-
-                      throw new Error(result.body.msg);
-
-                    case 7:
-                      if (!(result.status !== 200)) {
-                        _context2.next = 9;
-                        break;
-                      }
-
-                      return _context2.abrupt('return', false);
-
-                    case 9:
-                      return _context2.abrupt('return', result.body);
-
-                    case 10:
                     case 'end':
                       return _context2.stop();
                   }
@@ -76,16 +50,12 @@ System.register('bso-client/api/series', [], function (_export, _context) {
               }, _callee, undefined);
             }));
 
-            return function create(_x) {
+            return function create() {
               return _ref.apply(this, arguments);
             };
           }(),
-
           'delete': function _delete() {},
-          publish: function publish() {},
-          readLangAll: function readLangAll() {},
-          readLangPublished: function readLangPublished() {},
-          unpublish: function unpublish() {},
+          readId: function readId() {},
           update: function update() {}
         };
       });
