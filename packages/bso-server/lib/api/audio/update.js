@@ -1,6 +1,6 @@
 'use strict';
 
-System.register('bso-server/api/audio/update', ['babel-runtime/regenerator', 'babel-runtime/core-js/promise', 'babel-runtime/helpers/asyncToGenerator', 'path', 'crypto', './helpers/checkFile', './helpers/checkFilename', './helpers/checkMime'], function (_export, _context) {
+System.register('bso-server/api/audio/update', ['babel-runtime/regenerator', 'babel-runtime/core-js/promise', 'babel-runtime/helpers/asyncToGenerator', 'path', 'crypto', './helpers/checkFile', '../helpers/checkFilename', './helpers/checkMime'], function (_export, _context) {
     "use strict";
 
     var _regeneratorRuntime, _Promise, _asyncToGenerator, path, crypto, checkFile, checkFilename, checkMime;

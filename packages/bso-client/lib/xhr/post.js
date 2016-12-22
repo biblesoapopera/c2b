@@ -6,7 +6,7 @@ System.register("bso-client/xhr/post", [], function (_export, _context) {
   return {
     setters: [],
     execute: function () {
-      _export("default", function (jwt) {
+      _export("default", function (jwt, XMLHttpRequest) {
         return function (url, data) {
           return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();

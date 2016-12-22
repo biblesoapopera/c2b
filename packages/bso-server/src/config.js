@@ -8,7 +8,8 @@ export default {
   rbac: rbac,
   db: db('mongodb://localhost:27017/c2b'),
   audioData: path.join(__dirname, '..', '..', '..', 'data', 'audio'),
-  imgData: path.join(__dirname, '..', '..', '..', 'data', 'img'),
+  langData: path.join(__dirname, '..', '..', '..', 'data', 'lang'),
+  episodeImgData: path.join(__dirname, '..', '..', '..', 'data', 'episode-img'),
   port: 8080,
   logger: logger
 }

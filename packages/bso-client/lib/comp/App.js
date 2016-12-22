@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', './Splash', './episodeChooser/EpisodeChooser', './DeliveryChooser', './player/PlayerContainer', './editor/Editor', './editor/AudioEditor', '../translate', '../store'], function (_export, _context) {
+System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', './Splash', './episodeChooser/EpisodeChooser', './DeliveryChooser', './player/PlayerContainer', './editor/Editor', './editor/AudioEditor'], function (_export, _context) {
   "use strict";
 
-  var React, Background, Menu, Splash, EpisodeChooser, DeliveryChooser, PlayerContainer, Editor, AudioEditor, translate, store, _createClass, App;
+  var React, Background, Menu, Splash, EpisodeChooser, DeliveryChooser, PlayerContainer, Editor, AudioEditor, _createClass, App;
 
   function _asyncToGenerator(fn) {
     return function () {
@@ -83,10 +83,6 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
       Editor = _editorEditor.default;
     }, function (_editorAudioEditor) {
       AudioEditor = _editorAudioEditor.default;
-    }, function (_translate) {
-      translate = _translate.default;
-    }, function (_store) {
-      store = _store.default;
     }],
     execute: function () {
       _createClass = function () {
@@ -111,6 +107,8 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
         _inherits(App, _React$Component);
 
         function App(props) {
+          var _this2 = this;
+
           _classCallCheck(this, App);
 
           var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
@@ -127,74 +125,67 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
             //route: ['editor']
           };
 
-          _this.switchLang(_this.state.lang);
-          return _this;
-        }
+          api = {};
+          Object.keys(_this.props.api).forEach(function (key) {
+            return api[key] = _this.props.api[key];
+          });
 
-        _createClass(App, [{
-          key: 'switchLang',
-          value: function () {
+          api.lang.switch = function () {
             var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(lang) {
               return regeneratorRuntime.wrap(function _callee$(_context2) {
                 while (1) {
                   switch (_context2.prev = _context2.next) {
                     case 0:
                       _context2.next = 2;
-                      return store.lang.load(lang);
+                      return api.lang.read(lang);
 
                     case 2:
-
-                      this.setState({ lang: lang });
-                      this.menu(this.state.menu);
+                      _this.setState({ lang: lang });
+                      api.translate = function (context, str) {
+                        return _this.props.api.translate(lang, context, str);
+                      };
 
                     case 4:
                     case 'end':
                       return _context2.stop();
                   }
                 }
-              }, _callee, this);
+              }, _callee, _this2);
             }));
 
-            function switchLang(_x) {
+            return function (_x) {
               return _ref.apply(this, arguments);
-            }
-
-            return switchLang;
-          }()
-        }, {
-          key: 'setUser',
-          value: function setUser(user) {
-            this.setState({ user: user });
-          }
-        }, {
-          key: 'menu',
-          value: function menu(buttons) {
-            var _this2 = this;
-
-            buttons.forEach(function (btn) {
-              if (btn.name === 'login') {
-                btn.fn = _this2.setUser.bind(_this2);
-              } else if (btn.name === 'lang') {
-                btn.fn = _this2.switchLang.bind(_this2);
-                btn.lang = _this2.state.lang;
-                btn.store = store;
-              }
-            });
-            this.setState({ menu: buttons });
-          }
-        }, {
-          key: 'go',
-          value: function go(to) {
-            this.setState({ route: to });
-          }
-        }, {
-          key: 'tr',
-          value: function tr(lang) {
-            return function (context, str) {
-              return translate(lang, context, str);
             };
-          }
-        }, {
+          }();
+
+          api.go = function (to) {
+            _this.setState({ route: to });
+          };
+
+          api.loading = {
+            show: function show() {
+              return _this.setState({ loading: true });
+            },
+            hide: function hide() {
+              return _this.setState({ loading: false });
+            }
+          };
+
+          api.user.set = function () {
+            _this.setState(api.user.active);
+          };
+
+          api.menu = function (buttons) {
+            _this.setState({ menu: buttons });
+          };
+
+          api.lang.switch(_this.state.lang);
+          api.user.set();
+          _this.api = api;
+          return _this;
+        }
+
+        _createClass(App, [{
           key: 'render',
           value: function render() {
             var route = this.state.route[0];
@@ -205,35 +196,30 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
               React.createElement(Background, null),
               React.createElement(Menu, {
                 buttons: this.state.menu,
-                tr: this.tr(this.state.lang)
+                lang: this.state.lang,
+                api: this.api
               }),
-              route === void 0 && React.createElement(Splash, { go: this.go.bind(this), menu: this.menu.bind(this), tr: this.tr(this.state.lang) }),
+              route === void 0 && React.createElement(Splash, {
+                api: this.api
+              }),
               route === 'choose-episode' && React.createElement(EpisodeChooser, {
                 lang: this.state.lang,
-                switchLang: this.switchLang.bind(this),
-                go: this.go.bind(this),
-                store: store,
-                tr: this.tr(this.state.lang)
+                api: this.api
               }),
               route === 'choose-delivery' && React.createElement(DeliveryChooser, {
-                go: this.go.bind(this),
-                episode: this.state.route[1],
-                tr: this.tr(this.state.lang)
+                api: this.api,
+                episode: this.state.route[1]
               }),
               route === 'player' && React.createElement(PlayerContainer, {
-                go: this.go.bind(this),
                 episode: this.state.route[1],
-                tr: this.tr(this.state.lang),
-                store: store
+                api: this.api
               }),
               route === 'editor' && React.createElement(Editor, {
-                go: this.go.bind(this),
-                tr: this.tr(this.state.lang)
+                api: this.api,
+                lang: this.state.lang
               }),
               route === 'audio-editor' && React.createElement(AudioEditor, {
-                lang: this.state.lang,
-                tr: this.tr(this.state.lang),
-                store: store
+                api: this.api
               })
             );
           }

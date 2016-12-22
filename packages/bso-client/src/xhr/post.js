@@ -1,4 +1,4 @@
-export default jwt => {
+export default (jwt, XMLHttpRequest) => {
   return (url, data) => {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest()

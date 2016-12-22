@@ -1,15 +1,10 @@
 import assert from 'bso-tools/assert'
-import jwt from 'bso-client/jwt'
+import jwtFn from 'bso-client/jwt'
 import sinon from 'sinon'
+import localStorage from 'bso-client/test/resource/localStorage'
 
-let mockLocalStorage = {
-  setItem: ()=>{},
-  removeItem: ()=>{}
-}
-global.localStorage = mockLocalStorage
-
-let stubSetItem = sinon.stub(mockLocalStorage, 'setItem')
-
+let stubSetItem = sinon.stub(localStorage, 'setItem')
+let jwt = jwtFn(localStorage)
 
 export default async () => {
   // setup
@@ -24,4 +19,5 @@ export default async () => {
 
   // cleanup
   delete global.localStorage
+  stubSetItem.restore()
 }

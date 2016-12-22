@@ -3,8 +3,7 @@ import postFn from 'bso-client/xhr/post'
 import sinon from 'sinon'
 
 sinon.xhr = {supportsCORS: true}
-global.XMLHttpRequest = sinon.useFakeXMLHttpRequest()
-
+let fakeXMLHttpRequest = sinon.useFakeXMLHttpRequest()
 let mockJwt = {set: ()=>{}, get: ()=>{}}
 let jwtGet = sinon.stub(mockJwt, 'get')
 let jwtSet = sinon.stub(mockJwt, 'set')
@@ -19,7 +18,7 @@ server.respondWith([
 ])
 
 export default async () => {
-  let post = postFn(mockJwt)
+  let post = postFn(mockJwt, fakeXMLHttpRequest)
 
   let result = await post('/testurl', {data: 123})
 

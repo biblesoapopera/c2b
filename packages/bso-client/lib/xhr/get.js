@@ -1,27 +1,39 @@
-'use strict';
+"use strict";
 
-System.register('bso-client/xhr/get', [], function (_export, _context) {
+System.register("bso-client/xhr/get", [], function (_export, _context) {
   "use strict";
 
   return {
     setters: [],
     execute: function () {
-      _export('default', function (url) {
-        return new Promise(function (resolve, reject) {
-          var xhr = new XMLHttpRequest();
-          xhr.open('GET', url, true);
+      _export("default", function (jwt, XMLHttpRequest) {
+        return function (url) {
+          return new Promise(function (resolve, reject) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
-          xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
+            var token = jwt.get();
+            if (jwt) xhr.setRequestHeader('authorization', 'jwt ' + token);
+
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState !== 4) return;
+
               if (xhr.status == 200) {
-                resolve(JSON.parse(xhr.responseText));
-              } else {
-                reject('Error fetching url ' + url + '. Status: ' + xhr.status);
+                var authHeader = xhr.getResponseHeader('authorization');
+                if (authHeader && authHeader.slice(0, 3) === 'jwt') {
+                  jwt.set(authHeader.slice(4));
+                }
               }
-            }
-          };
-          xhr.send();
-        });
+
+              resolve({
+                status: xhr.status,
+                body: JSON.parse(xhr.responseText)
+              });
+            };
+            xhr.send();
+          });
+        };
       });
     }
   };

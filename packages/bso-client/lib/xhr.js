@@ -11,10 +11,10 @@ System.register('bso-client/xhr', ['./xhr/get', './xhr/post'], function (_export
       post = _xhrPost.default;
     }],
     execute: function () {
-      _export('default', function (jwt) {
+      _export('default', function (jwt, XMLHttpRequest) {
         return {
-          get: get,
-          post: post(jwt)
+          get: get(jwt, XMLHttpRequest),
+          post: post(jwt, XMLHttpRequest)
         };
       });
     }

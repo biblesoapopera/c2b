@@ -5,7 +5,10 @@ import sinon from 'sinon'
 let mockXhr = {post: ()=>{}}
 let stubPost = sinon.stub(mockXhr, 'post')
 stubPost.returns({status: 500, body: {msg: 'internal server error'}})
-let user = userFn(mockXhr)
+
+let mockJwt = {get: () => {}}
+
+let user = userFn(mockXhr, mockJwt)
 
 export default async () => {
   let result
@@ -18,5 +21,5 @@ export default async () => {
 
   assert.ok(err)
   assert.notOk(result)
-  assert.deepEqual({roles: ['guest']}, user.active())
+  assert.deepEqual({roles: ['guest']}, await user.active())
 }

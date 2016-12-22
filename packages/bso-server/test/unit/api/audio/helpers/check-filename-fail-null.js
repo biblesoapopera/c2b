@@ -5,10 +5,9 @@ import MockRequest from 'mock-express-request'
 export default async () => {
   let req = new MockRequest({})
 
-  let result
   let caughtErr
   try {
-    result = fn(req)
+    fn(req)
   } catch (err) {
     caughtErr = err
   }

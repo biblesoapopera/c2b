@@ -2,34 +2,25 @@ import assert from 'bso-tools/assert'
 import request from 'supertest'
 import express from 'express'
 import router from 'bso-server/router'
-import dbFn from 'bso-server/db'
-import rbac from 'bso-server/rbac'
-import path from 'path'
-import mongoose from 'mongoose'
+import mongooseCleanup from 'bso-server/test/resource/mongoose-cleanup'
+import testConfig from 'bso-server/test/resource/test-server-config'
 
 let app = express()
-let key = 'testing testing'
-let db = dbFn('mongodb://localhost:27020/test-api-series-read-published-success')
-let audioData = path.join(__dirname, '..', '..', '..', 'temp')
+let config = testConfig('read-published-success')
 
-app.use('/', router({
-  key:key,
-  rbac: rbac,
-  db: db,
-  audioData: audioData
-}))
+app.use('/', router(config))
 
 export let timeout = 5000
 export default async () => {
 
   // create some series to query against
-  await db.series.create({
+  await config.db.series.create({
     lang: 'en',
     number: 1,
     title: 'series1',
     published: true
   })
-  await db.series.create({
+  await config.db.series.create({
     lang: 'en',
     number: 2,
     title: 'series2',
@@ -60,12 +51,5 @@ export default async () => {
 
   await p
 
-  // cleanup
-  await new Promise((resolve, reject) => {
-    mongoose.connection.db.dropDatabase(err => {
-      if (err) reject(err)
-      else resolve()
-    })
-  })
-  mongoose.connection.close()
+  await mongooseCleanup()
 }

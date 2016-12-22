@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-server/api', ['./api/series', './api/episode', './api/audio'], function (_export, _context) {
+System.register('bso-server/api', ['./api/series', './api/episode', './api/audio', './api/user', './api/episodeImg'], function (_export, _context) {
   "use strict";
 
-  var series, episode, audio;
+  var series, episode, audio, user, episodeImg;
   return {
     setters: [function (_apiSeries) {
       series = _apiSeries.default;
@@ -11,12 +11,18 @@ System.register('bso-server/api', ['./api/series', './api/episode', './api/audio
       episode = _apiEpisode.default;
     }, function (_apiAudio) {
       audio = _apiAudio.default;
+    }, function (_apiUser) {
+      user = _apiUser.default;
+    }, function (_apiEpisodeImg) {
+      episodeImg = _apiEpisodeImg.default;
     }],
     execute: function () {
       _export('default', {
         series: series,
         episode: episode,
-        audio: audio
+        audio: audio,
+        user: user,
+        episodeImg: episodeImg
       });
     }
   };

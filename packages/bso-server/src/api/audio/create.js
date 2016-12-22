@@ -1,7 +1,7 @@
 import path from 'path'
 import crypto from 'crypto'
 import checkFile from './helpers/checkFile'
-import checkFilename from './helpers/checkFilename'
+import checkFilename from '../helpers/checkFilename'
 import checkMime from './helpers/checkMime'
 
 export default (audioDir, db) => {

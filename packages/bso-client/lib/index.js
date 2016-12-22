@@ -3,7 +3,7 @@
 System.register('bso-client', ['regenerator', 'react', 'react-dom', './comp/App', './api', './xhr', './jwt'], function (_export, _context) {
   "use strict";
 
-  var React, ReactDOM, App, api, xhr, jwt;
+  var React, ReactDOM, App, apiFn, xhrFn, jwtFn, jwt, xhr, api;
   return {
     setters: [function (_regenerator) {}, function (_react) {
       React = _react.default;
@@ -12,15 +12,19 @@ System.register('bso-client', ['regenerator', 'react', 'react-dom', './comp/App'
     }, function (_compApp) {
       App = _compApp.default;
     }, function (_api) {
-      api = _api.default;
+      apiFn = _api.default;
     }, function (_xhr) {
-      xhr = _xhr.default;
+      xhrFn = _xhr.default;
     }, function (_jwt) {
-      jwt = _jwt.default;
+      jwtFn = _jwt.default;
     }],
     execute: function () {
+      jwt = jwtFn(localStorage);
+      xhr = xhrFn(jwt, XMLHttpRequest);
+      api = apiFn(xhr);
 
-      ReactDOM.render(React.createElement(App, { api: api(xhr(jwt)) }), document.getElementById('root'));
+
+      ReactDOM.render(React.createElement(App, { api: api }), document.getElementById('root'));
     }
   };
 });

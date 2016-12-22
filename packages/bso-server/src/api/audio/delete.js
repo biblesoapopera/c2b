@@ -1,6 +1,6 @@
 import path from 'path'
 import del from 'del'
-import checkFilename from './helpers/checkFilename'
+import checkFilename from '../helpers/checkFilename'
 
 export default (audioDir, db) => {
   return async (req, res, next) => {

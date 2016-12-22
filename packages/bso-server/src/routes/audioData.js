@@ -3,7 +3,7 @@ import authorize from '../authorize'
 import api from '../api'
 import bodyParser from 'body-parser'
 import fileUpload from 'express-fileupload'
-import audioData from '../audioData'
+import express from 'express'
 
 export default (cfg, router) => {
   router.put(
@@ -27,5 +27,5 @@ export default (cfg, router) => {
     bodyParser.json(),
     api.audio.delete(cfg.audioData)
   )
-  router.use('/audio', audioData(cfg.audioData))
+  router.use('/audio', express.static(cfg.audioData))
 }

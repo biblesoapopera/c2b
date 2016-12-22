@@ -1,6 +1,6 @@
 'use strict';
 
-System.register('bso-server/api/audio/delete', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', 'path', 'del', './helpers/checkFilename'], function (_export, _context) {
+System.register('bso-server/api/audio/delete', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', 'path', 'del', '../helpers/checkFilename'], function (_export, _context) {
     "use strict";
 
     var _regeneratorRuntime, _asyncToGenerator, path, del, checkFilename;

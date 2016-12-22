@@ -7,8 +7,6 @@ import DeliveryChooser from './DeliveryChooser'
 import PlayerContainer from './player/PlayerContainer'
 import Editor from './editor/Editor'
 import AudioEditor from './editor/AudioEditor'
-import translate from '../translate'
-import store from '../store'
 
 class App extends React.Component {
   constructor(props) {
@@ -25,41 +23,35 @@ class App extends React.Component {
       //route: ['editor']
     }
 
-    this.switchLang(this.state.lang)
-  }
+    api = {}
+    Object.keys(this.props.api).forEach(key => api[key] = this.props.api[key])
 
-  async switchLang(lang) {
-    await store.lang.load(lang)
-
-    this.setState({lang: lang})
-    this.menu(this.state.menu)
-  }
-
-  setUser(user) {
-    this.setState({user: user})
-  }
-
-  menu(buttons) {
-    buttons.forEach(btn => {
-      if (btn.name === 'login') {
-        btn.fn = ::this.setUser
-      } else if (btn.name === 'lang') {
-        btn.fn = ::this.switchLang
-        btn.lang = this.state.lang
-        btn.store = store
-      }
-    })
-    this.setState({menu: buttons})
-  }
-
-  go(to) {
-    this.setState({route: to})
-  }
-
-  tr(lang) {
-    return (context, str) => {
-      return translate(lang, context, str)
+    api.lang.switch = async lang => {
+      await api.lang.read(lang)
+      this.setState({lang: lang})
+      api.translate = (context, str) => this.props.api.translate(lang, context, str)
     }
+
+    api.go = to => {
+      this.setState({route: to})
+    }
+
+    api.loading = {
+      show: () => this.setState({loading: true}),
+      hide: () => this.setState({loading: false})
+    }
+
+    api.user.set = () => {
+      this.setState(api.user.active)
+    }
+
+    api.menu = buttons => {
+      this.setState({menu: buttons})
+    }
+
+    api.lang.switch(this.state.lang)
+    api.user.set()
+    this.api = api
   }
 
   render() {
@@ -71,52 +63,47 @@ class App extends React.Component {
 
         <Menu
           buttons={this.state.menu}
-          tr={this.tr(this.state.lang)}
+          lang={this.state.lang}
+          api={this.api}
         />
 
         {route === void 0 &&
-          <Splash go={::this.go} menu={::this.menu} tr={this.tr(this.state.lang)}/>
+          <Splash
+            api={this.api}
+          />
         }
 
         {route === 'choose-episode' &&
           <EpisodeChooser
             lang={this.state.lang}
-            switchLang={::this.switchLang}
-            go={::this.go}
-            store={store}
-            tr={this.tr(this.state.lang)}
+            api={this.api}
           />
         }
 
         {route === 'choose-delivery' &&
           <DeliveryChooser
-            go={::this.go}
+            api={this.api}
             episode={this.state.route[1]}
-            tr={this.tr(this.state.lang)}
           />
         }
 
         {route === 'player' &&
           <PlayerContainer
-            go={::this.go}
             episode={this.state.route[1]}
-            tr={this.tr(this.state.lang)}
-            store={store}
+            api={this.api}
           />
         }
 
         {route === 'editor' &&
           <Editor
-            go={::this.go}
-            tr={this.tr(this.state.lang)}
+            api={this.api}
+            lang={this.state.lang}
           />
         }
 
         {route === 'audio-editor' &&
           <AudioEditor
-            lang={this.state.lang}
-            tr={this.tr(this.state.lang)}
-            store={store}
+            api={this.api}
           />
         }
       </div>

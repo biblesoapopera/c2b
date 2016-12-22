@@ -3,7 +3,7 @@
 System.register('bso-server/authenticate', ['babel-runtime/regenerator', 'babel-runtime/helpers/asyncToGenerator', 'jsonwebtoken'], function (_export, _context) {
     "use strict";
 
-    var _regeneratorRuntime, _asyncToGenerator, jwt, fail;
+    var _regeneratorRuntime, _asyncToGenerator, jwt, fail, updateTokenExpiry;
 
     return {
         setters: [function (_babelRuntimeRegenerator) {
@@ -21,11 +21,22 @@ System.register('bso-server/authenticate', ['babel-runtime/regenerator', 'babel-
                 next('route');
             };
 
+            updateTokenExpiry = function updateTokenExpiry(payload, user, key, res) {
+                if (payload.exp < Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 8) {
+                    var token = jwt.sign({
+                        sub: user.username,
+                        name: user.name,
+                        lv: user.loginVersion,
+                        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 10 // Expires in ten days
+                    }, key);
+                    res.set('authorization', 'jwt ' + token);
+                }
+            };
+
             _export('default', function (key, db) {
                 return function () {
                     var _ref = _asyncToGenerator(_regeneratorRuntime.mark(function _callee(req, res, next) {
-                        var authHeader, token, payload, username, user, lv, _token;
-
+                        var authHeader, token, payload, user;
                         return _regeneratorRuntime.wrap(function _callee$(_context2) {
                             while (1) {
                                 switch (_context2.prev = _context2.next) {
@@ -82,7 +93,7 @@ System.register('bso-server/authenticate', ['babel-runtime/regenerator', 'babel-
                                         return _context2.abrupt('return', fail(res, next));
 
                                     case 20:
-                                        if (payload.exp) {
+                                        if (!(!payload.exp || !payload.sub || !payload.lv)) {
                                             _context2.next = 22;
                                             break;
                                         }
@@ -90,64 +101,33 @@ System.register('bso-server/authenticate', ['babel-runtime/regenerator', 'babel-
                                         return _context2.abrupt('return', fail(res, next));
 
                                     case 22:
-                                        username = payload.sub;
+                                        _context2.next = 24;
+                                        return db.user.find({ username: payload.sub });
 
-                                        if (username) {
-                                            _context2.next = 25;
-                                            break;
-                                        }
-
-                                        return _context2.abrupt('return', fail(res, next));
-
-                                    case 25:
-                                        _context2.next = 27;
-                                        return db.user.find({ username: username });
-
-                                    case 27:
+                                    case 24:
                                         user = _context2.sent;
 
                                         if (user) {
-                                            _context2.next = 30;
+                                            _context2.next = 27;
                                             break;
                                         }
 
                                         return _context2.abrupt('return', fail(res, next));
 
-                                    case 30:
-
-                                        // check login version
-                                        lv = payload.lv;
-
-                                        if (lv) {
-                                            _context2.next = 33;
+                                    case 27:
+                                        if (!(payload.lv !== user.loginVersion)) {
+                                            _context2.next = 29;
                                             break;
                                         }
 
                                         return _context2.abrupt('return', fail(res, next));
 
-                                    case 33:
-                                        if (!(lv !== user.loginVersion)) {
-                                            _context2.next = 35;
-                                            break;
-                                        }
-
-                                        return _context2.abrupt('return', fail(res, next));
-
-                                    case 35:
+                                    case 29:
 
                                         // all checks complete. token good.
 
                                         // update token expiry if token will expire in less than eight days
-                                        if (payload.exp < Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 8) {
-                                            _token = jwt.sign({
-                                                sub: user.username,
-                                                name: user.name,
-                                                lv: user.loginVersion,
-                                                exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 10 // Expires in ten days
-                                            }, key);
-
-                                            res.set('authorization', 'jwt ' + _token);
-                                        }
+                                        updateTokenExpiry(payload, user, key, res);
 
                                         req.user = user;
                                         req.token = {
@@ -157,7 +137,7 @@ System.register('bso-server/authenticate', ['babel-runtime/regenerator', 'babel-
 
                                         next();
 
-                                    case 39:
+                                    case 33:
                                     case 'end':
                                         return _context2.stop();
                                 }
