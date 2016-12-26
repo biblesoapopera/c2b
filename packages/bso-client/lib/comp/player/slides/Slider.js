@@ -70,18 +70,93 @@ System.register('bso-client/comp/player/slides/Slider', ['react'], function (_ex
 
           _this.state = {
             complete: complete,
-            score: 50,
-            gripPos: null
+            score: 50
+          };
+
+          _this.gripState = {
+            handlers: {},
+            gripScore: 50,
+            start: 0
           };
           return _this;
         }
 
         _createClass(Slider, [{
+          key: 'componentDidMount',
+          value: function componentDidMount() {
+            this.positionGrip(this.state.score);
+          }
+        }, {
+          key: 'positionGrip',
+          value: function positionGrip(value) {
+            this.grip.style.left = this.track.clientWidth * value / 100 - this.grip.clientWidth / 2 + 'px';
+            this.grip.style.top = -(this.grip.clientHeight / 2 - this.track.clientHeight / 2) + 'px';
+          }
+        }, {
+          key: 'trackClick',
+          value: function trackClick(evt) {
+            var newScore = Math.round((evt.clientX - this.track.getBoundingClientRect().left) * 100 / this.track.clientWidth);
+            this.setState({
+              score: newScore
+            });
+            this.positionGrip(newScore);
+          }
+        }, {
+          key: 'dragstart',
+          value: function dragstart(evt) {
+            this.gripState.handlers = {
+              mouseup: this.dragend.bind(this),
+              touchend: this.dragend.bind(this),
+              mousemove: this.dragmove.bind(this),
+              touchmove: this.dragmove.bind(this)
+            };
+            this.slide.addEventListener('mouseup', this.gripState.handlers.mouseup);
+            this.slide.addEventListener('touchend', this.gripState.handlers.touchend);
+            this.slide.addEventListener('mousemove', this.gripState.handlers.mousemove);
+            this.slide.addEventListener('touchmove', this.gripState.handlers.touchmove);
+
+            this.gripState.start = evt.touches ? evt.touches[0].clientX : evt.clientX;
+
+            this.grip.classList.add('active');
+          }
+        }, {
+          key: 'dragmove',
+          value: function dragmove(evt) {
+            evt.stopPropagation();
+            var delta = (evt.touches ? evt.touches[0].clientX : evt.clientX) - this.gripState.start;
+            var tempScore = Math.round(this.state.score + delta * 100 / this.track.clientWidth);
+
+            if (tempScore > 100) tempScore = 100;else if (tempScore < 0) tempScore = 0;
+
+            this.gripState.gripScore = tempScore;
+            this.positionGrip(tempScore);
+          }
+        }, {
+          key: 'dragend',
+          value: function dragend(evt) {
+            evt.stopPropagation();
+            this.slide.removeEventListener('mouseup', this.gripState.handlers.mouseup);
+            this.slide.removeEventListener('touchend', this.gripState.handlers.touchend);
+            this.slide.removeEventListener('mousemove', this.gripState.handlers.mousemove);
+            this.slide.removeEventListener('touchmove', this.gripState.handlers.touchmove);
+
+            this.grip.classList.remove('active');
+            this.setState({
+              score: this.gripState.gripScore
+            });
+          }
+        }, {
           key: 'render',
           value: function render() {
+            var _this2 = this;
+
             return React.createElement(
               'div',
-              { className: 'slide slider' },
+              { className: 'slide slider',
+                ref: function ref(slide) {
+                  return _this2.slide = slide;
+                }
+              },
               React.createElement('div', { className: 'question', dangerouslySetInnerHTML: { __html: this.props.question } }),
               React.createElement(
                 'div',
@@ -89,10 +164,19 @@ System.register('bso-client/comp/player/slides/Slider', ['react'], function (_ex
                 React.createElement(
                   'div',
                   { className: 'track-container' },
-                  React.createElement('div', { className: 'track' }),
+                  React.createElement('div', { className: 'track',
+                    onClick: this.trackClick.bind(this),
+                    ref: function ref(track) {
+                      return _this2.track = track;
+                    }
+                  }),
                   React.createElement('div', {
                     className: 'grip',
-                    style: { left: this.state.gripPos + 'px' }
+                    ref: function ref(grip) {
+                      return _this2.grip = grip;
+                    },
+                    onMouseDown: this.dragstart.bind(this),
+                    onTouchStart: this.dragstart.bind(this)
                   })
                 ),
                 React.createElement(

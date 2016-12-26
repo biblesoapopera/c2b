@@ -604,30 +604,34 @@ form button:enabled:hover {
 .slide.slider .answer-container .track-container {
   width: 80%;
   position: relative;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 .slide.slider .answer-container .track-container .track {
-  background-color: red;
+  background-color: rgba(255, 255, 255, 0.2);
   width: 100%;
   height: 10px;
+  cursor: pointer;
+  border-radius: 10px;
 }
 .slide.slider .answer-container .track-container .grip {
   box-shadow: 0 0 3px #001129;
   width: 40px;
   height: 40px;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
   border: thin solid transparent;
   border-radius: 40px;
   cursor: pointer;
   position: absolute;
   top: 0;
   transition-property: left;
-  transition-duration: 1s;
+  transition-duration: 0.5s;
 }
 .slide.slider .answer-container .track-container .grip:hover,
 .slide.slider .answer-container .track-container .grip.active {
   transition: none;
   border: thin solid #ffffff;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #ffffff;
 }
 .slide.slider .answer-container .answers {
   display: flex;
@@ -640,7 +644,7 @@ form button:enabled:hover {
   font-family: Sans-Serif;
   font-weight: 300;
   font-size: 80%;
-  width: 25%;
+  width: 40%;
 }
 .editor .text {
   margin: 3vw;
