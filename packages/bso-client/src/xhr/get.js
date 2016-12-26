@@ -6,7 +6,7 @@
       xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
 
       let token = jwt.get()
-      if (jwt) xhr.setRequestHeader('authorization', 'jwt ' + token)
+      if (token) xhr.setRequestHeader('authorization', 'jwt ' + token)
 
       xhr.onreadystatechange = () => {
         if (xhr.readyState !== 4) return
@@ -17,7 +17,6 @@
             jwt.set(authHeader.slice(4))
           }
         }
-
         resolve({
           status: xhr.status,
           body: JSON.parse(xhr.responseText)

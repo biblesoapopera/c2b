@@ -16,7 +16,6 @@ System.register('bso-server/routes/episode', ['../authenticate', '../authorize',
     }],
     execute: function () {
       _export('default', function (cfg, router) {
-        router.get('/episode/orphan', authenticate(cfg.key, cfg.db), authorize(cfg.rbac, 'readOrphan', 'episode'), api.episode.readOrphan(cfg.db));
         router.get('/episode/:id', authenticate(cfg.key, cfg.db), authorize(cfg.rbac, 'read', 'episode'), api.episode.readId(cfg.db));
         router.put('/episode', authenticate(cfg.key, cfg.db), authorize(cfg.rbac, 'create', 'episode'), bodyParser.json(), api.episode.create(cfg.db));
         router.patch('/episode/:id', authenticate(cfg.key, cfg.db), authorize(cfg.rbac, 'update', 'episode'), bodyParser.json(), api.episode.update(cfg.db));

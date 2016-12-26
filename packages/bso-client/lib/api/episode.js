@@ -55,7 +55,30 @@ System.register('bso-client/api/episode', [], function (_export, _context) {
             };
           }(),
           'delete': function _delete() {},
-          readId: function readId() {},
+          readId: function () {
+            var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(id) {
+              return regeneratorRuntime.wrap(function _callee2$(_context3) {
+                while (1) {
+                  switch (_context3.prev = _context3.next) {
+                    case 0:
+                      _context3.next = 2;
+                      return xhr.get('/episode/' + id);
+
+                    case 2:
+                      return _context3.abrupt('return', _context3.sent);
+
+                    case 3:
+                    case 'end':
+                      return _context3.stop();
+                  }
+                }
+              }, _callee2, undefined);
+            }));
+
+            return function readId(_x) {
+              return _ref2.apply(this, arguments);
+            };
+          }(),
           update: function update() {}
         };
       });

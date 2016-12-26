@@ -3,7 +3,9 @@ export default (xhr) => {
     create: async () => {
     },
     'delete': () => {},
-    readId: () => {},
+    readId: async (id) => {
+      return await xhr.get('/episode/' + id)
+    },
     update: () => {}
   }
 }

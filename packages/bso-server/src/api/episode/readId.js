@@ -1,6 +1,6 @@
 export default (db) => {
   return async (req, res, next) => {
-    let result = await db.episode.find({_id: req.params.id, series: {$exists: true}})
+    let result = await db.episode.findId(req.params.id)
 
     res.type('json')
     res.status(200)

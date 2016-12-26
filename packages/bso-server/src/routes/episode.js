@@ -5,12 +5,6 @@ import bodyParser from 'body-parser'
 
 export default (cfg, router) => {
   router.get(
-    '/episode/orphan',
-    authenticate(cfg.key, cfg.db),
-    authorize(cfg.rbac, 'readOrphan', 'episode'),
-    api.episode.readOrphan(cfg.db)
-  )
-  router.get(
     '/episode/:id',
     authenticate(cfg.key, cfg.db),
     authorize(cfg.rbac, 'read', 'episode'),

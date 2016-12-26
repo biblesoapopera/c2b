@@ -33,6 +33,7 @@ module.exports = entry => {
     if (mid === 'react-dom') return require.resolve('bso-client/lib/react-dom')
     if (mid === 'react') return require.resolve('bso-client/lib/react')
     if (mid === 'regenerator') return require.resolve('bso-client/lib/regenerator')
+    if (mid === 'spark-md5') return require.resolve('bso-client/lib/spark-md5')
 
     let prefix = mid.split('-')[0]
     if (prefix === 'bso' || prefix === 'up') mid = mid.replace('/', '/lib/')

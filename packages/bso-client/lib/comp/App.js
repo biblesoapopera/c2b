@@ -121,11 +121,11 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
             //route: []
             //route: ['choose-episode']
             //route: ['choose-delivery', 4]
-            route: ['player', 4]
+            route: ['player', '5860d2d2fdb53f210ca32efb']
             //route: ['editor']
           };
 
-          api = {};
+          var api = {};
           Object.keys(_this.props.api).forEach(function (key) {
             return api[key] = _this.props.api[key];
           });
@@ -141,11 +141,8 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
 
                     case 2:
                       _this.setState({ lang: lang });
-                      api.translate = function (context, str) {
-                        return _this.props.api.translate(lang, context, str);
-                      };
 
-                    case 4:
+                    case 3:
                     case 'end':
                       return _context2.stop();
                   }
@@ -179,8 +176,10 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
             _this.setState({ menu: buttons });
           };
 
-          api.lang.switch(_this.state.lang);
-          api.user.set();
+          api.translate = function (context, str) {
+            _this.props.api.translate(_this.state.lang, context, str);
+          };
+
           _this.api = api;
           return _this;
         }

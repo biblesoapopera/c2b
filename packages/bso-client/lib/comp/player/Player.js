@@ -5,6 +5,35 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
 
   var React, Text, Slider, Pick, Swipe, _createClass, Player;
 
+  function _asyncToGenerator(fn) {
+    return function () {
+      var gen = fn.apply(this, arguments);
+      return new Promise(function (resolve, reject) {
+        function step(key, arg) {
+          try {
+            var info = gen[key](arg);
+            var value = info.value;
+          } catch (error) {
+            reject(error);
+            return;
+          }
+
+          if (info.done) {
+            resolve(value);
+          } else {
+            return Promise.resolve(value).then(function (value) {
+              step("next", value);
+            }, function (err) {
+              step("throw", err);
+            });
+          }
+        }
+
+        return step("next");
+      });
+    };
+  }
+
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -75,17 +104,52 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
           var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, props));
 
           _this.state = {
-            slide: 2
+            slide: 2,
+            err: false,
+            episodeData: false
           };
-
-          _this.episode = _this.props.store.episode.find(_this.props.episode);
           return _this;
         }
 
         _createClass(Player, [{
+          key: 'componentDidMount',
+          value: function () {
+            var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+              var res;
+              return regeneratorRuntime.wrap(function _callee$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      _context2.next = 2;
+                      return this.props.api.episode.readId(this.props.episode);
+
+                    case 2:
+                      res = _context2.sent;
+
+                      if (res.status === 200) {
+                        this.setState({ episodeData: res.body });
+                      } else {
+                        this.setState({ err: res });
+                      }
+
+                    case 4:
+                    case 'end':
+                      return _context2.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
+
+            function componentDidMount() {
+              return _ref.apply(this, arguments);
+            }
+
+            return componentDidMount;
+          }()
+        }, {
           key: 'next',
           value: function next() {
-            if (this.state.slide !== this.episode.slides.length - 1) {
+            if (this.state.slide !== this.state.episodeData.slides.length - 1) {
               this.setState({ slide: this.state.slide + 1 });
             }
           }
@@ -107,94 +171,113 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
             var _this2 = this;
 
             var activeSlide = void 0;
+            var episodeData = this.state.episodeData;
 
-            return React.createElement(
-              'div',
-              { className: 'player' },
-              React.createElement(
-                Swipe,
-                {
-                  className: 'slide-swipe',
-                  onSwipeLeft: this.next.bind(this),
-                  onSwipeRight: this.previous.bind(this)
-                },
-                React.createElement(
-                  'div',
-                  {
-                    className: 'slide-list',
-                    style: { left: -100 * this.state.slide + '%' }
-                  },
-                  this.episode.slides.map(function (slideObj, key) {
-                    var type = void 0;
-                    var slide = void 0;
-                    var slideJsx = void 0;
-
-                    if (slideObj.text) type = 'text';else if (slideObj.slider) type = 'slider';else if (slideObj.listen) type = 'listen';else if (slideObj.pick) type = 'pick';else if (slideObj.multipick) type = 'multipick';
-
-                    slide = slideObj[type];
-
-                    if (key === _this2.state.slide) activeSlide = slide;
-
-                    if (type === 'text') {
-                      slideJsx = React.createElement(Text, {
-                        text: slide.text
-                      });
-                    } else if (type === 'slider') {
-                      slideJsx = React.createElement(Slider, {
-                        question: slide.question,
-                        answers: slide.answers,
-                        feedback: slide.feedback,
-                        complete: slide.complete
-                      });
-                    } else if (type === 'pick') {
-                      slideJsx = React.createElement(Pick, {
-                        question: slide.question,
-                        answers: slide.answers,
-                        feedback: slide.feedback,
-                        complete: slide.complete
-                      });
-                    }
-
-                    return React.createElement(
-                      'div',
-                      { className: 'slide-container', key: key },
-                      slideJsx
-                    );
-                  })
-                )
-              ),
-              React.createElement(
+            if (!episodeData && !this.state.err) {
+              return React.createElement(
                 'div',
-                { className: 'nav' },
+                null,
+                'Loading'
+              );
+            }
+
+            if (this.state.err) {
+              return React.createElement(
+                'div',
+                null,
+                'Error'
+              );
+            }
+
+            if (episodeData && !this.state.err) {
+              return React.createElement(
+                'div',
+                { className: 'player' },
                 React.createElement(
-                  'div',
-                  { className: 'previous btn ' + (this.state.slide !== 0 ? '' : 'hide'), onClick: this.previous.bind(this) },
+                  Swipe,
+                  {
+                    className: 'slide-swipe',
+                    onSwipeLeft: this.next.bind(this),
+                    onSwipeRight: this.previous.bind(this)
+                  },
                   React.createElement(
                     'div',
-                    null,
-                    React.createElement('div', null)
+                    {
+                      className: 'slide-list',
+                      style: { left: -100 * this.state.slide + '%' }
+                    },
+                    episodeData.slides.map(function (slideObj, key) {
+                      var type = void 0;
+                      var slide = void 0;
+                      var slideJsx = void 0;
+
+                      if (slideObj.text) type = 'text';else if (slideObj.slider) type = 'slider';else if (slideObj.listen) type = 'listen';else if (slideObj.pick) type = 'pick';else if (slideObj.multipick) type = 'multipick';
+
+                      slide = slideObj[type];
+
+                      if (key === _this2.state.slide) activeSlide = slide;
+
+                      if (type === 'text') {
+                        slideJsx = React.createElement(Text, {
+                          text: slide.text
+                        });
+                      } else if (type === 'slider') {
+                        slideJsx = React.createElement(Slider, {
+                          question: slide.question,
+                          answers: slide.answers,
+                          feedback: slide.feedback,
+                          complete: slide.complete
+                        });
+                      } else if (type === 'pick') {
+                        slideJsx = React.createElement(Pick, {
+                          question: slide.question,
+                          answers: slide.answers,
+                          feedback: slide.feedback,
+                          complete: slide.complete
+                        });
+                      }
+
+                      return React.createElement(
+                        'div',
+                        { className: 'slide-container', key: key },
+                        slideJsx
+                      );
+                    })
                   )
                 ),
                 React.createElement(
                   'div',
-                  { className: 'audio btn ' + (activeSlide.audio ? '' : 'hide'), onClick: this.audio.bind(this) },
+                  { className: 'nav' },
                   React.createElement(
                     'div',
-                    null,
-                    React.createElement('div', null)
-                  )
-                ),
-                React.createElement(
-                  'div',
-                  { className: 'next btn ' + (this.state.slide !== this.episode.slides.length - 1 ? '' : 'hide'), onClick: this.next.bind(this) },
+                    { className: 'previous btn ' + (this.state.slide !== 0 ? '' : 'hide'), onClick: this.previous.bind(this) },
+                    React.createElement(
+                      'div',
+                      null,
+                      React.createElement('div', null)
+                    )
+                  ),
                   React.createElement(
                     'div',
-                    null,
-                    React.createElement('div', null)
+                    { className: 'audio btn ' + (activeSlide.audio ? '' : 'hide'), onClick: this.audio.bind(this) },
+                    React.createElement(
+                      'div',
+                      null,
+                      React.createElement('div', null)
+                    )
+                  ),
+                  React.createElement(
+                    'div',
+                    { className: 'next btn ' + (this.state.slide !== episodeData.slides.length - 1 ? '' : 'hide'), onClick: this.next.bind(this) },
+                    React.createElement(
+                      'div',
+                      null,
+                      React.createElement('div', null)
+                    )
                   )
                 )
-              )
-            );
+              );
+            }
           }
         }]);
 

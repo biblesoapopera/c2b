@@ -6,10 +6,8 @@ class PlayerContainer extends React.Component {
     return (
       <div className="player-container">
         <Player
-          go={this.props.go}
+          api={this.props.api}
           episode={this.props.episode}
-          tr={this.props.tr}
-          store={this.props.store}
         />
       </div>
     )

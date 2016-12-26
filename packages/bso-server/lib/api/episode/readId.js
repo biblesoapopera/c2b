@@ -21,7 +21,7 @@ System.register('bso-server/api/episode/readId', ['babel-runtime/regenerator', '
                 switch (_context2.prev = _context2.next) {
                   case 0:
                     _context2.next = 2;
-                    return db.episode.find({ _id: req.params.id, series: { $exists: true } });
+                    return db.episode.findId(req.params.id);
 
                   case 2:
                     result = _context2.sent;

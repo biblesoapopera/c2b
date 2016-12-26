@@ -29,7 +29,8 @@ let content = new mongoose.Schema({
 
 let answer = new mongoose.Schema({
   value: {
-    type: content,
+    type: String,
+    maxlength: 200,
     required: true
   },
   score: {
@@ -39,7 +40,8 @@ let answer = new mongoose.Schema({
     max: 100
   },
   feedback: {
-    type: content
+    type: String,
+    maxlength: 200
   }
 })
 
@@ -51,8 +53,9 @@ let feedback = new mongoose.Schema({
 
 let questionSlide = new mongoose.Schema({
   question: {
-    type: content,
-    required: true
+    type: String,
+    required: true,
+    maxlength: 200
   },
   answers: [answer],
   audio: audio,

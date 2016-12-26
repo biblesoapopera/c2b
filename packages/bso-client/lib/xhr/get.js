@@ -14,7 +14,7 @@ System.register("bso-client/xhr/get", [], function (_export, _context) {
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
             var token = jwt.get();
-            if (jwt) xhr.setRequestHeader('authorization', 'jwt ' + token);
+            if (token) xhr.setRequestHeader('authorization', 'jwt ' + token);
 
             xhr.onreadystatechange = function () {
               if (xhr.readyState !== 4) return;
@@ -25,7 +25,6 @@ System.register("bso-client/xhr/get", [], function (_export, _context) {
                   jwt.set(authHeader.slice(4));
                 }
               }
-
               resolve({
                 status: xhr.status,
                 body: JSON.parse(xhr.responseText)

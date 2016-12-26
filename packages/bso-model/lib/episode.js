@@ -40,7 +40,8 @@ System.register('bso-model/Episode', ['babel-runtime/core-js/object/keys', 'mong
       });
       answer = new mongoose.Schema({
         value: {
-          type: content,
+          type: String,
+          maxlength: 200,
           required: true
         },
         score: {
@@ -50,7 +51,8 @@ System.register('bso-model/Episode', ['babel-runtime/core-js/object/keys', 'mong
           max: 100
         },
         feedback: {
-          type: content
+          type: String,
+          maxlength: 200
         }
       });
       feedback = new mongoose.Schema({
@@ -60,8 +62,9 @@ System.register('bso-model/Episode', ['babel-runtime/core-js/object/keys', 'mong
       });
       questionSlide = new mongoose.Schema({
         question: {
-          type: content,
-          required: true
+          type: String,
+          required: true,
+          maxlength: 200
         },
         answers: [answer],
         audio: audio,

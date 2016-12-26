@@ -76,10 +76,8 @@ System.register('bso-client/comp/player/PlayerContainer', ['react', './Player'],
               'div',
               { className: 'player-container' },
               React.createElement(Player, {
-                go: this.props.go,
-                episode: this.props.episode,
-                tr: this.props.tr,
-                store: this.props.store
+                api: this.props.api,
+                episode: this.props.episode
               })
             );
           }

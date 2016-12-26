@@ -19,17 +19,16 @@ class App extends React.Component {
       //route: []
       //route: ['choose-episode']
       //route: ['choose-delivery', 4]
-      route: ['player', 4]
+      route: ['player', '5860d2d2fdb53f210ca32efb']
       //route: ['editor']
     }
 
-    api = {}
+    let api = {}
     Object.keys(this.props.api).forEach(key => api[key] = this.props.api[key])
 
     api.lang.switch = async lang => {
       await api.lang.read(lang)
       this.setState({lang: lang})
-      api.translate = (context, str) => this.props.api.translate(lang, context, str)
     }
 
     api.go = to => {
@@ -49,8 +48,10 @@ class App extends React.Component {
       this.setState({menu: buttons})
     }
 
-    api.lang.switch(this.state.lang)
-    api.user.set()
+    api.translate = (context, str) =>{
+      this.props.api.translate(this.state.lang, context, str)
+    }
+
     this.api = api
   }
 
