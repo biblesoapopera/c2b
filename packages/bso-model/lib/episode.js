@@ -56,9 +56,18 @@ System.register('bso-model/Episode', ['babel-runtime/core-js/object/keys', 'mong
         }
       });
       feedback = new mongoose.Schema({
-        incorrect: { type: content },
-        correct: { type: content },
-        complete: { type: content }
+        incorrect: {
+          type: String,
+          maxlength: 200
+        },
+        correct: {
+          type: String,
+          maxlength: 200
+        },
+        complete: {
+          type: String,
+          maxlength: 200
+        }
       });
       questionSlide = new mongoose.Schema({
         question: {

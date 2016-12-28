@@ -8,7 +8,7 @@ class Player extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      slide: 2,
+      slide: 3,
       err: false,
       episodeData: false
     }
@@ -81,6 +81,7 @@ class Player extends React.Component {
                 if (type === 'text') {
                   slideJsx = (<Text
                     text={slide.text}
+                    focused={key === this.state.slide}
                   />
                   )
                 } else if (type === 'slider') {
@@ -89,6 +90,7 @@ class Player extends React.Component {
                     answers={slide.answers}
                     feedback={slide.feedback}
                     complete={slide.complete}
+                    focused={key === this.state.slide}
                   />
                   )
                 } else if (type === 'pick') {
@@ -97,6 +99,7 @@ class Player extends React.Component {
                     answers={slide.answers}
                     feedback={slide.feedback}
                     complete={slide.complete}
+                    focused={key === this.state.slide}
                   />
                   )
                 }

@@ -66,10 +66,8 @@ System.register('bso-client/comp/player/slides/Slider', ['react'], function (_ex
 
           var _this = _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).call(this, props));
 
-          var complete = props.complete === 'always';
-
           _this.state = {
-            complete: complete,
+            complete: props.complete === 'always',
             score: 50
           };
 
@@ -85,6 +83,11 @@ System.register('bso-client/comp/player/slides/Slider', ['react'], function (_ex
           key: 'componentDidMount',
           value: function componentDidMount() {
             this.positionGrip(this.state.score);
+          }
+        }, {
+          key: 'componenetDidUpdate',
+          value: function componenetDidUpdate(prevProps) {
+            if (!prevProps.focused && this.props.focused) this.positionGrip(this.state.score);
           }
         }, {
           key: 'positionGrip',

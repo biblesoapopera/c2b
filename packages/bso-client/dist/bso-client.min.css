@@ -646,6 +646,27 @@ form button:enabled:hover {
   font-size: 80%;
   width: 40%;
 }
+.slide.pick .answers .btn {
+  padding: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.slide.pick .answers .tick {
+  width: 50px;
+  height: 50px;
+}
+.slide.pick .answers .btn.active .tick {
+  background: url('img/tick.png');
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.slide.pick .answers .text {
+  flex-grow: 1;
+}
 .editor .text {
   margin: 3vw;
 }

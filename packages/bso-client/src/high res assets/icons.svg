@@ -55,7 +55,7 @@
      inkscape:window-height="1017"
      id="namedview4166"
      showgrid="false"
-     inkscape:zoom="0.5173896355"
+     inkscape:zoom="0.18292486"
      inkscape:cx="2193.220337"
      inkscape:cy="186.4406778"
      inkscape:window-x="1592"
@@ -246,5 +246,26 @@
        height="116.9491501"
        x="2537.610352"
        y="-194.6176605" />
+  </g>
+  <g
+     id="g4183"
+     inkscape:export-filename="C:\bso\packages\bso-client\src\img\tick.png"
+     inkscape:export-xdpi="4.860000134"
+     inkscape:export-ydpi="4.860000134">
+    <rect
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:0.5440000048;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:50;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       id="rect4169"
+       width="400"
+       height="400"
+       x="3133.176758"
+       y="-273.6897583"
+       inkscape:export-filename="C:\bso\packages\bso-client\src\img\globe.png"
+       inkscape:export-xdpi="4.860000134"
+       inkscape:export-ydpi="4.860000134" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path4181"
+       d="M 3198.848743,-43.11451269 3304.796128,62.83287182 3467.546821,-219.0595964"
+       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:28.7117195129;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" />
   </g>
 </svg>

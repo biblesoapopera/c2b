@@ -66,22 +66,53 @@ System.register('bso-client/comp/player/slides/Pick', ['react'], function (_expo
 
           var _this = _possibleConstructorReturn(this, (Pick.__proto__ || Object.getPrototypeOf(Pick)).call(this, props));
 
-          var complete = props.complete === 'always';
-
           _this.state = {
-            complete: complete,
-            score: 0
+            complete: props.complete === 'always',
+            score: 0,
+            value: '',
+            activeKey: false
           };
           return _this;
         }
 
         _createClass(Pick, [{
+          key: 'click',
+          value: function click(key, value, score, evt) {
+            this.setState({
+              score: score,
+              value: value,
+              activeKey: key
+            });
+          }
+        }, {
           key: 'render',
           value: function render() {
+            var _this2 = this;
+
             return React.createElement(
               'div',
               { className: 'slide pick' },
-              React.createElement('div', { className: 'question', dangerouslySetInnerHTML: { __html: this.props.question } })
+              React.createElement('div', { className: 'question', dangerouslySetInnerHTML: { __html: this.props.question } }),
+              React.createElement(
+                'div',
+                { className: 'answers' },
+                this.props.answers.map(function (answer, key) {
+                  return React.createElement(
+                    'div',
+                    {
+                      className: 'btn' + (_this2.state.activeKey === key ? ' active' : ''),
+                      key: key,
+                      onClick: _this2.click.bind(_this2, key, answer.value, answer.score)
+                    },
+                    React.createElement('div', { className: 'tick' }),
+                    React.createElement(
+                      'div',
+                      { className: 'text' },
+                      answer.value
+                    )
+                  );
+                })
+              )
             );
           }
         }]);

@@ -104,7 +104,7 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
           var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, props));
 
           _this.state = {
-            slide: 2,
+            slide: 3,
             err: false,
             episodeData: false
           };
@@ -219,21 +219,24 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
 
                       if (type === 'text') {
                         slideJsx = React.createElement(Text, {
-                          text: slide.text
+                          text: slide.text,
+                          focused: key === _this2.state.slide
                         });
                       } else if (type === 'slider') {
                         slideJsx = React.createElement(Slider, {
                           question: slide.question,
                           answers: slide.answers,
                           feedback: slide.feedback,
-                          complete: slide.complete
+                          complete: slide.complete,
+                          focused: key === _this2.state.slide
                         });
                       } else if (type === 'pick') {
                         slideJsx = React.createElement(Pick, {
                           question: slide.question,
                           answers: slide.answers,
                           feedback: slide.feedback,
-                          complete: slide.complete
+                          complete: slide.complete,
+                          focused: key === _this2.state.slide
                         });
                       }
 

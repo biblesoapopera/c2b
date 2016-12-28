@@ -4,10 +4,8 @@ class Slider extends React.Component {
   constructor(props) {
     super(props)
 
-    let complete = props.complete === 'always'
-
     this.state = {
-      complete: complete,
+      complete: props.complete === 'always',
       score: 50
     }
 
@@ -20,6 +18,10 @@ class Slider extends React.Component {
 
   componentDidMount() {
     this.positionGrip(this.state.score)
+  }
+
+  componenetDidUpdate(prevProps) {
+    if (!prevProps.focused && this.props.focused) this.positionGrip(this.state.score)
   }
 
   positionGrip(value) {

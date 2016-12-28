@@ -121,7 +121,7 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
             //route: []
             //route: ['choose-episode']
             //route: ['choose-delivery', 4]
-            route: ['player', '5860d2d2fdb53f210ca32efb']
+            route: ['player', '5861e8d8e3ccf715b416561f']
             //route: ['editor']
           };
 

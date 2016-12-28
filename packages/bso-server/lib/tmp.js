@@ -72,6 +72,28 @@ System.register('bso-server/tmp', ['babel-runtime/regenerator', 'babel-runtime/c
                       }],
                       "completeWhen": "always"
                     }
+                  }, {
+                    "pick": {
+                      "question": "What did Paul’s uncle give him as a gift?",
+                      "answers": [{
+                        "value": "TV",
+                        "score": 100,
+                        "feedback": "Yes, Paul's uncle gave him a TV"
+                      }, {
+                        "value": "phone",
+                        "score": 0,
+                        "feedback": "No, Paul's uncle didn't give him a phone"
+                      }, {
+                        "value": "football",
+                        "score": 0,
+                        "feedback": "No, Paul's uncle didn't gave him a football"
+                      }],
+                      "feedback": {
+                        "incorrect": "Please try again",
+                        "complete": "Good stuff"
+                      },
+                      "completeWhen": "correct"
+                    }
                   }] });
 
               case 3:

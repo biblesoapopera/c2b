@@ -1,0 +1,29 @@
+.slide.pick {
+  .answers {
+    .btn {
+      padding: 10px;
+      margin-top: 10px;
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tick {
+      width: 50px;
+      height: 50px;
+    }
+
+    .btn.active .tick {
+      background: url('img/tick.png');
+      background-size: cover;
+      background-position: 50%, 50%;
+    }
+
+    .text {
+      flex-grow: 1;
+    }
+  }
+}

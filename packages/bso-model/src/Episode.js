@@ -46,9 +46,18 @@ let answer = new mongoose.Schema({
 })
 
 let feedback = new mongoose.Schema({
-  incorrect: {type: content},
-  correct: {type: content},
-  complete: {type: content}
+  incorrect: {
+    type: String,
+    maxlength: 200
+  },
+  correct: {
+    type: String,
+    maxlength: 200
+  },
+  complete: {
+    type: String,
+    maxlength: 200
+  }
 })
 
 let questionSlide = new mongoose.Schema({
