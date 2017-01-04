@@ -7,9 +7,8 @@ let schema = new mongoose.Schema({
     required: true,
     validate: val => Object.keys(lang).indexOf(val) !== -1
   },
-  number: {
+  order: {
     type: Number,
-    required: true,
     unique: true,
     min: 0
   },

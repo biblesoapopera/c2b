@@ -13,26 +13,21 @@ class Login extends React.Component {
     this.setState({visible: true})
   }
 
-  setUser(user) {
+  hide() {
     this.setState({visible: false})
-    this.props.setUser(user)
-  }
-
-  tr(str) {
-    return this.props.tr('login', str)
   }
 
   render() {
     return (
       <div className="login">
         <div className="btn font-menu" onClick={::this.show}>
-          <div>{this.tr('login')}</div>
+          <div>{this.props.api.translate('login', 'login')}</div>
         </div>
 
         {this.state.visible &&
           <LoginModal
-            setUser={::this.setUser}
-            tr={::this.tr}
+            api={this.props.api}
+            hide={::this.hide}
           />
         }
       </div>

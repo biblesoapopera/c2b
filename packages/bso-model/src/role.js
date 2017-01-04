@@ -3,6 +3,7 @@ export default [
   'student',
   'donor',
   'agent',
+  'editor',
   'admin',
   'superadmin'
 ]

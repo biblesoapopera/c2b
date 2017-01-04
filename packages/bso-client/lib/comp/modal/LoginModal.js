@@ -5,6 +5,35 @@ System.register('bso-client/comp/modal/LoginModal', ['react'], function (_export
 
   var React, _createClass, LoginModal;
 
+  function _asyncToGenerator(fn) {
+    return function () {
+      var gen = fn.apply(this, arguments);
+      return new Promise(function (resolve, reject) {
+        function step(key, arg) {
+          try {
+            var info = gen[key](arg);
+            var value = info.value;
+          } catch (error) {
+            reject(error);
+            return;
+          }
+
+          if (info.done) {
+            resolve(value);
+          } else {
+            return Promise.resolve(value).then(function (value) {
+              step("next", value);
+            }, function (err) {
+              step("throw", err);
+            });
+          }
+        }
+
+        return step("next");
+      });
+    };
+  }
+
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -69,7 +98,9 @@ System.register('bso-client/comp/modal/LoginModal', ['react'], function (_export
           _this.state = {
             username: '',
             password: '',
-            valid: false
+            valid: false,
+            loading: false,
+            err: false
           };
           return _this;
         }
@@ -95,10 +126,54 @@ System.register('bso-client/comp/modal/LoginModal', ['react'], function (_export
           }
         }, {
           key: 'submit',
-          value: function submit(evt) {
-            evt.preventDefault();
-            console.log(this.state);
-          }
+          value: function () {
+            var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(evt) {
+              var result;
+              return regeneratorRuntime.wrap(function _callee$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      evt.preventDefault();
+                      this.setState({
+                        loading: true,
+                        err: false
+                      });
+
+                      _context2.next = 4;
+                      return this.props.api.user.login(this.state.username, this.state.password);
+
+                    case 4:
+                      result = _context2.sent;
+
+
+                      if (result) {
+                        this.props.api.user.set();
+                        this.setState({ loading: false });
+                        this.props.hide();
+                      } else {
+                        this.setState({
+                          username: '',
+                          password: '',
+                          valid: false,
+                          loading: false,
+                          err: true
+                        });
+                      }
+
+                    case 6:
+                    case 'end':
+                      return _context2.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
+
+            function submit(_x) {
+              return _ref.apply(this, arguments);
+            }
+
+            return submit;
+          }()
         }, {
           key: 'render',
           value: function render() {
@@ -107,34 +182,40 @@ System.register('bso-client/comp/modal/LoginModal', ['react'], function (_export
             return React.createElement(
               'div',
               { className: 'modal login-modal', onClick: function onClick() {
-                  return _this2.props.setUser();
+                  return _this2.props.hide();
                 } },
               React.createElement(
                 'div',
-                null,
+                { className: 'modal-inner' },
                 React.createElement(
                   'form',
                   { onClick: this.stopPropagation },
                   React.createElement(
                     'label',
                     null,
-                    this.props.tr('username'),
+                    this.props.api.translate('login', 'username'),
                     React.createElement('input', { type: 'text', value: this.state.username, onChange: this.usernameChange.bind(this) })
                   ),
                   React.createElement(
                     'label',
                     null,
-                    this.props.tr('password'),
+                    this.props.api.translate('login', 'password'),
                     React.createElement('input', { type: 'password', value: this.state.password, onChange: this.passwordChange.bind(this) })
+                  ),
+                  React.createElement(
+                    'div',
+                    { className: 'font3 error' },
+                    this.state.err && this.props.api.translate('login', 'login failed')
                   ),
                   React.createElement(
                     'button',
                     {
-                      disabled: this.state.valid ? false : 'disabled',
+                      disabled: this.state.valid && !this.state.loading ? false : 'disabled',
                       type: 'button',
                       onClick: this.submit.bind(this)
                     },
-                    this.props.tr('login')
+                    this.state.loading && '...',
+                    !this.state.loading && this.props.api.translate('login', 'login')
                   )
                 )
               )

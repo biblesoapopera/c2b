@@ -10,7 +10,7 @@ System.register('bso-client/api/translate', [], function (_export, _context) {
         return function (lang, context, str) {
           var strPack = getStringPack(lang);
 
-          if (strPack && (!strPack[context] || typeof strPack[context][str] !== 'string')) {
+          if (lang !== 'en' && strPack && (!strPack[context] || typeof strPack[context][str] !== 'string')) {
             // TODO do something better with this warning
             console.log('Missing translation:', lang, context, str);
           }

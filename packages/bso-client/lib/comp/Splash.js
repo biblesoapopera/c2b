@@ -70,17 +70,33 @@ System.register('bso-client/comp/Splash', ['react'], function (_export, _context
         _createClass(Splash, [{
           key: 'componentWillMount',
           value: function componentWillMount() {
-            this.props.menu([{ name: 'lang' }, { name: 'login' }]);
+            this.props.api.menu(this.buttons(this.props.user.roles));
+          }
+        }, {
+          key: 'buttons',
+          value: function buttons(roles) {
+            var buttons = ['lang'];
+
+            if (!roles) {
+              buttons.push('login');
+            } else if (roles.length === 1 && roles[0] === 'guest') {
+              buttons.push('login');
+            } else {
+              buttons.push('hamburger');
+            }
+
+            return buttons;
           }
         }, {
           key: 'enter',
           value: function enter() {
-            this.props.go(['choose-episode']);
+            this.props.api.go(['choose-episode']);
           }
         }, {
-          key: 'tr',
-          value: function tr(str) {
-            return this.props.tr('splash', str);
+          key: 'componentWillReceiveProps',
+          value: function componentWillReceiveProps(nextProps) {
+            if (this.props.user.roles === nextProps.user.roles) return;
+            this.props.api.menu(this.buttons(nextProps.user.roles));
           }
         }, {
           key: 'render',
@@ -91,17 +107,17 @@ System.register('bso-client/comp/Splash', ['react'], function (_export, _context
               React.createElement(
                 'h1',
                 { className: 'font0' },
-                this.tr('Cursed to Bless')
+                this.props.api.translate('splash', 'Cursed to Bless')
               ),
               React.createElement(
                 'h2',
                 { className: 'font1' },
-                this.tr('a bible teaching drama')
+                this.props.api.translate('splash', 'a bible teaching drama')
               ),
               React.createElement(
                 'div',
                 { className: 'btn font2', onClick: this.enter.bind(this) },
-                this.tr('join the story')
+                this.props.api.translate('splash', 'join the story')
               )
             );
           }

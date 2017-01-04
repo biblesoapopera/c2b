@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/player/Player', ['react', './slides/Text', './slides/Slider', './slides/Pick', '../Swipe'], function (_export, _context) {
+System.register('bso-client/comp/player/Player', ['react', './slides/Text', './slides/Slider', './slides/Pick', '../Swipe', '../Loading', '../Error'], function (_export, _context) {
   "use strict";
 
-  var React, Text, Slider, Pick, Swipe, _createClass, Player;
+  var React, Text, Slider, Pick, Swipe, Loading, Error, _createClass, Player;
 
   function _asyncToGenerator(fn) {
     return function () {
@@ -75,6 +75,10 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
       Pick = _slidesPick.default;
     }, function (_Swipe) {
       Swipe = _Swipe.default;
+    }, function (_Loading) {
+      Loading = _Loading.default;
+    }, function (_Error) {
+      Error = _Error.default;
     }],
     execute: function () {
       _createClass = function () {
@@ -174,19 +178,11 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
             var episodeData = this.state.episodeData;
 
             if (!episodeData && !this.state.err) {
-              return React.createElement(
-                'div',
-                null,
-                'Loading'
-              );
+              return React.createElement(Loading, null);
             }
 
             if (this.state.err) {
-              return React.createElement(
-                'div',
-                null,
-                'Error'
-              );
+              return React.createElement(Error, { err: this.state.err });
             }
 
             if (episodeData && !this.state.err) {

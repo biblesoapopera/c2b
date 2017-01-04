@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-System.register('bso-client/comp/menu/Menu', ['react', './LangSwitcher', './Login'], function (_export, _context) {
+System.register("bso-client/comp/menu/Menu", ["react"], function (_export, _context) {
   "use strict";
 
-  var React, LangSwitcher, Login, _createClass, Menu;
+  var React, _createClass, Menu;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -38,10 +38,6 @@ System.register('bso-client/comp/menu/Menu', ['react', './LangSwitcher', './Logi
   return {
     setters: [function (_react) {
       React = _react.default;
-    }, function (_LangSwitcher) {
-      LangSwitcher = _LangSwitcher.default;
-    }, function (_Login) {
-      Login = _Login.default;
     }],
     execute: function () {
       _createClass = function () {
@@ -72,99 +68,31 @@ System.register('bso-client/comp/menu/Menu', ['react', './LangSwitcher', './Logi
         }
 
         _createClass(Menu, [{
-          key: 'render',
+          key: "render",
           value: function render() {
-            var _this2 = this;
-
-            var items = this.props.buttons.map(function (btn) {
-              if (btn.name === 'lang') {
-                return React.createElement(LangSwitcher, {
-                  key: btn.name,
-                  lang: btn.lang,
-                  switchLang: btn.fn,
-                  store: btn.store
-                });
-              } else if (btn.name === 'login') {
-                return React.createElement(Login, {
-                  key: btn.name,
-                  setUser: btn.fn,
-                  tr: _this2.props.tr
-                });
-              }
-            });
-
             return React.createElement(
-              'div',
-              { className: 'menu' },
+              "div",
+              { className: "menu" },
               React.createElement(
-                'div',
-                { className: 'logo font-logo' },
-                'C2B'
+                "div",
+                { className: "logo font-logo" },
+                "C2B"
               ),
               React.createElement(
-                'div',
-                { className: 'items' },
-                items
+                "div",
+                { className: "items" },
+                this.props.buttons.map(function (button) {
+                  return button;
+                })
               )
             );
-            /*
-                let items = []
-            
-                if (this.props.route[0] === 'splash') items = ['lang', 'login']
-                if (this.props.route[0] === 'choose-episode') items = ['edit', 'lang']
-                if (this.props.route[0] === 'choose-delivery') items = ['lang']
-                if (this.props.route[0] === 'player') items = ['lang']
-                if (this.props.route[0] === 'editor') items = ['edit-audio', 'edit-series', 'edit-episode']
-                if (this.props.route[0] === 'audio-editor') items = ['edit', 'edit-series', 'edit-episode']
-            
-                return (
-                  <div className="menu">
-                    <div className="logo font-logo">C2B</div>
-            
-                    <div className='items'>
-            
-            
-                      {items.indexOf('edit') !== -1 &&
-                        <div className="item edit" onClick={::this.edit}>
-                          <div></div>
-                        </div>
-                      }
-            
-                      {items.indexOf('lang') !== -1 &&
-                        <LangSwitcher
-                          lang={this.props.lang}
-                          switchLang={this.props.switchLang}
-                          store={this.props.store}
-                        />
-                      }
-            
-                      {items.indexOf('edit-audio') !== -1 &&
-                        <div className="item edit-audio" onClick={::this.editAudio}>
-                          <div></div>
-                        </div>
-                      }
-            
-                      {items.indexOf('edit-series') !== -1 &&
-                        <div className="item edit-series" onClick={::this.editSeries}>
-                          <div></div>
-                        </div>
-                      }
-            
-                      {items.indexOf('edit-episode') !== -1 &&
-                        <div className="item edit-episode" onClick={::this.editEpisode}>
-                          <div></div>
-                        </div>
-                      }
-                    </div>
-                  </div>
-                )*/
           }
         }]);
 
         return Menu;
       }(React.Component);
 
-      _export('default', Menu);
+      _export("default", Menu);
     }
   };
 });

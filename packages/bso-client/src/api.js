@@ -3,6 +3,7 @@ import langFn from './api/lang'
 import translateFn from './api/translate'
 import audioFn from './api/audio'
 import episodeFn from './api/episode'
+import seriesFn from './api/series'
 
 export default (xhr, jwt, SparkMD5, FileReader) => {
   let user = userFn(xhr, jwt)
@@ -13,6 +14,7 @@ export default (xhr, jwt, SparkMD5, FileReader) => {
     lang: lang,
     translate: translateFn(lang.readSync),
     audio: audioFn(xhr, SparkMD5, FileReader),
+    series: seriesFn(xhr),
     episode: episodeFn(xhr)
   }
 }

@@ -56,7 +56,7 @@
      id="namedview4166"
      showgrid="false"
      inkscape:zoom="0.18292486"
-     inkscape:cx="2193.220337"
+     inkscape:cx="2034.364985"
      inkscape:cy="186.4406778"
      inkscape:window-x="1592"
      inkscape:window-y="-8"
@@ -267,5 +267,46 @@
        id="path4181"
        d="M 3198.848743,-43.11451269 3304.796128,62.83287182 3467.546821,-219.0595964"
        style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:28.7117195129;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+  <g
+     id="g4199"
+     inkscape:export-filename="C:\bso\packages\bso-client\src\img\hamburger.png"
+     inkscape:export-xdpi="4.860000134"
+     inkscape:export-ydpi="4.860000134">
+    <rect
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:0.5440000048;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:50;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       id="rect4172"
+       width="400"
+       height="400"
+       x="-1234.736816"
+       y="-641.7175293"
+       inkscape:export-filename="C:\bso\packages\bso-client\src\img\globe.png"
+       inkscape:export-xdpi="4.860000134"
+       inkscape:export-ydpi="4.860000134" />
+    <g
+       transform="translate(-26.12602234,415.4275055)"
+       id="g4194">
+      <rect
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:40;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+         id="rect4180"
+         width="311.603363"
+         height="49.20053101"
+         x="-1164.412476"
+         y="-1009.7453" />
+      <rect
+         y="-881.7453003"
+         x="-1164.412476"
+         height="49.20053101"
+         width="311.603363"
+         id="rect4186"
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:40;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+      <rect
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:40;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+         id="rect4188"
+         width="311.603363"
+         height="49.20053101"
+         x="-1164.412476"
+         y="-753.7453003" />
+    </g>
   </g>
 </svg>

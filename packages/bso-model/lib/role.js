@@ -6,7 +6,7 @@ System.register('bso-model/role', [], function (_export, _context) {
   return {
     setters: [],
     execute: function () {
-      _export('default', ['guest', 'student', 'donor', 'agent', 'admin', 'superadmin']);
+      _export('default', ['guest', 'student', 'donor', 'agent', 'editor', 'admin', 'superadmin']);
     }
   };
 });

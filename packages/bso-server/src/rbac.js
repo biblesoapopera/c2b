@@ -7,7 +7,7 @@ export default new RBAC({
     password: ['change', 'forgot'],
     user: ['create', 'read', 'update', 'delete'],
     series: ['create', 'readAll', 'readPublished', 'update', 'delete', 'publish', 'unpublish'],
-    episode: ['create', 'read', 'readOrphan', 'update', 'delete'],
+    episode: ['create', 'read', 'update', 'delete'],
     audio: ['create', 'update', 'delete']
   },
   grants: {
@@ -24,7 +24,7 @@ export default new RBAC({
     ],
     donor: ['student'],
     agent: ['student'],
-    admin: [
+    editor: [
       'student',
       'create-series',
       'readAll-series',
@@ -32,10 +32,12 @@ export default new RBAC({
       'publish-series',
       'unpublish-series',
       'create-episode',
-      'readOrphan-episode',
       'update-episode',
       'create-audio',
       'update-audio'
+    ],
+    admin: [
+      'editor'
     ],
     superadmin: [
       'admin',

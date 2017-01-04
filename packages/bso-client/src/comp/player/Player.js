@@ -3,6 +3,8 @@ import Text from './slides/Text'
 import Slider from './slides/Slider'
 import Pick from './slides/Pick'
 import Swipe from '../Swipe'
+import Loading from '../Loading'
+import Error from '../Error'
 
 class Player extends React.Component {
   constructor(props) {
@@ -44,11 +46,11 @@ class Player extends React.Component {
     const episodeData = this.state.episodeData
 
     if (!episodeData && !this.state.err) {
-      return <div>Loading</div>
+      return <Loading />
     }
 
     if (this.state.err) {
-      return <div>Error</div>
+      return <Error err={this.state.err}/>
     }
 
     if (episodeData && !this.state.err) {

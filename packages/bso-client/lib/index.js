@@ -23,7 +23,7 @@ System.register('bso-client', ['regenerator', 'react', 'react-dom', './comp/App'
     execute: function () {
       jwt = jwtFn(localStorage);
       xhr = xhrFn(jwt, XMLHttpRequest);
-      api = apiFn(xhr, SparkMD5, FileReader);
+      api = apiFn(xhr, jwt, SparkMD5, FileReader);
 
 
       ReactDOM.render(React.createElement(App, { api: api }), document.getElementById('root'));

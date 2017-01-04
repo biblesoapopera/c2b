@@ -81,11 +81,11 @@ System.register('bso-client/comp/modal/LangSwitcherModal', ['react', './LangSwit
                 } },
               React.createElement(
                 'div',
-                null,
+                { className: 'modal-inner' },
                 React.createElement(
                   'ul',
                   null,
-                  this.props.store.lang.listNames().map(function (item, key) {
+                  this.props.api.lang.listNames().map(function (item, key) {
                     return React.createElement(LangSwitcherItem, {
                       key: key,
                       selected: item[0] === _this2.props.lang,

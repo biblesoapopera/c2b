@@ -83,7 +83,7 @@ System.register('bso-client/comp/menu/LangSwitcher', ['react', '../modal/LangSwi
           key: 'newLang',
           value: function newLang(lang) {
             this.setState({ visible: false });
-            if (lang !== this.props.lang) this.props.switchLang(lang);
+            if (lang !== this.props.lang) this.props.api.lang.switch(lang);
           }
         }, {
           key: 'render',
@@ -93,11 +93,15 @@ System.register('bso-client/comp/menu/LangSwitcher', ['react', '../modal/LangSwi
               { className: 'lang-switcher' },
               React.createElement(
                 'div',
-                { className: 'lang', onClick: this.show.bind(this) },
-                React.createElement('div', null)
+                { className: 'inner', onClick: this.show.bind(this) },
+                React.createElement(
+                  'div',
+                  { className: 'icon' },
+                  React.createElement('div', null)
+                )
               ),
               this.state.visible && React.createElement(LangSwitcherModal, {
-                store: this.props.store,
+                api: this.props.api,
                 lang: this.props.lang,
                 newLang: this.newLang.bind(this)
               })

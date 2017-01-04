@@ -80,15 +80,9 @@ System.register('bso-client/comp/menu/Login', ['react', '../modal/LoginModal'], 
             this.setState({ visible: true });
           }
         }, {
-          key: 'setUser',
-          value: function setUser(user) {
+          key: 'hide',
+          value: function hide() {
             this.setState({ visible: false });
-            this.props.setUser(user);
-          }
-        }, {
-          key: 'tr',
-          value: function tr(str) {
-            return this.props.tr('login', str);
           }
         }, {
           key: 'render',
@@ -102,12 +96,12 @@ System.register('bso-client/comp/menu/Login', ['react', '../modal/LoginModal'], 
                 React.createElement(
                   'div',
                   null,
-                  this.tr('login')
+                  this.props.api.translate('login', 'login')
                 )
               ),
               this.state.visible && React.createElement(LoginModal, {
-                setUser: this.setUser.bind(this),
-                tr: this.tr.bind(this)
+                api: this.props.api,
+                hide: this.hide.bind(this)
               })
             );
           }

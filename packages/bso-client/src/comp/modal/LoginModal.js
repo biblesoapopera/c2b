@@ -6,7 +6,9 @@ class LoginModal extends React.Component {
     this.state = {
       username: '',
       password: '',
-      valid: false
+      valid: false,
+      loading: false,
+      err: false
     }
   }
 
@@ -26,30 +28,51 @@ class LoginModal extends React.Component {
     evt.stopPropagation()
   }
 
-  submit(evt) {
+  async submit(evt) {
     evt.preventDefault()
-    console.log(this.state)
+    this.setState({
+      loading: true,
+      err: false
+    })
+
+    let result = await this.props.api.user.login(this.state.username, this.state.password)
+
+    if (result) {
+      this.props.api.user.set()
+      this.setState({loading: false})
+      this.props.hide()
+    } else {
+      this.setState({
+        username: '',
+        password: '',
+        valid: false,
+        loading: false,
+        err: true
+      })
+    }
   }
 
   render() {
     return (
-      <div className="modal login-modal" onClick={() => this.props.setUser()}>
-        <div>
+      <div className="modal login-modal" onClick={() => this.props.hide()}>
+        <div className="modal-inner">
           <form onClick={this.stopPropagation}>
             <label>
-              {this.props.tr('username')}
+              {this.props.api.translate('login', 'username')}
               <input type="text" value={this.state.username} onChange={::this.usernameChange} />
             </label>
             <label>
-              {this.props.tr('password')}
+              {this.props.api.translate('login', 'password')}
               <input type="password" value={this.state.password} onChange={::this.passwordChange} />
             </label>
+            <div className="font3 error">{this.state.err && this.props.api.translate('login', 'login failed')}</div>
             <button
-              disabled={this.state.valid ? false : 'disabled'}
+              disabled={(this.state.valid && !this.state.loading) ? false : 'disabled'}
               type="button"
               onClick={::this.submit}
             >
-              {this.props.tr('login')}
+              {this.state.loading && '...'}
+              {!this.state.loading && this.props.api.translate('login', 'login')}
             </button>
           </form>
         </div>

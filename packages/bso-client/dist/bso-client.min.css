@@ -48,6 +48,9 @@
   font-weight: 300;
   font-size: 80%;
 }
+.error {
+  color: #b30000;
+}
 html,
 body {
   height: 100%;
@@ -165,7 +168,7 @@ form button:enabled:hover {
   align-items: center;
   z-index: 100;
 }
-.modal div {
+.modal .modal-inner {
   width: 80vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.95);
@@ -559,20 +562,24 @@ form button:enabled:hover {
 .lang-switcher {
   width: 50px;
   height: 50px;
+}
+.lang-switcher .inner {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
 }
-.lang-switcher .lang {
+.lang-switcher .inner .icon {
   width: 50%;
   height: 50%;
   background: url('img/globe.png');
   background-size: cover;
   background-position: 50%, 50%;
 }
-.lang-switcher:hover {
+.lang-switcher .inner:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 .lang-switcher-modal ul {
@@ -591,6 +598,44 @@ form button:enabled:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 .lang-switcher-modal li:hover {
+  background-color: #017b92;
+}
+.hamburger {
+  width: 50px;
+  height: 50px;
+}
+.hamburger .inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.hamburger .inner .icon {
+  width: 50%;
+  height: 50%;
+  background: url('img/hamburger.png');
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.hamburger .inner:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.hamburger-modal ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+}
+.hamburger-modal li {
+  width: 100%;
+  height: 30px;
+  padding-top: 15px;
+  cursor: pointer;
+}
+.hamburger-modal li:hover {
   background-color: #017b92;
 }
 .slide.slider .answer-container {

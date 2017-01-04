@@ -15,19 +15,21 @@ class LangSwitcher extends React.Component {
 
   newLang(lang) {
     this.setState({visible: false})
-    if (lang !== this.props.lang) this.props.switchLang(lang)
+    if (lang !== this.props.lang) this.props.api.lang.switch(lang)
   }
 
   render() {
     return (
       <div className="lang-switcher">
-        <div className="lang" onClick={::this.show}>
-          <div></div>
+        <div className="inner" onClick={::this.show}>
+          <div className="icon">
+            <div></div>
+          </div>
         </div>
 
         {this.state.visible &&
           <LangSwitcherModal
-            store={this.props.store}
+            api={this.props.api}
             lang={this.props.lang}
             newLang={::this.newLang}
           />

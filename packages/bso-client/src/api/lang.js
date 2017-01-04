@@ -11,19 +11,29 @@ export default xhr => {
       if (!store[lang]) return
 
       if (!store[lang].loaded) {
-        let data = await xhr.get('lang/' + lang + '.json')
-        data.name = store[lang].name
-        data.loaded = true
-        store[lang] = data
+        let res = await xhr.get('lang/' + lang + '.json')
+        if (res.status !== 200 && res.status !== 304) {
+          throw new Error(res)
+        }
+
+        res.body.name = store[lang].name
+        res.body.loaded = true
+        store[lang] = res.body
       }
 
       return store[lang]
     },
+
     readSync: lang => {
       if (store[lang] && store[lang].loaded) return store[lang]
     },
+
     listNames: () => {
       return Object.keys(store).map(key => [key, store[key].name])
+    },
+
+    getName: lang => {
+      return store[lang].name
     }
   }
 }

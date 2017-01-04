@@ -1,94 +1,103 @@
 'use strict';
 
 System.register('bso-client/api/series', [], function (_export, _context) {
-  "use strict";
+    "use strict";
 
-  function _asyncToGenerator(fn) {
-    return function () {
-      var gen = fn.apply(this, arguments);
-      return new Promise(function (resolve, reject) {
-        function step(key, arg) {
-          try {
-            var info = gen[key](arg);
-            var value = info.value;
-          } catch (error) {
-            reject(error);
-            return;
-          }
+    function _asyncToGenerator(fn) {
+        return function () {
+            var gen = fn.apply(this, arguments);
+            return new Promise(function (resolve, reject) {
+                function step(key, arg) {
+                    try {
+                        var info = gen[key](arg);
+                        var value = info.value;
+                    } catch (error) {
+                        reject(error);
+                        return;
+                    }
 
-          if (info.done) {
-            resolve(value);
-          } else {
-            return Promise.resolve(value).then(function (value) {
-              step("next", value);
-            }, function (err) {
-              step("throw", err);
-            });
-          }
-        }
-
-        return step("next");
-      });
-    };
-  }
-
-  return {
-    setters: [],
-    execute: function () {
-      _export('default', function (xhr) {
-        return {
-          create: function () {
-            var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(obj) {
-              var result;
-              return regeneratorRuntime.wrap(function _callee$(_context2) {
-                while (1) {
-                  switch (_context2.prev = _context2.next) {
-                    case 0:
-                      _context2.next = 2;
-                      return xhr.post('/series', obj);
-
-                    case 2:
-                      result = _context2.sent;
-
-                      if (!(result.status === 500)) {
-                        _context2.next = 7;
-                        break;
-                      }
-
-                      throw new Error(result.body.msg);
-
-                    case 7:
-                      if (!(result.status !== 200)) {
-                        _context2.next = 9;
-                        break;
-                      }
-
-                      return _context2.abrupt('return', false);
-
-                    case 9:
-                      return _context2.abrupt('return', result.body);
-
-                    case 10:
-                    case 'end':
-                      return _context2.stop();
-                  }
+                    if (info.done) {
+                        resolve(value);
+                    } else {
+                        return Promise.resolve(value).then(function (value) {
+                            step("next", value);
+                        }, function (err) {
+                            step("throw", err);
+                        });
+                    }
                 }
-              }, _callee, undefined);
-            }));
 
-            return function create(_x) {
-              return _ref.apply(this, arguments);
-            };
-          }(),
-
-          'delete': function _delete() {},
-          publish: function publish() {},
-          readLangAll: function readLangAll() {},
-          readLangPublished: function readLangPublished() {},
-          unpublish: function unpublish() {},
-          update: function update() {}
+                return step("next");
+            });
         };
-      });
     }
-  };
+
+    return {
+        setters: [],
+        execute: function () {
+            _export('default', function (xhr) {
+                return {
+                    create: function () {
+                        var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(obj) {
+                            return regeneratorRuntime.wrap(function _callee$(_context2) {
+                                while (1) {
+                                    switch (_context2.prev = _context2.next) {
+                                        case 0:
+                                            _context2.next = 2;
+                                            return xhr.post('/series', obj);
+
+                                        case 2:
+                                            return _context2.abrupt('return', _context2.sent);
+
+                                        case 3:
+                                        case 'end':
+                                            return _context2.stop();
+                                    }
+                                }
+                            }, _callee, undefined);
+                        }));
+
+                        return function create(_x) {
+                            return _ref.apply(this, arguments);
+                        };
+                    }(),
+
+                    'delete': function _delete() {},
+
+                    publish: function publish() {},
+
+                    readLangAll: function () {
+                        var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(lang) {
+                            return regeneratorRuntime.wrap(function _callee2$(_context3) {
+                                while (1) {
+                                    switch (_context3.prev = _context3.next) {
+                                        case 0:
+                                            _context3.next = 2;
+                                            return xhr.get('/series/' + lang + '/all');
+
+                                        case 2:
+                                            return _context3.abrupt('return', _context3.sent);
+
+                                        case 3:
+                                        case 'end':
+                                            return _context3.stop();
+                                    }
+                                }
+                            }, _callee2, undefined);
+                        }));
+
+                        return function readLangAll(_x2) {
+                            return _ref2.apply(this, arguments);
+                        };
+                    }(),
+
+                    readLangPublished: function readLangPublished() {},
+
+                    unpublish: function unpublish() {},
+
+                    update: function update() {}
+                };
+            });
+        }
+    };
 });

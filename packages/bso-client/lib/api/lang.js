@@ -46,7 +46,7 @@ System.register('bso-client/api/lang', [], function (_export, _context) {
         return {
           read: function () {
             var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(lang) {
-              var data;
+              var res;
               return regeneratorRuntime.wrap(function _callee$(_context2) {
                 while (1) {
                   switch (_context2.prev = _context2.next) {
@@ -60,7 +60,7 @@ System.register('bso-client/api/lang', [], function (_export, _context) {
 
                     case 2:
                       if (store[lang].loaded) {
-                        _context2.next = 9;
+                        _context2.next = 11;
                         break;
                       }
 
@@ -68,16 +68,25 @@ System.register('bso-client/api/lang', [], function (_export, _context) {
                       return xhr.get('lang/' + lang + '.json');
 
                     case 5:
-                      data = _context2.sent;
+                      res = _context2.sent;
 
-                      data.name = store[lang].name;
-                      data.loaded = true;
-                      store[lang] = data;
+                      if (!(res.status !== 200 && res.status !== 304)) {
+                        _context2.next = 8;
+                        break;
+                      }
 
-                    case 9:
+                      throw new Error(res);
+
+                    case 8:
+
+                      res.body.name = store[lang].name;
+                      res.body.loaded = true;
+                      store[lang] = res.body;
+
+                    case 11:
                       return _context2.abrupt('return', store[lang]);
 
-                    case 10:
+                    case 12:
                     case 'end':
                       return _context2.stop();
                   }
@@ -89,13 +98,19 @@ System.register('bso-client/api/lang', [], function (_export, _context) {
               return _ref.apply(this, arguments);
             };
           }(),
+
           readSync: function readSync(lang) {
             if (store[lang] && store[lang].loaded) return store[lang];
           },
+
           listNames: function listNames() {
             return Object.keys(store).map(function (key) {
               return [key, store[key].name];
             });
+          },
+
+          getName: function getName(lang) {
+            return store[lang].name;
           }
         };
       });

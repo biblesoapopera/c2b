@@ -1,14 +1,22 @@
 import mongoose from 'mongoose'
 import dbFn from 'bso-server/db'
+import hash from 'password-hash'
 
 mongoose.Promise = Promise
 
 let db = dbFn('mongodb://localhost:27017/c2b')
 
-  export default async () => {
+export default async () => {
 
-    try {
-
+  try {
+    let result = await db.user.create({
+      username: 'marty@marty.com',
+      password: hash.generate('marty'),
+      name: 'Marty Olmos',
+      roles: ['editor'],
+      loginVersion: 1
+    })
+/*
 let result = await db.episode.create({
   "lang": "en",
   "series": 0,
@@ -84,10 +92,11 @@ let result = await db.episode.create({
     }
 
   ]})
-    } catch (err) {
-      console.log(err)
-      console.log(JSON.stringify(err.errors, null, '  '))
-    }
-console.log(result)
-console.log('done')
+  */
+  } catch (err) {
+    console.log(err)
+    console.log(JSON.stringify(err.errors, null, '  '))
   }
+  console.log(result)
+  console.log('done')
+}

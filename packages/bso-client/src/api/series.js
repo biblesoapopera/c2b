@@ -2,22 +2,21 @@ export default (xhr) => {
   return {
     create: async (obj) => {
       // TODO add mongoose model validation
-      let result = await xhr.post('/series', obj)
-
-      if (result.status === 500) {
-        throw new Error(result.body.msg)
-      } else if (result.status !== 200) {
-        return false
-      }
-
-      return result.body
+      return await xhr.post('/series', obj)
     },
 
     'delete': () => {},
+
     publish: () => {},
-    readLangAll: () => {},
+
+    readLangAll: async (lang) => {
+      return await xhr.get('/series/' + lang + '/all')
+    },
+
     readLangPublished: () => {},
+
     unpublish: () => {},
+
     update: () => {}
   }
 }
