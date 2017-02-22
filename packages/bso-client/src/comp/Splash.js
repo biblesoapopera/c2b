@@ -10,11 +10,14 @@ class Splash extends React.Component {
 
     if (!roles) {
       buttons.push('login')
+      return buttons
     } else if (roles.length === 1 && roles[0] === 'guest') {
       buttons.push('login')
     } else {
       buttons.push('hamburger')
     }
+
+    if (roles.indexOf('editor') !== -1) buttons.unshift('edit')
 
     return buttons
   }

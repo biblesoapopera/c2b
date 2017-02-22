@@ -1,12 +1,14 @@
 import React from 'react'
 
-class LoginModal extends React.Component {
+class CreateSeriesModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: title,
-      summary: summary,
-      valid: false
+      title: '',
+      summary: '',
+      valid: false,
+      loading: false,
+      err: false
     }
   }
 
@@ -26,21 +28,41 @@ class LoginModal extends React.Component {
     evt.stopPropagation()
   }
 
-  submit(evt) {
+  async submit(evt) {
     evt.preventDefault()
-    console.log({
+
+    this.setState({
+      loading: true,
+      err: false
+    })
+
+    let result = await this.props.api.series.create({
       lang: this.props.lang,
       order: this.props.order,
       title: this.state.title,
       summary: this.state.summary,
       published: false,
     })
+
+    if (result && result.status === 200) {
+      this.props.createdSeries(result.body)
+      this.setState({loading: false})
+      this.props.hide()
+    } else {
+      this.setState({
+        valid: false,
+        loading: false,
+        err: true
+      })
+    }
   }
 
   render() {
+    // TODO add proper validation errors to UI
     return (
-      <div className="modal create-series-modal" onClick={() => this.props.created()}>
+      <div className="modal create-series-modal" onClick={this.props.hide}>
         <div className="modal-inner">
+          <div>Create new series</div>
           <form onClick={this.stopPropagation}>
             <label>
               {this.props.api.translate('create-series', 'title')}
@@ -50,12 +72,14 @@ class LoginModal extends React.Component {
               {this.props.api.translate('create-series', 'summary')}
               <input type="text" value={this.state.summary} onChange={::this.summaryChange} />
             </label>
+            <div className="font3 error">{this.state.err && this.props.api.translate('create-series', 'error')}</div>
             <button
-              disabled={this.state.valid ? false : 'disabled'}
+              disabled={(this.state.valid && !this.state.loading) ? false : 'disabled'}
               type="button"
               onClick={::this.submit}
             >
-              {this.props.api.translate('create-series', 'ok')}
+              {this.state.loading && '...'}
+              {!this.state.loading && this.props.api.translate('create-series', 'ok')}
             </button>
           </form>
         </div>
@@ -64,4 +88,4 @@ class LoginModal extends React.Component {
   }
 }
 
-export default LoginModal
+export default CreateSeriesModal

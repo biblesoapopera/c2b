@@ -11,21 +11,21 @@ export default (cfg, router) => {
     authenticate(cfg.key, cfg.db),
     authorize(cfg.rbac, 'create', 'episode-img'),
     fileUpload(),
-    api.episodeImg.create(cfg.audioData)
+    api.episodeImg.create(cfg.episodeImgData)
   )
   router.patch(
     '/episode-img/:lang/:series/:file',
     authenticate(cfg.key, cfg.db),
     authorize(cfg.rbac, 'update', 'episode-img'),
     fileUpload(),
-    api.episodeImg.update(cfg.audioData)
+    api.episodeImg.update(cfg.episodeImgData)
   )
   router.delete(
     '/episode-img/:lang/:series/:file',
     authenticate(cfg.key, cfg.db),
     authorize(cfg.rbac, 'delete', 'episode-img'),
     bodyParser.json(),
-    api.episodeImg.delete(cfg.audioData)
+    api.episodeImg.delete(cfg.episodeImgData)
   )
   router.use('/episode-img', express.static(cfg.episodeImgData))
 }

@@ -42,6 +42,9 @@ export default (xhr, jwt) => {
             throw new Error(result.body.msg)
           } else if (result.status === 200) {
             active = result.body
+          } else if (result.status === 401) {
+            jwt.remove()
+            active = {roles: ['guest']}
           }
         } else {
           active = {roles: ['guest']}

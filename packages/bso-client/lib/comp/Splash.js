@@ -79,11 +79,14 @@ System.register('bso-client/comp/Splash', ['react'], function (_export, _context
 
             if (!roles) {
               buttons.push('login');
+              return buttons;
             } else if (roles.length === 1 && roles[0] === 'guest') {
               buttons.push('login');
             } else {
               buttons.push('hamburger');
             }
+
+            if (roles.indexOf('editor') !== -1) buttons.unshift('edit');
 
             return buttons;
           }

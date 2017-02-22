@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', './Splash', './episodeChooser/EpisodeChooser', './DeliveryChooser', './player/PlayerContainer', './editor/Editor', './menu/LangSwitcher', './menu/Login', './menu/Hamburger', './Loading', './Error'], function (_export, _context) {
+System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', './Splash', './episodeChooser/EpisodeChooser', './DeliveryChooser', './player/PlayerContainer', './editor/Editor', './menu/LangSwitcher', './menu/Login', './menu/Hamburger', './menu/Edit', './Loading', './Error'], function (_export, _context) {
   "use strict";
 
-  var React, Background, Menu, Splash, EpisodeChooser, DeliveryChooser, PlayerContainer, Editor, LangSwitcher, Login, Hamburger, Loading, Error, _createClass, App;
+  var React, Background, Menu, Splash, EpisodeChooser, DeliveryChooser, PlayerContainer, Editor, LangSwitcher, Login, Hamburger, Edit, Loading, Error, _createClass, App;
 
   function _asyncToGenerator(fn) {
     return function () {
@@ -87,6 +87,8 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
       Login = _menuLogin.default;
     }, function (_menuHamburger) {
       Hamburger = _menuHamburger.default;
+    }, function (_menuEdit) {
+      Edit = _menuEdit.default;
     }, function (_Loading) {
       Loading = _Loading.default;
     }, function (_Error) {
@@ -128,8 +130,8 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
             lang: 'en',
             menu: [],
             user: false,
-            route: []
-            //route: ['choose-episode']
+            //route: []
+            route: ['choose-episode']
             //route: ['choose-delivery', 4]
             //route: ['player', '5861e8d8e3ccf715b416561f']
             //route: ['editor']
@@ -273,6 +275,10 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
                 return React.createElement(Login, { key: 'login', api: _this3.api });
               } else if (btn === 'hamburger') {
                 return React.createElement(Hamburger, { key: 'hamburger', api: _this3.api });
+              } else if (btn === 'edit') {
+                return React.createElement(Edit, { key: 'edit', api: _this3.api });
+              } else if (typeof btn !== 'string') {
+                return btn;
               }
             });
 

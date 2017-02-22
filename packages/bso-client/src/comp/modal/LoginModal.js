@@ -54,7 +54,7 @@ class LoginModal extends React.Component {
 
   render() {
     return (
-      <div className="modal login-modal" onClick={() => this.props.hide()}>
+      <div className="modal login-modal" onClick={this.props.hide}>
         <div className="modal-inner">
           <form onClick={this.stopPropagation}>
             <label>

@@ -1,5 +1,5 @@
 import React from 'react'
-import CreateSeriesModal from './CreateSeriesModal'
+import CreateSeries from './CreateSeries'
 import Loading from '../Loading'
 import Error from '../Error'
 
@@ -7,27 +7,39 @@ class Editor extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      create: false,
       seriesData: false,
+      lang: this.props.lang,
       err: false
     }
+  }
+
+  componentWillMount() {
+    this.props.api.menu(['hamburger'])
   }
 
   async componentDidMount() {
     let res = await this.props.api.series.readLangAll(this.props.lang)
     if (res.status === 200) {
       this.setState({seriesData: res.body})
+      let create = (
+        <CreateSeries
+          key="create-series"
+          api={this.props.api}
+          lang={this.state.lang}
+          order={this.state.seriesData && this.state.seriesData.length}
+          createdSeries = {::this.createdSeries}
+        />
+      )
+      this.props.api.menu([create, 'hamburger'])
     } else {
       this.setState({err: res})
     }
   }
 
-  create() {
-    this.setState({create: true})
-  }
-
-  created() {
-    this.setState({create: false})
+  createdSeries(series) {
+    let newSeriesData = this.state.seriesData.map(item=>item)
+    newSeriesData.push(series)
+    this.setState({seriesData: newSeriesData})
   }
 
   render() {
@@ -38,7 +50,6 @@ class Editor extends React.Component {
     }
 
     if (this.state.err) {
-console.log(this.state.err)
       return <Error err={this.state.err}/>
     }
 
@@ -50,22 +61,54 @@ console.log(this.state.err)
               {this.props.api.translate('editor', 'edit series in') + ' '}
             </span>
             <span>
-              {this.props.api.lang.getName(this.props.lang)}
+              {this.props.api.lang.getName(this.state.lang)}
             </span>
           </div>
 
-          <div onClick={::this.create} className="create"></div>
+          <div>
 
-          {this.state.create &&
-            <CreateSeriesModal
-              api={this.props.api}
-              lang={this.props.lang}
-              created={::this.created}
-              order={seriesData.length}
-            />
-          }
+              {this.state.seriesData.map(item => {
+                return (
+                  <div
+                    key={item.order}
+                  >
+                    <div>{item.title}</div>
+                    <div>{item.summary}</div>
 
+                    <div className="move-up" onClick={() => this.moveUp(item)}>
+                      <div className="inner">
+                        <div className="icon"><div></div></div>
+                      </div>
+                    </div>
 
+                    <div className="move-down" onClick={() => this.moveDown(item)}>
+                      <div className="inner">
+                        <div className="icon"><div></div></div>
+                      </div>
+                    </div>
+
+                    <div className="edit" onClick={() => this.edit(item)}>
+                      <div className="inner">
+                        <div className="icon"><div></div></div>
+                      </div>
+                    </div>
+
+                    <div className="publish unpublished" onClick={() => this.publish(item)}>
+                      <div className="inner">
+                        <div className="icon"><div></div></div>
+                      </div>
+                    </div>
+
+                    <div className="grow" onClick={() => this.grow(item)}>
+                      <div className="inner">
+                        <div className="icon"><div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+
+          </div>
         </div>
       )
     }

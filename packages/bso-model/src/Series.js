@@ -27,11 +27,9 @@ let schema = new mongoose.Schema({
     default: false
   },
   episodes: [{
-    number: {
-      type: Number,
-      required: true,
-      unique: true,
-      min: 0
+    id: {
+      type: String,
+      required: true
     },
     title: {
       type: String,

@@ -1,9 +1,38 @@
-"use strict";
+'use strict';
 
-System.register("bso-client/comp/editor/CreateSeriesModal", ["react"], function (_export, _context) {
+System.register('bso-client/comp/editor/CreateSeriesModal', ['react'], function (_export, _context) {
   "use strict";
 
-  var React, _createClass, LoginModal;
+  var React, _createClass, CreateSeriesModal;
+
+  function _asyncToGenerator(fn) {
+    return function () {
+      var gen = fn.apply(this, arguments);
+      return new Promise(function (resolve, reject) {
+        function step(key, arg) {
+          try {
+            var info = gen[key](arg);
+            var value = info.value;
+          } catch (error) {
+            reject(error);
+            return;
+          }
+
+          if (info.done) {
+            resolve(value);
+          } else {
+            return Promise.resolve(value).then(function (value) {
+              step("next", value);
+            }, function (err) {
+              step("throw", err);
+            });
+          }
+        }
+
+        return step("next");
+      });
+    };
+  }
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -58,89 +87,142 @@ System.register("bso-client/comp/editor/CreateSeriesModal", ["react"], function 
         };
       }();
 
-      LoginModal = function (_React$Component) {
-        _inherits(LoginModal, _React$Component);
+      CreateSeriesModal = function (_React$Component) {
+        _inherits(CreateSeriesModal, _React$Component);
 
-        function LoginModal(props) {
-          _classCallCheck(this, LoginModal);
+        function CreateSeriesModal(props) {
+          _classCallCheck(this, CreateSeriesModal);
 
-          var _this = _possibleConstructorReturn(this, (LoginModal.__proto__ || Object.getPrototypeOf(LoginModal)).call(this, props));
+          var _this = _possibleConstructorReturn(this, (CreateSeriesModal.__proto__ || Object.getPrototypeOf(CreateSeriesModal)).call(this, props));
 
           _this.state = {
-            title: title,
-            summary: summary,
-            valid: false
+            title: '',
+            summary: '',
+            valid: false,
+            loading: false,
+            err: false
           };
           return _this;
         }
 
-        _createClass(LoginModal, [{
-          key: "titleChange",
+        _createClass(CreateSeriesModal, [{
+          key: 'titleChange',
           value: function titleChange(evt) {
             var valid = false;
             if (this.state.summary && evt.target.value) valid = true;
             this.setState({ title: evt.target.value, valid: valid });
           }
         }, {
-          key: "summaryChange",
+          key: 'summaryChange',
           value: function summaryChange(evt) {
             var valid = false;
             if (this.state.title && evt.target.value) valid = true;
             this.setState({ summary: evt.target.value, valid: valid });
           }
         }, {
-          key: "stopPropagation",
+          key: 'stopPropagation',
           value: function stopPropagation(evt) {
             evt.stopPropagation();
           }
         }, {
-          key: "submit",
-          value: function submit(evt) {
-            evt.preventDefault();
-            console.log({
-              lang: this.props.lang,
-              order: this.props.order,
-              title: this.state.title,
-              summary: this.state.summary,
-              published: false
-            });
-          }
-        }, {
-          key: "render",
-          value: function render() {
-            var _this2 = this;
+          key: 'submit',
+          value: function () {
+            var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(evt) {
+              var result;
+              return regeneratorRuntime.wrap(function _callee$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      evt.preventDefault();
 
+                      this.setState({
+                        loading: true,
+                        err: false
+                      });
+
+                      _context2.next = 4;
+                      return this.props.api.series.create({
+                        lang: this.props.lang,
+                        order: this.props.order,
+                        title: this.state.title,
+                        summary: this.state.summary,
+                        published: false
+                      });
+
+                    case 4:
+                      result = _context2.sent;
+
+
+                      if (result && result.status === 200) {
+                        this.props.createdSeries(result.body);
+                        this.setState({ loading: false });
+                        this.props.hide();
+                      } else {
+                        this.setState({
+                          valid: false,
+                          loading: false,
+                          err: true
+                        });
+                      }
+
+                    case 6:
+                    case 'end':
+                      return _context2.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
+
+            function submit(_x) {
+              return _ref.apply(this, arguments);
+            }
+
+            return submit;
+          }()
+        }, {
+          key: 'render',
+          value: function render() {
+            // TODO add proper validation errors to UI
             return React.createElement(
-              "div",
-              { className: "modal create-series-modal", onClick: function onClick() {
-                  return _this2.props.created();
-                } },
+              'div',
+              { className: 'modal create-series-modal', onClick: this.props.hide },
               React.createElement(
-                "div",
-                { className: "modal-inner" },
+                'div',
+                { className: 'modal-inner' },
                 React.createElement(
-                  "form",
+                  'div',
+                  null,
+                  'Create new series'
+                ),
+                React.createElement(
+                  'form',
                   { onClick: this.stopPropagation },
                   React.createElement(
-                    "label",
+                    'label',
                     null,
                     this.props.api.translate('create-series', 'title'),
-                    React.createElement("input", { type: "text", value: this.state.title, onChange: this.titleChange.bind(this) })
+                    React.createElement('input', { type: 'text', value: this.state.title, onChange: this.titleChange.bind(this) })
                   ),
                   React.createElement(
-                    "label",
+                    'label',
                     null,
                     this.props.api.translate('create-series', 'summary'),
-                    React.createElement("input", { type: "text", value: this.state.summary, onChange: this.summaryChange.bind(this) })
+                    React.createElement('input', { type: 'text', value: this.state.summary, onChange: this.summaryChange.bind(this) })
                   ),
                   React.createElement(
-                    "button",
+                    'div',
+                    { className: 'font3 error' },
+                    this.state.err && this.props.api.translate('create-series', 'error')
+                  ),
+                  React.createElement(
+                    'button',
                     {
-                      disabled: this.state.valid ? false : 'disabled',
-                      type: "button",
+                      disabled: this.state.valid && !this.state.loading ? false : 'disabled',
+                      type: 'button',
                       onClick: this.submit.bind(this)
                     },
-                    this.props.api.translate('create-series', 'ok')
+                    this.state.loading && '...',
+                    !this.state.loading && this.props.api.translate('create-series', 'ok')
                   )
                 )
               )
@@ -148,10 +230,10 @@ System.register("bso-client/comp/editor/CreateSeriesModal", ["react"], function 
           }
         }]);
 
-        return LoginModal;
+        return CreateSeriesModal;
       }(React.Component);
 
-      _export("default", LoginModal);
+      _export('default', CreateSeriesModal);
     }
   };
 });

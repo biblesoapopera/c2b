@@ -170,6 +170,9 @@ System.register('bso-client/api/user', [], function (_export, _context) {
                     case 10:
                       if (result.status === 200) {
                         _active = result.body;
+                      } else if (result.status === 401) {
+                        jwt.remove();
+                        _active = { roles: ['guest'] };
                       }
 
                     case 11:

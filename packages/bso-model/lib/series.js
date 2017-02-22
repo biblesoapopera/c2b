@@ -42,11 +42,9 @@ System.register('bso-model/Series', ['babel-runtime/core-js/object/keys', 'mongo
           default: false
         },
         episodes: [{
-          number: {
-            type: Number,
-            required: true,
-            unique: true,
-            min: 0
+          id: {
+            type: String,
+            required: true
           },
           title: {
             type: String,

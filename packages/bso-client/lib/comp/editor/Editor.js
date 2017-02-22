@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/editor/Editor', ['react', './CreateSeriesModal', '../Loading', '../Error'], function (_export, _context) {
+System.register('bso-client/comp/editor/Editor', ['react', './CreateSeries', '../Loading', '../Error'], function (_export, _context) {
   "use strict";
 
-  var React, CreateSeriesModal, Loading, Error, _createClass, Editor;
+  var React, CreateSeries, Loading, Error, _createClass, Editor;
 
   function _asyncToGenerator(fn) {
     return function () {
@@ -67,8 +67,8 @@ System.register('bso-client/comp/editor/Editor', ['react', './CreateSeriesModal'
   return {
     setters: [function (_react) {
       React = _react.default;
-    }, function (_CreateSeriesModal) {
-      CreateSeriesModal = _CreateSeriesModal.default;
+    }, function (_CreateSeries) {
+      CreateSeries = _CreateSeries.default;
     }, function (_Loading) {
       Loading = _Loading.default;
     }, function (_Error) {
@@ -102,18 +102,23 @@ System.register('bso-client/comp/editor/Editor', ['react', './CreateSeriesModal'
           var _this = _possibleConstructorReturn(this, (Editor.__proto__ || Object.getPrototypeOf(Editor)).call(this, props));
 
           _this.state = {
-            create: false,
             seriesData: false,
+            lang: _this.props.lang,
             err: false
           };
           return _this;
         }
 
         _createClass(Editor, [{
+          key: 'componentWillMount',
+          value: function componentWillMount() {
+            this.props.api.menu(['hamburger']);
+          }
+        }, {
           key: 'componentDidMount',
           value: function () {
             var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-              var res;
+              var res, create;
               return regeneratorRuntime.wrap(function _callee$(_context2) {
                 while (1) {
                   switch (_context2.prev = _context2.next) {
@@ -126,6 +131,15 @@ System.register('bso-client/comp/editor/Editor', ['react', './CreateSeriesModal'
 
                       if (res.status === 200) {
                         this.setState({ seriesData: res.body });
+                        create = React.createElement(CreateSeries, {
+                          key: 'create-series',
+                          api: this.props.api,
+                          lang: this.state.lang,
+                          order: this.state.seriesData && this.state.seriesData.length,
+                          createdSeries: this.createdSeries.bind(this)
+                        });
+
+                        this.props.api.menu([create, 'hamburger']);
                       } else {
                         this.setState({ err: res });
                       }
@@ -145,18 +159,19 @@ System.register('bso-client/comp/editor/Editor', ['react', './CreateSeriesModal'
             return componentDidMount;
           }()
         }, {
-          key: 'create',
-          value: function create() {
-            this.setState({ create: true });
-          }
-        }, {
-          key: 'created',
-          value: function created() {
-            this.setState({ create: false });
+          key: 'createdSeries',
+          value: function createdSeries(series) {
+            var newSeriesData = this.state.seriesData.map(function (item) {
+              return item;
+            });
+            newSeriesData.push(series);
+            this.setState({ seriesData: newSeriesData });
           }
         }, {
           key: 'render',
           value: function render() {
+            var _this2 = this;
+
             var seriesData = this.state.seriesData;
 
             if (!seriesData && !this.state.err) {
@@ -164,7 +179,6 @@ System.register('bso-client/comp/editor/Editor', ['react', './CreateSeriesModal'
             }
 
             if (this.state.err) {
-              console.log(this.state.err);
               return React.createElement(Error, { err: this.state.err });
             }
 
@@ -183,16 +197,106 @@ System.register('bso-client/comp/editor/Editor', ['react', './CreateSeriesModal'
                   React.createElement(
                     'span',
                     null,
-                    this.props.api.lang.getName(this.props.lang)
+                    this.props.api.lang.getName(this.state.lang)
                   )
                 ),
-                React.createElement('div', { onClick: this.create.bind(this), className: 'create' }),
-                this.state.create && React.createElement(CreateSeriesModal, {
-                  api: this.props.api,
-                  lang: this.props.lang,
-                  created: this.created.bind(this),
-                  order: seriesData.length
-                })
+                React.createElement(
+                  'div',
+                  null,
+                  this.state.seriesData.map(function (item) {
+                    return React.createElement(
+                      'div',
+                      {
+                        key: item.order
+                      },
+                      React.createElement(
+                        'div',
+                        null,
+                        item.title
+                      ),
+                      React.createElement(
+                        'div',
+                        null,
+                        item.summary
+                      ),
+                      React.createElement(
+                        'div',
+                        { className: 'move-up', onClick: function onClick() {
+                            return _this2.moveUp(item);
+                          } },
+                        React.createElement(
+                          'div',
+                          { className: 'inner' },
+                          React.createElement(
+                            'div',
+                            { className: 'icon' },
+                            React.createElement('div', null)
+                          )
+                        )
+                      ),
+                      React.createElement(
+                        'div',
+                        { className: 'move-down', onClick: function onClick() {
+                            return _this2.moveDown(item);
+                          } },
+                        React.createElement(
+                          'div',
+                          { className: 'inner' },
+                          React.createElement(
+                            'div',
+                            { className: 'icon' },
+                            React.createElement('div', null)
+                          )
+                        )
+                      ),
+                      React.createElement(
+                        'div',
+                        { className: 'edit', onClick: function onClick() {
+                            return _this2.edit(item);
+                          } },
+                        React.createElement(
+                          'div',
+                          { className: 'inner' },
+                          React.createElement(
+                            'div',
+                            { className: 'icon' },
+                            React.createElement('div', null)
+                          )
+                        )
+                      ),
+                      React.createElement(
+                        'div',
+                        { className: 'publish unpublished', onClick: function onClick() {
+                            return _this2.publish(item);
+                          } },
+                        React.createElement(
+                          'div',
+                          { className: 'inner' },
+                          React.createElement(
+                            'div',
+                            { className: 'icon' },
+                            React.createElement('div', null)
+                          )
+                        )
+                      ),
+                      React.createElement(
+                        'div',
+                        { className: 'grow', onClick: function onClick() {
+                            return _this2.grow(item);
+                          } },
+                        React.createElement(
+                          'div',
+                          { className: 'inner' },
+                          React.createElement(
+                            'div',
+                            { className: 'icon' },
+                            React.createElement('div', null)
+                          )
+                        )
+                      )
+                    );
+                  })
+                )
               );
             }
           }

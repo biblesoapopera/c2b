@@ -20,9 +20,9 @@ System.register('bso-server/routes/episodeImgData', ['../authenticate', '../auth
     }],
     execute: function () {
       _export('default', function (cfg, router) {
-        router.put('/episode-img/:lang/:series/:file', authenticate(cfg.key, cfg.db), authorize(cfg.rbac, 'create', 'episode-img'), fileUpload(), api.episodeImg.create(cfg.audioData));
-        router.patch('/episode-img/:lang/:series/:file', authenticate(cfg.key, cfg.db), authorize(cfg.rbac, 'update', 'episode-img'), fileUpload(), api.episodeImg.update(cfg.audioData));
-        router.delete('/episode-img/:lang/:series/:file', authenticate(cfg.key, cfg.db), authorize(cfg.rbac, 'delete', 'episode-img'), bodyParser.json(), api.episodeImg.delete(cfg.audioData));
+        router.put('/episode-img/:lang/:series/:file', authenticate(cfg.key, cfg.db), authorize(cfg.rbac, 'create', 'episode-img'), fileUpload(), api.episodeImg.create(cfg.episodeImgData));
+        router.patch('/episode-img/:lang/:series/:file', authenticate(cfg.key, cfg.db), authorize(cfg.rbac, 'update', 'episode-img'), fileUpload(), api.episodeImg.update(cfg.episodeImgData));
+        router.delete('/episode-img/:lang/:series/:file', authenticate(cfg.key, cfg.db), authorize(cfg.rbac, 'delete', 'episode-img'), bodyParser.json(), api.episodeImg.delete(cfg.episodeImgData));
         router.use('/episode-img', express.static(cfg.episodeImgData));
       });
     }

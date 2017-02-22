@@ -16,7 +16,7 @@ export default (cfg, router) => {
     authorize(cfg.rbac, 'readPublished', 'series'),
     api.series.readLangPublished(cfg.db)
   )
-  router.put(
+  router.post(
     '/series',
     authenticate(cfg.key, cfg.db),
     authorize(cfg.rbac, 'create', 'series'),

@@ -91,7 +91,30 @@ System.register('bso-client/api/series', [], function (_export, _context) {
                         };
                     }(),
 
-                    readLangPublished: function readLangPublished() {},
+                    readLangPublished: function () {
+                        var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(lang) {
+                            return regeneratorRuntime.wrap(function _callee3$(_context4) {
+                                while (1) {
+                                    switch (_context4.prev = _context4.next) {
+                                        case 0:
+                                            _context4.next = 2;
+                                            return xhr.get('/series/' + lang + '/published');
+
+                                        case 2:
+                                            return _context4.abrupt('return', _context4.sent);
+
+                                        case 3:
+                                        case 'end':
+                                            return _context4.stop();
+                                    }
+                                }
+                            }, _callee3, undefined);
+                        }));
+
+                        return function readLangPublished(_x3) {
+                            return _ref3.apply(this, arguments);
+                        };
+                    }(),
 
                     unpublish: function unpublish() {},
 

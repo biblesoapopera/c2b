@@ -177,13 +177,9 @@ System.register('bso-client/comp/modal/LoginModal', ['react'], function (_export
         }, {
           key: 'render',
           value: function render() {
-            var _this2 = this;
-
             return React.createElement(
               'div',
-              { className: 'modal login-modal', onClick: function onClick() {
-                  return _this2.props.hide();
-                } },
+              { className: 'modal login-modal', onClick: this.props.hide },
               React.createElement(
                 'div',
                 { className: 'modal-inner' },

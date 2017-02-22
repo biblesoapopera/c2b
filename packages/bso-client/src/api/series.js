@@ -13,7 +13,9 @@ export default (xhr) => {
       return await xhr.get('/series/' + lang + '/all')
     },
 
-    readLangPublished: () => {},
+    readLangPublished: async (lang) => {
+      return await xhr.get('/series/' + lang + '/published')
+    },
 
     unpublish: () => {},
 

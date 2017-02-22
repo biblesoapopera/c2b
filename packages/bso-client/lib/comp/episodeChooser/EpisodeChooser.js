@@ -1,9 +1,38 @@
 'use strict';
 
-System.register('bso-client/comp/episodeChooser/EpisodeChooser', ['react', './Series', '../modal/LangSwitcherModal'], function (_export, _context) {
+System.register('bso-client/comp/episodeChooser/EpisodeChooser', ['react', './Series', '../Loading', '../Error', '../modal/LangSwitcherModal'], function (_export, _context) {
   "use strict";
 
-  var React, Series, LangSwitcherModal, _createClass, EpisodeChooser;
+  var React, Series, Loading, Error, LangSwitcherModal, _createClass, EpisodeChooser;
+
+  function _asyncToGenerator(fn) {
+    return function () {
+      var gen = fn.apply(this, arguments);
+      return new Promise(function (resolve, reject) {
+        function step(key, arg) {
+          try {
+            var info = gen[key](arg);
+            var value = info.value;
+          } catch (error) {
+            reject(error);
+            return;
+          }
+
+          if (info.done) {
+            resolve(value);
+          } else {
+            return Promise.resolve(value).then(function (value) {
+              step("next", value);
+            }, function (err) {
+              step("throw", err);
+            });
+          }
+        }
+
+        return step("next");
+      });
+    };
+  }
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -40,6 +69,10 @@ System.register('bso-client/comp/episodeChooser/EpisodeChooser', ['react', './Se
       React = _react.default;
     }, function (_Series) {
       Series = _Series.default;
+    }, function (_Loading) {
+      Loading = _Loading.default;
+    }, function (_Error) {
+      Error = _Error.default;
     }, function (_modalLangSwitcherModal) {
       LangSwitcherModal = _modalLangSwitcherModal.default;
     }],
@@ -72,12 +105,55 @@ System.register('bso-client/comp/episodeChooser/EpisodeChooser', ['react', './Se
 
           _this.state = {
             selectedEpisode: false,
-            showLang: false
+            seriesData: false,
+            lang: _this.props.lang,
+            err: false,
+            switchLangVisible: false
           };
           return _this;
         }
 
         _createClass(EpisodeChooser, [{
+          key: 'componentWillMount',
+          value: function componentWillMount() {
+            this.props.api.menu(['lang', 'hamburger']);
+          }
+        }, {
+          key: 'componentDidMount',
+          value: function () {
+            var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+              var res;
+              return regeneratorRuntime.wrap(function _callee$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      _context2.next = 2;
+                      return this.props.api.series.readLangPublished(this.props.lang);
+
+                    case 2:
+                      res = _context2.sent;
+
+                      if (res.status === 200) {
+                        this.setState({ seriesData: res.body });
+                      } else {
+                        this.setState({ err: res });
+                      }
+
+                    case 4:
+                    case 'end':
+                      return _context2.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
+
+            function componentDidMount() {
+              return _ref.apply(this, arguments);
+            }
+
+            return componentDidMount;
+          }()
+        }, {
           key: 'select',
           value: function select(seriesNum, episodeNum) {
             this.setState({
@@ -92,66 +168,74 @@ System.register('bso-client/comp/episodeChooser/EpisodeChooser', ['react', './Se
         }, {
           key: 'play',
           value: function play() {
-            this.props.go(['choose-delivery', this.props.store.series.find(this.props.lang)[this.state.selectedEpisode.series].episodes[this.state.selectedEpisode.episode].id]);
+            this.props.api.go(['choose-delivery', this.state.seriesData[this.state.selectedEpisode.series].episodes[this.state.selectedEpisode.episode].id]);
           }
         }, {
-          key: 'tr',
-          value: function tr(str) {
-            return this.props.tr('episode-chooser', str);
-          }
-        }, {
-          key: 'showLang',
-          value: function showLang() {
-            this.setState({ showLang: true });
+          key: 'showSwitchLang',
+          value: function showSwitchLang() {
+            this.setState({ switchLangVisible: true });
           }
         }, {
           key: 'newLang',
           value: function newLang(lang) {
-            this.setState({ showLang: false });
-            if (lang !== this.props.lang) this.props.switchLang(lang);
+            this.setState({ switchLangVisible: false });
+            if (lang !== this.props.lang) this.props.api.lang.switch(lang);
           }
         }, {
           key: 'render',
           value: function render() {
             var _this2 = this;
 
-            var seriesList = this.props.store.series.find(this.props.lang);
-            return React.createElement(
-              'div',
-              { className: 'episode-chooser' },
-              !!seriesList.length && React.createElement(
+            var seriesList = this.props.api.series.readLangPublished(this.props.lang);
+
+            var seriesData = this.state.seriesData;
+
+            if (!seriesData && !this.state.err) {
+              return React.createElement(Loading, null);
+            }
+
+            if (this.state.err) {
+              return React.createElement(Error, { err: this.state.err });
+            }
+
+            if (seriesData) {
+              return React.createElement(
                 'div',
-                { className: 'series-list' },
-                seriesList.map(function (series, key) {
-                  return React.createElement(Series, {
-                    key: key,
-                    title: series.title,
-                    summary: series.summary,
-                    episodes: series.episodes,
-                    series: key,
-                    selectedEpisode: _this2.state.selectedEpisode.series === key ? _this2.state.selectedEpisode.episode : false,
-                    select: _this2.select.bind(_this2),
-                    deselect: _this2.deselect.bind(_this2),
-                    play: _this2.play.bind(_this2)
-                  });
+                { className: 'episode-chooser' },
+                !!seriesData.length && React.createElement(
+                  'div',
+                  { className: 'series-list' },
+                  seriesData.map(function (series, key) {
+                    return React.createElement(Series, {
+                      key: key,
+                      title: series.title,
+                      summary: series.summary,
+                      episodes: series.episodes,
+                      series: key,
+                      selectedEpisode: _this2.state.selectedEpisode.series === key ? _this2.state.selectedEpisode.episode : false,
+                      select: _this2.select.bind(_this2),
+                      deselect: _this2.deselect.bind(_this2),
+                      play: _this2.play.bind(_this2)
+                    });
+                  })
+                ),
+                !seriesData.length && React.createElement(
+                  'div',
+                  { className: 'font3 empty' },
+                  this.props.api.translate('episode-chooser', 'No episodes available in selected language')
+                ),
+                React.createElement(
+                  'div',
+                  { className: 'other-languages btn font2', onClick: this.showSwitchLang.bind(this) },
+                  this.props.api.translate('episode-chooser', 'other languages')
+                ),
+                this.state.switchLangVisible && React.createElement(LangSwitcherModal, {
+                  api: this.props.api,
+                  lang: this.props.lang,
+                  newLang: this.newLang.bind(this)
                 })
-              ),
-              !seriesList.length && React.createElement(
-                'div',
-                { className: 'font3 empty' },
-                this.tr('No episodes available in selected language')
-              ),
-              React.createElement(
-                'div',
-                { className: 'other-languages btn font2', onClick: this.showLang.bind(this) },
-                this.tr('other languages')
-              ),
-              this.state.showLang && React.createElement(LangSwitcherDropdown, {
-                store: this.props.store,
-                lang: this.props.lang,
-                newLang: this.newLang.bind(this)
-              })
-            );
+              );
+            }
           }
         }]);
 

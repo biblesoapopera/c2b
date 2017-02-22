@@ -26,24 +26,24 @@ export default new RBAC({
     agent: ['student'],
     editor: [
       'student',
-      'create-series',
-      'readAll-series',
-      'update-series',
-      'publish-series',
-      'unpublish-series',
-      'create-episode',
-      'update-episode',
-      'create-audio',
-      'update-audio'
+      'create_series',
+      'readAll_series',
+      'update_series',
+      'publish_series',
+      'unpublish_series',
+      'create_episode',
+      'update_episode',
+      'create_audio',
+      'update_audio'
     ],
     admin: [
       'editor'
     ],
     superadmin: [
       'admin',
-      'delete-series',
-      'delete-episode',
-      'delete-audio'
+      'delete_series',
+      'delete_episode',
+      'delete_audio'
     ]
   }
 })

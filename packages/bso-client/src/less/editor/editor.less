@@ -6,4 +6,160 @@
   .btn {
     margin: 3vw;
   }
+
+  .move-up {
+    width: @menu-height;
+    height: @menu-height;
+
+    .inner {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      width: 100%;
+      height: 100%;
+
+      cursor: pointer;
+
+      .icon {
+        width: 50%;
+        height: 50%;
+
+        background: url('img/move-up.png');
+        background-size: cover;
+        background-position: 50%, 50%;
+      }
+    }
+
+    .inner:hover {
+      background-color: fade(@white, 10%);
+    }
+  }
+
+  .move-down {
+    width: @menu-height;
+    height: @menu-height;
+
+    .inner {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      width: 100%;
+      height: 100%;
+
+      cursor: pointer;
+
+      .icon {
+        width: 50%;
+        height: 50%;
+
+        background: url('img/move-down.png');
+        background-size: cover;
+        background-position: 50%, 50%;
+      }
+    }
+
+    .inner:hover {
+      background-color: fade(@white, 10%);
+    }
+  }
+
+  .edit {
+    width: @menu-height;
+    height: @menu-height;
+
+    .inner {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      width: 100%;
+      height: 100%;
+
+      cursor: pointer;
+
+      .icon {
+        width: 50%;
+        height: 50%;
+
+        background: url('img/edit.png');
+        background-size: cover;
+        background-position: 50%, 50%;
+      }
+    }
+
+    .inner:hover {
+      background-color: fade(@white, 10%);
+    }
+  }
+
+  .publish {
+    width: @menu-height;
+    height: @menu-height;
+
+    .inner {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      width: 100%;
+      height: 100%;
+
+      cursor: pointer;
+
+      .icon {
+        width: 50%;
+        height: 50%;
+        background-size: cover;
+        background-position: 50%, 50%;
+      }
+    }
+
+    .inner:hover {
+      background-color: fade(@white, 10%);
+    }
+  }
+
+  .publish.unpublished .inner .icon {
+    background: url('img/unpublished.png');
+  }
+
+  .published.unpublished .inner .icon {
+    background: url('img/published.png');
+  }
+
+  .grow {
+    width: @menu-height;
+    height: @menu-height;
+
+    .inner {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      width: 100%;
+      height: 100%;
+
+      cursor: pointer;
+
+      .icon {
+        width: 50%;
+        height: 50%;
+
+        background: url('img/grow.png');
+        background-size: cover;
+        background-position: 50%, 50%;
+      }
+    }
+
+    .inner:hover {
+      background-color: fade(@white, 10%);
+    }
+  }
 }

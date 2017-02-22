@@ -536,18 +536,6 @@ form button:enabled:hover {
   background-size: cover;
   background-position: 50%, 50%;
 }
-.menu .items .edit div {
-  background: url('img/edit.png');
-}
-.menu .items .edit-audio div {
-  background: url('img/edit-audio.png');
-}
-.menu .items .edit-series div {
-  background: url('img/edit-series.png');
-}
-.menu .items .edit-episode div {
-  background: url('img/edit-episode.png');
-}
 .login .btn {
   padding: 5px;
   margin-left: 5px;
@@ -638,6 +626,29 @@ form button:enabled:hover {
 .hamburger-modal li:hover {
   background-color: #017b92;
 }
+.edit {
+  width: 50px;
+  height: 50px;
+}
+.edit .inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.edit .inner .icon {
+  width: 50%;
+  height: 50%;
+  background: url('img/edit.png');
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.edit .inner:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
 .slide.slider .answer-container {
   width: 100%;
   display: flex;
@@ -717,4 +728,147 @@ form button:enabled:hover {
 }
 .editor .btn {
   margin: 3vw;
+}
+.editor .move-up {
+  width: 50px;
+  height: 50px;
+}
+.editor .move-up .inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.editor .move-up .inner .icon {
+  width: 50%;
+  height: 50%;
+  background: url('img/move-up.png');
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.editor .move-up .inner:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.editor .move-down {
+  width: 50px;
+  height: 50px;
+}
+.editor .move-down .inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.editor .move-down .inner .icon {
+  width: 50%;
+  height: 50%;
+  background: url('img/move-down.png');
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.editor .move-down .inner:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.editor .edit {
+  width: 50px;
+  height: 50px;
+}
+.editor .edit .inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.editor .edit .inner .icon {
+  width: 50%;
+  height: 50%;
+  background: url('img/edit.png');
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.editor .edit .inner:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.editor .publish {
+  width: 50px;
+  height: 50px;
+}
+.editor .publish .inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.editor .publish .inner .icon {
+  width: 50%;
+  height: 50%;
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.editor .publish .inner:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.editor .publish.unpublished .inner .icon {
+  background: url('img/unpublished.png');
+}
+.editor .published.unpublished .inner .icon {
+  background: url('img/published.png');
+}
+.editor .grow {
+  width: 50px;
+  height: 50px;
+}
+.editor .grow .inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.editor .grow .inner .icon {
+  width: 50%;
+  height: 50%;
+  background: url('img/grow.png');
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.editor .grow .inner:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.create-series {
+  width: 50px;
+  height: 50px;
+}
+.create-series .inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.create-series .inner .icon {
+  width: 50%;
+  height: 50%;
+  background: url('img/create.png');
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.create-series .inner:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }

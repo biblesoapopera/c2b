@@ -9,6 +9,7 @@ import Editor from './editor/Editor'
 import LangSwitcher from './menu/LangSwitcher'
 import Login from './menu/Login'
 import Hamburger from './menu/Hamburger'
+import Edit from './menu/Edit'
 import Loading from './Loading'
 import Error from './Error'
 
@@ -22,8 +23,8 @@ class App extends React.Component {
       lang: 'en',
       menu: [],
       user: false,
-      route: []
-      //route: ['choose-episode']
+      //route: []
+      route: ['choose-episode']
       //route: ['choose-delivery', 4]
       //route: ['player', '5861e8d8e3ccf715b416561f']
       //route: ['editor']
@@ -97,6 +98,10 @@ class App extends React.Component {
         return <Login key="login" api={this.api}/>
       } else if (btn === 'hamburger') {
         return <Hamburger key="hamburger" api={this.api}/>
+      } else if (btn === 'edit') {
+        return <Edit key="edit" api={this.api}/>
+      } else if (typeof btn !== 'string') {
+        return btn
       }
     })
 
