@@ -56,8 +56,6 @@ class EpisodeChooser extends React.Component {
   }
 
   render() {
-    let seriesList = this.props.api.series.readLangPublished(this.props.lang)
-
     const seriesData = this.state.seriesData
 
     if (!seriesData && !this.state.err) {

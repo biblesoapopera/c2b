@@ -24,8 +24,8 @@ class App extends React.Component {
       menu: [],
       user: false,
       //route: []
-      route: ['choose-episode']
-      //route: ['choose-delivery', 4]
+      //route: ['choose-episode']
+      route: ['choose-delivery', '5861e8d8e3ccf715b416561f']
       //route: ['player', '5861e8d8e3ccf715b416561f']
       //route: ['editor']
     }
@@ -150,7 +150,10 @@ class App extends React.Component {
       <div className="app">
         <Background />
 
-        <Menu buttons={buttons} />
+        <Menu
+          api={this.api}
+          buttons={buttons}
+        />
 
         {content}
       </div>

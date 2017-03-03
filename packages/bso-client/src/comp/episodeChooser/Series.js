@@ -75,7 +75,7 @@ class Series extends React.Component {
               >
                 <div className="overlay">
                   <div className="top">
-                    <div className="title font2">{this.props.episodes[this.state.selectedEpisode].title}</div>
+                    <div className="title font2">{"S" + (this.props.series + 1) + ":E" + (this.state.selectedEpisode + 1) + " " + this.props.episodes[this.state.selectedEpisode].title}</div>
                     <div className="close font2"><div onClick={this.props.deselect}>✖</div></div>
                   </div>
                   <div className="play" onClick={this.props.play}><div><span>▶</span></div></div>

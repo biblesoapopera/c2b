@@ -183,7 +183,7 @@ System.register('bso-client/comp/episodeChooser/Series', ['react', './Episode', 
                         React.createElement(
                           'div',
                           { className: 'title font2' },
-                          this.props.episodes[this.state.selectedEpisode].title
+                          "S" + (this.props.series + 1) + ":E" + (this.state.selectedEpisode + 1) + " " + this.props.episodes[this.state.selectedEpisode].title
                         ),
                         React.createElement(
                           'div',

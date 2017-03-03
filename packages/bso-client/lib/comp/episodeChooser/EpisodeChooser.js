@@ -186,8 +186,6 @@ System.register('bso-client/comp/episodeChooser/EpisodeChooser', ['react', './Se
           value: function render() {
             var _this2 = this;
 
-            var seriesList = this.props.api.series.readLangPublished(this.props.lang);
-
             var seriesData = this.state.seriesData;
 
             if (!seriesData && !this.state.err) {

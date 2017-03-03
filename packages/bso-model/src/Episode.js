@@ -102,18 +102,12 @@ let schema = new mongoose.Schema({
     required: true,
     maxlength: 180
   },
-  audioFiles: [{
-    name: {
-      type: String,
-      required: true,
-      maxlength: 180
-    },
-    hash: {
-      type: String,
-      required: true,
-      maxlength: 255
-    }
-  }],
+  primaryAudio: {
+    type: String,
+    minlength: 3,
+    maxlength: 180
+  },
+  secondaryAudio: [String],
   slides: [{
     text: {type: content},
     slider: {type: questionSlide},

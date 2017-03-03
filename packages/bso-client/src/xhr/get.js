@@ -1,12 +1,16 @@
  export default (jwt, XMLHttpRequest) => {
-  return (url) => {
+  return (url, responseType, progressCb) => {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest()
       xhr.open('GET', url, true)
-      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
 
       let token = jwt.get()
       if (token) xhr.setRequestHeader('authorization', 'jwt ' + token)
+
+      if (progressCb) xhr.onprogress = progressCb
+
+      if (responseType) xhr.responseType = responseType
+      else xhr.responseType = 'json'
 
       xhr.onreadystatechange = () => {
         if (xhr.readyState !== 4) return
@@ -17,10 +21,20 @@
             jwt.set(authHeader.slice(4))
           }
         }
-        resolve({
-          status: xhr.status,
-          body: JSON.parse(xhr.responseText)
-        })
+
+        if (xhr.getResponseHeader('Content-Type').indexOf('application/json') !== -1){
+          resolve({
+            status: xhr.status,
+            body: xhr.response
+          })
+        } else if (xhr.getResponseHeader('Content-Type').indexOf('audio/mpeg') !== -1){
+          resolve({
+            status: xhr.status,
+            body: xhr.response
+          })
+        } else {
+          throw new Error('Unexpected Content-Type ' + xhr.getResponseHeader('Content-Type'))
+        }
       }
       xhr.send()
     })

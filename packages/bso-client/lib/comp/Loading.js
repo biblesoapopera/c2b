@@ -73,7 +73,13 @@ System.register("bso-client/comp/Loading", ["react"], function (_export, _contex
             return React.createElement(
               "div",
               { className: "loading" },
-              "Loading"
+              React.createElement("img", { src: "img/spinner.svg" }),
+              this.props.percentage !== void 0 && React.createElement(
+                "div",
+                null,
+                this.props.percentage,
+                "%"
+              )
             );
           }
         }]);

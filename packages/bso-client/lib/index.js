@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client', ['regenerator', 'react', 'react-dom', './comp/App', './api', './xhr', './jwt', 'spark-md5'], function (_export, _context) {
+System.register('bso-client', ['regenerator', 'react', 'react-dom', './comp/App', './api', './xhr', './jwt', 'spark-md5', './cache'], function (_export, _context) {
   "use strict";
 
-  var React, ReactDOM, App, apiFn, xhrFn, jwtFn, SparkMD5, jwt, xhr, api;
+  var React, ReactDOM, App, apiFn, xhrFn, jwtFn, SparkMD5, cacheFn, jwt, xhr, api;
   return {
     setters: [function (_regenerator) {}, function (_react) {
       React = _react.default;
@@ -19,11 +19,13 @@ System.register('bso-client', ['regenerator', 'react', 'react-dom', './comp/App'
       jwtFn = _jwt.default;
     }, function (_sparkMd) {
       SparkMD5 = _sparkMd.default;
+    }, function (_cache) {
+      cacheFn = _cache.default;
     }],
     execute: function () {
       jwt = jwtFn(localStorage);
       xhr = xhrFn(jwt, XMLHttpRequest);
-      api = apiFn(xhr, jwt, SparkMD5, FileReader);
+      api = apiFn(xhr, jwt, SparkMD5, FileReader, cacheFn);
 
 
       ReactDOM.render(React.createElement(App, { api: api }), document.getElementById('root'));

@@ -153,7 +153,7 @@ gulp.task('compile-bso-client-html', () => {
     .pipe(livereload())
 })
 gulp.task('compile-bso-client-img', () => {
-  return gulp.src(['packages/bso-client/src/**/*.{jpg,png}', '!packages/bso-client/src/high res assets/**/*.*'])
+  return gulp.src(['packages/bso-client/src/**/*.{jpg,png,svg}', '!packages/bso-client/src/high res assets/**/*.*'])
     .pipe(gulp.dest('packages/bso-client/dist'))
     .pipe(livereload())
 })

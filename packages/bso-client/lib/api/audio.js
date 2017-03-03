@@ -75,11 +75,17 @@ System.register('bso-client/api/audio', [], function (_export, _context) {
         };
       }();
 
-      _export('default', function (xhr, SparkMD5, FileReader) {
+      _export('default', function (xhr, SparkMD5, FileReader, cache) {
         return {
-          readLocal: function () {
+          has: function has(file) {
+            return cache.has(file);
+          },
+          get: function get(file) {
+            return cache.get(file);
+          },
+          loadLocal: function () {
             var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(remoteFile, localFile) {
-              var remoteHash, spark, fileReader, result, localHash, _ref2, _ref3;
+              var remoteHashResponse, remoteHash, resultArrayBuffer, localHash, _ref2, _ref3;
 
               return regeneratorRuntime.wrap(function _callee$(_context2) {
                 while (1) {
@@ -89,13 +95,23 @@ System.register('bso-client/api/audio', [], function (_export, _context) {
                       return xhr.get('/audio/' + remoteFile + '/hash');
 
                     case 2:
-                      remoteHash = _context2.sent.hash;
-                      spark = new SparkMD5.ArrayBuffer();
-                      fileReader = new FileReader();
-                      result = void 0;
+                      remoteHashResponse = _context2.sent;
+
+                      if (!(remoteHashResponse.status !== 200)) {
+                        _context2.next = 5;
+                        break;
+                      }
+
+                      throw new Error('server error');
+
+                    case 5:
+                      remoteHash = remoteHashResponse.body.hash;
+                      resultArrayBuffer = void 0;
                       localHash = void 0;
-                      _context2.next = 9;
+                      _context2.next = 10;
                       return new Promise(function (resolve, reject) {
+                        var spark = new SparkMD5.ArrayBuffer();
+                        var fileReader = new FileReader();
                         fileReader.onload = function (evt) {
                           spark.append(evt.target.result);
 
@@ -109,23 +125,23 @@ System.register('bso-client/api/audio', [], function (_export, _context) {
                         fileReader.readAsArrayBuffer(localFile);
                       });
 
-                    case 9:
+                    case 10:
                       _ref2 = _context2.sent;
                       _ref3 = _slicedToArray(_ref2, 2);
                       localHash = _ref3[0];
                       result = _ref3[1];
 
                       if (!(localHash !== remoteHash)) {
-                        _context2.next = 15;
+                        _context2.next = 16;
                         break;
                       }
 
                       throw new Error('Bad local file');
 
-                    case 15:
-                      return _context2.abrupt('return', result);
-
                     case 16:
+                      cache.set(remoteFile, URL.createObjectURL(new Blob([resultArrayBuffer])));
+
+                    case 17:
                     case 'end':
                       return _context2.stop();
                   }
@@ -133,16 +149,35 @@ System.register('bso-client/api/audio', [], function (_export, _context) {
               }, _callee, undefined);
             }));
 
-            return function readLocal(_x, _x2) {
+            return function loadLocal(_x, _x2) {
               return _ref.apply(this, arguments);
             };
           }(),
-          readRemote: function () {
-            var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(remoteFile) {
+          loadRemote: function () {
+            var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(remoteFile, progressCb) {
+              var remoteFileResponse;
               return regeneratorRuntime.wrap(function _callee2$(_context3) {
                 while (1) {
                   switch (_context3.prev = _context3.next) {
                     case 0:
+                      _context3.next = 2;
+                      return xhr.get('/audio/' + remoteFile + '.mp3', 'blob', progressCb);
+
+                    case 2:
+                      remoteFileResponse = _context3.sent;
+
+                      if (!(remoteFileResponse.status !== 200)) {
+                        _context3.next = 5;
+                        break;
+                      }
+
+                      throw new Error('server error');
+
+                    case 5:
+
+                      cache.set(remoteFile, URL.createObjectURL(remoteFileResponse.body));
+
+                    case 6:
                     case 'end':
                       return _context3.stop();
                   }
@@ -150,7 +185,7 @@ System.register('bso-client/api/audio', [], function (_export, _context) {
               }, _callee2, undefined);
             }));
 
-            return function readRemote(_x3) {
+            return function loadRemote(_x3, _x4) {
               return _ref4.apply(this, arguments);
             };
           }()

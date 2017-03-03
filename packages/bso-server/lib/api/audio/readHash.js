@@ -32,7 +32,7 @@ System.register('bso-server/api/audio/readHash', ['babel-runtime/regenerator', '
                                     case 2:
                                         file = req.params.file;
                                         _context2.next = 5;
-                                        return db.audioHash.find(req.params.file + '.mp3');
+                                        return db.audioHash.find(req.params.file);
 
                                     case 5:
                                         hash = _context2.sent.hash;

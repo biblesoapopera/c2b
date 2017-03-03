@@ -415,6 +415,9 @@ form button:enabled:hover {
   border-right: 10px solid transparent;
   border-top: 10px solid #ffffff;
 }
+.delivery-chooser {
+  margin-top: 3vw;
+}
 .delivery-chooser .btn {
   margin-left: 3vw;
   margin-right: 3vw;
@@ -500,6 +503,21 @@ form button:enabled:hover {
 .player .nav .next div div {
   background: url('img/right.png');
 }
+.loading {
+  height: calc(100vh - 50px );
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 6vw;
+  background-color: rgba(0, 17, 41, 0.9);
+  position: absolute;
+  top: 50px;
+}
 .menu {
   width: 100vw;
   height: 50px;
@@ -510,7 +528,17 @@ form button:enabled:hover {
   align-items: center;
 }
 .menu .logo {
+  height: 50px;
   padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.menu .logo:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 .menu .items {
   display: flex;

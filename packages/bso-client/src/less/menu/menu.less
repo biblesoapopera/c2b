@@ -9,7 +9,19 @@
   align-items: center;
 
   .logo {
+    height: @menu-height;
     padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo:hover {
+    background-color: fade(@white, 10%);
   }
 
   .items {

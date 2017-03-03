@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-System.register("bso-client/comp/menu/Menu", ["react"], function (_export, _context) {
+System.register('bso-client/comp/menu/Menu', ['react'], function (_export, _context) {
   "use strict";
 
   var React, _createClass, Menu;
@@ -68,19 +68,28 @@ System.register("bso-client/comp/menu/Menu", ["react"], function (_export, _cont
         }
 
         _createClass(Menu, [{
-          key: "render",
+          key: 'home',
+          value: function home() {
+            this.props.api.go(['choose-episode']);
+          }
+        }, {
+          key: 'render',
           value: function render() {
             return React.createElement(
-              "div",
-              { className: "menu" },
+              'div',
+              { className: 'menu' },
               React.createElement(
-                "div",
-                { className: "logo font-logo" },
-                "C2B"
+                'div',
+                { className: 'logo', onClick: this.home.bind(this) },
+                React.createElement(
+                  'div',
+                  { className: 'font-logo' },
+                  'C2B'
+                )
               ),
               React.createElement(
-                "div",
-                { className: "items" },
+                'div',
+                { className: 'items' },
                 this.props.buttons.map(function (button) {
                   return button;
                 })
@@ -92,7 +101,7 @@ System.register("bso-client/comp/menu/Menu", ["react"], function (_export, _cont
         return Menu;
       }(React.Component);
 
-      _export("default", Menu);
+      _export('default', Menu);
     }
   };
 });

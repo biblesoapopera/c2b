@@ -131,8 +131,8 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
             menu: [],
             user: false,
             //route: []
-            route: ['choose-episode']
-            //route: ['choose-delivery', 4]
+            //route: ['choose-episode']
+            route: ['choose-delivery', '5861e8d8e3ccf715b416561f']
             //route: ['player', '5861e8d8e3ccf715b416561f']
             //route: ['editor']
           };
@@ -317,7 +317,10 @@ System.register('bso-client/comp/App', ['react', './Background', './menu/Menu', 
               'div',
               { className: 'app' },
               React.createElement(Background, null),
-              React.createElement(Menu, { buttons: buttons }),
+              React.createElement(Menu, {
+                api: this.api,
+                buttons: buttons
+              }),
               content
             );
           }

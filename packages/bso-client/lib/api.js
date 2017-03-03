@@ -19,7 +19,7 @@ System.register('bso-client/api', ['./api/user', './api/lang', './api/translate'
       seriesFn = _apiSeries.default;
     }],
     execute: function () {
-      _export('default', function (xhr, jwt, SparkMD5, FileReader) {
+      _export('default', function (xhr, jwt, SparkMD5, FileReader, cacheFn) {
         var user = userFn(xhr, jwt);
         var lang = langFn(xhr);
 
@@ -27,7 +27,7 @@ System.register('bso-client/api', ['./api/user', './api/lang', './api/translate'
           user: user,
           lang: lang,
           translate: translateFn(lang.readSync),
-          audio: audioFn(xhr, SparkMD5, FileReader),
+          audio: audioFn(xhr, SparkMD5, FileReader, cacheFn()),
           series: seriesFn(xhr),
           episode: episodeFn(xhr)
         };

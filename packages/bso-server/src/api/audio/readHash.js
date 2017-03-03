@@ -6,7 +6,7 @@ export default (audioDir, db) => {
 
     let file = req.params.file
 
-    let hash = (await db.audioHash.find(req.params.file + '.mp3')).hash
+    let hash = (await db.audioHash.find(req.params.file)).hash
 
     res.type('json')
     res.status(200)

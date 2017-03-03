@@ -1,0 +1,17 @@
+.loading {
+  height: ~"calc(100vh -" @menu-height ~")";
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .font1;
+
+  background-color: fade(@dark, 90%);
+
+  position: absolute;
+  top: @menu-height;
+}

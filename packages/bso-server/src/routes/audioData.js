@@ -29,7 +29,7 @@ export default (cfg, router) => {
   )
   router.get(
     '/audio/:file/hash',
-    api.audio.readHash(cfg.db)
+    api.audio.readHash(cfg.audioData, cfg.db)
   )
 
   router.use('/audio', express.static(cfg.audioData))

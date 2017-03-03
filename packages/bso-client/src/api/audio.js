@@ -1,15 +1,23 @@
-export default (xhr, SparkMD5, FileReader) => {
+export default (xhr, SparkMD5, FileReader, cache) => {
   return {
-    readLocal: async (remoteFile, localFile) => {
+    has: file => {
+      return cache.has(file)
+    },
+    get: file => {
+      return cache.get(file)
+    },
+    loadLocal: async (remoteFile, localFile) => {
       // Load remote hash
-      const remoteHash = (await xhr.get('/audio/' + remoteFile + '/hash')).hash
+      const remoteHashResponse = await xhr.get('/audio/' + remoteFile + '/hash')
 
-      const spark = new SparkMD5.ArrayBuffer()
-      const fileReader = new FileReader()
+      if (remoteHashResponse.status !== 200) throw new Error('server error')
+      let remoteHash = remoteHashResponse.body.hash
 
-      let result
+      let resultArrayBuffer
       let localHash
       [localHash, result] = await new Promise((resolve, reject) => {
+        const spark = new SparkMD5.ArrayBuffer()
+        const fileReader = new FileReader()
         fileReader.onload = evt => {
           spark.append(evt.target.result)
 
@@ -26,12 +34,14 @@ export default (xhr, SparkMD5, FileReader) => {
       if (localHash !== remoteHash) {
         throw new Error('Bad local file')
       }
-
-      // return audio buffer ready to play
-      return result
+      cache.set(remoteFile, URL.createObjectURL(new Blob([resultArrayBuffer])))
     },
-    readRemote: async (remoteFile) => {
+    loadRemote: async (remoteFile, progressCb) => {
+      const remoteFileResponse = await xhr.get('/audio/' + remoteFile + '.mp3', 'blob', progressCb)
 
+      if (remoteFileResponse.status !== 200) throw new Error('server error')
+
+      cache.set(remoteFile, URL.createObjectURL(remoteFileResponse.body))
     }
   }
 }
