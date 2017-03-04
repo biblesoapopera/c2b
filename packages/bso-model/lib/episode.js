@@ -119,7 +119,6 @@ System.register('bso-model/Episode', ['babel-runtime/core-js/object/keys', 'mong
           minlength: 3,
           maxlength: 180
         },
-        secondaryAudio: [String],
         slides: [{
           text: { type: content },
           slider: { type: questionSlide },

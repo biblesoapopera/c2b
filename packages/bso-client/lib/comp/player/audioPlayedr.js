@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-System.register("bso-client/comp/player/slides/Text", ["react"], function (_export, _context) {
+System.register('bso-client/comp/player/audioPlayedr', ['react'], function (_export, _context) {
   "use strict";
 
-  var React, _createClass, Text;
+  var React, _createClass, AudioPlayer;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -58,30 +58,29 @@ System.register("bso-client/comp/player/slides/Text", ["react"], function (_expo
         };
       }();
 
-      Text = function (_React$Component) {
-        _inherits(Text, _React$Component);
+      AudioPlayer = function (_React$Component) {
+        _inherits(AudioPlayer, _React$Component);
 
-        function Text() {
-          _classCallCheck(this, Text);
+        function AudioPlayer() {
+          _classCallCheck(this, AudioPlayer);
 
-          return _possibleConstructorReturn(this, (Text.__proto__ || Object.getPrototypeOf(Text)).apply(this, arguments));
+          return _possibleConstructorReturn(this, (AudioPlayer.__proto__ || Object.getPrototypeOf(AudioPlayer)).apply(this, arguments));
         }
 
-        _createClass(Text, [{
-          key: "render",
+        _createClass(AudioPlayer, [{
+          key: 'render',
           value: function render() {
-            return React.createElement(
-              "div",
-              { className: "slide text" },
-              React.createElement("div", { dangerouslySetInnerHTML: { __html: this.props.text } })
-            );
+            return React.createElement('div', {
+              className: 'slide text' + (this.props.active ? ' active' : '') + (this.props.dir ? ' ' + this.props.dir : ''),
+              dangerouslySetInnerHTML: { __html: this.props.text }
+            });
           }
         }]);
 
-        return Text;
+        return AudioPlayer;
       }(React.Component);
 
-      _export("default", Text);
+      _export('default', AudioPlayer);
     }
   };
 });

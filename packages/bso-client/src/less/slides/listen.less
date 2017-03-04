@@ -1,0 +1,45 @@
+.slide.listen {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .track-container {
+    width: 80%;
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 20px;
+
+    .track {
+      background-color: fade(@white, 20%);
+      width: 100%;
+      height: 10px;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    .grip {
+      box-shadow: 0 0 3px @dark;
+      width: 40px;
+      height: 40px;
+      background-color: fade(@white, 80%);
+      border: thin solid transparent;
+      border-radius: 40px;
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+
+      transition-property: left;
+      transition-duration: 0.5s;
+    }
+
+    .grip:hover, .grip.active {
+      transition: none;
+      border: thin solid @white;
+      background-color: fade(@white, 100%);
+    }
+  }
+}

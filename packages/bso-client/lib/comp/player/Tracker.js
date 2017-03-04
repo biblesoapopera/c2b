@@ -1,9 +1,9 @@
 "use strict";
 
-System.register("bso-client/comp/player/slides/Text", ["react"], function (_export, _context) {
+System.register("bso-client/comp/player/Tracker", ["react"], function (_export, _context) {
   "use strict";
 
-  var React, _createClass, Text;
+  var React, _createClass, Tracker;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -58,30 +58,32 @@ System.register("bso-client/comp/player/slides/Text", ["react"], function (_expo
         };
       }();
 
-      Text = function (_React$Component) {
-        _inherits(Text, _React$Component);
+      Tracker = function (_React$Component) {
+        _inherits(Tracker, _React$Component);
 
-        function Text() {
-          _classCallCheck(this, Text);
+        function Tracker() {
+          _classCallCheck(this, Tracker);
 
-          return _possibleConstructorReturn(this, (Text.__proto__ || Object.getPrototypeOf(Text)).apply(this, arguments));
+          return _possibleConstructorReturn(this, (Tracker.__proto__ || Object.getPrototypeOf(Tracker)).apply(this, arguments));
         }
 
-        _createClass(Text, [{
+        _createClass(Tracker, [{
           key: "render",
           value: function render() {
             return React.createElement(
               "div",
-              { className: "slide text" },
-              React.createElement("div", { dangerouslySetInnerHTML: { __html: this.props.text } })
+              { className: "slide-tracker" },
+              this.props.current,
+              "/",
+              this.props.total
             );
           }
         }]);
 
-        return Text;
+        return Tracker;
       }(React.Component);
 
-      _export("default", Text);
+      _export("default", Tracker);
     }
   };
 });

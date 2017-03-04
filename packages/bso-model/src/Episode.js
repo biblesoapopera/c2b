@@ -107,7 +107,6 @@ let schema = new mongoose.Schema({
     minlength: 3,
     maxlength: 180
   },
-  secondaryAudio: [String],
   slides: [{
     text: {type: content},
     slider: {type: questionSlide},
