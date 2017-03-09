@@ -84,7 +84,7 @@ a:hover {
 }
 .btn {
   background-color: rgba(255, 255, 255, 0.2);
-  padding: 5vw 5vw 5vw 5vw;
+  padding: 5vh 5vh 5vh 5vh;
   border: thin solid transparent;
   cursor: pointer;
 }
@@ -470,6 +470,7 @@ form button:enabled:hover {
   left: 2.5%;
   bottom: 2.5%;
   width: 95%;
+  height: 10%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -478,30 +479,48 @@ form button:enabled:hover {
 }
 .player .nav .btn {
   width: 5%;
+  height: 100%;
   border-radius: 50%;
+  padding: 0;
 }
 .player .nav .btn div {
   width: 100%;
-  padding-top: 100%;
-  position: relative;
 }
 .player .nav .btn div div {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
   background-size: cover;
   background-position: 50%, 50%;
 }
-.player .nav .previous div div {
-  background: url('img/left.png');
+.player .nav .previous,
+.player .nav .audio,
+.player .nav .next {
+  height: 100%;
 }
-.player .nav .audio div div {
-  background: url('img/audio.png');
+.player .nav .previous img,
+.player .nav .audio img,
+.player .nav .next img {
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: thin solid transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 50% 50%;
 }
-.player .nav .next div div {
-  background: url('img/right.png');
+.player .nav .previous img:hover,
+.player .nav .audio img:hover,
+.player .nav .next img:hover {
+  border: thin solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.player .nav .previous img {
+  background-image: url('img/left.png');
+}
+.player .nav .audio img {
+  background-image: url('img/audio.png');
+}
+.player .nav .next img {
+  background-image: url('img/right.png');
 }
 .loading {
   height: calc(100vh - 50px );

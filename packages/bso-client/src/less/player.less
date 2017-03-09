@@ -47,6 +47,7 @@
     left: 2.5%;
     bottom: 2.5%;
     width: 95%;
+    height: 10%;
 
     display: flex;
     flex-direction: row;
@@ -56,19 +57,21 @@
 
     .btn {
       width: 5%;
+      height: 100%;
       border-radius: 50%;
+      padding: 0;
 
       div {
         width: 100%;
-        padding-top: 100%;
-        position: relative;
+        //padding-top: 100%;
+        //position: relative;
 
         div {
-          position: absolute;
-          top: 0;
-          left: 0;
-          bottom: 0;
-          right: 0;
+          //position: absolute;
+          //top: 0;
+          //left: 0;
+          //bottom: 0;
+          //right: 0;
 
           background-size: cover;
           background-position: 50%, 50%;
@@ -76,16 +79,36 @@
       }
     }
 
-    .previous div div {
-      background: url('img/left.png');
+    .previous, .audio, .next {
+      height: 100%;
+
+      img {
+        height: 100%;
+        background-color: fade(@white, 20%);
+        border: thin solid transparent;
+        cursor: pointer;
+        border-radius: 50%;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 50% 50%;
+      }
+
+      img:hover {
+        border: thin solid @white;
+        background-color: fade(@white, 40%);
+      }
     }
 
-    .audio div div {
-      background: url('img/audio.png');
+    .previous img {
+      background-image: url('img/left.png');
     }
 
-    .next div div {
-      background: url('img/right.png');
+    .audio img {
+      background-image: url('img/audio.png');
+    }
+
+    .next img {
+      background-image: url('img/right.png');
     }
   }
 }

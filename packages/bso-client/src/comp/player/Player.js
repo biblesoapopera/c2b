@@ -145,6 +145,7 @@ class Player extends React.Component {
   render() {
     let activeSlide
     let activeType
+    let blankSquare = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAHAAAABwBeAaJGQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAMSURBVAiZY2CgEwAAAGkAAUQjwBEAAAAASUVORK5CYII="
 
     const episodeData = this.state.episodeData
 
@@ -224,14 +225,14 @@ class Player extends React.Component {
         </Swipe>
 
         <div className="nav">
-          <div className={'previous btn ' + (this.state.slide !== 0 ? '' : 'hide')} onClick={::this.previous}>
-            <div><div></div></div>
+          <div className={'previous ' + (this.state.slide !== 0 ? '' : 'hide')} onClick={::this.previous}>
+            <img src={blankSquare}/>
           </div>
-          <div className={'audio btn ' + ((activeType !== 'listen' && activeSlide && activeSlide.audio) ? '' : 'hide')} onClick={::this.audio}>
-            <div><div></div></div>
+          <div className={'audio ' + ((activeType !== 'listen' && activeSlide && activeSlide.audio) ? '' : 'hide')} onClick={::this.audio}>
+            <img src={blankSquare}/>
           </div>
-          <div className={'next btn ' + ((episodeData && this.state.slide !== episodeData.slides.length-1) ? '' : 'hide')} onClick={::this.next}>
-            <div><div></div></div>
+          <div className={'next ' + ((episodeData && this.state.slide !== episodeData.slides.length-1) ? '' : 'hide')} onClick={::this.next}>
+           <img src={blankSquare}/>
           </div>
         </div>
 
