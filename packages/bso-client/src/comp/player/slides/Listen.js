@@ -1,3 +1,4 @@
+import blankSquare from '../../blankSquare'
 import React from 'react'
 
 class Listen extends React.Component {
@@ -24,6 +25,7 @@ class Listen extends React.Component {
   }
 
   positionGrip(value) {
+console.log(this.grip.clientWidth, value)
     this.grip.style.left = ((this.track.clientWidth * value/100) - this.grip.clientWidth / 2) + 'px'
     this.grip.style.top = (- (this.grip.clientHeight / 2  - this.track.clientHeight / 2)) + 'px'
   }
@@ -56,23 +58,27 @@ class Listen extends React.Component {
   render() {
     return (
       <div className="slide listen">
-        <div dangerouslySetInnerHTML={{__html: this.props.text}}></div>
-
+        <div className="listen-text">
+          <div dangerouslySetInnerHTML={{__html: this.props.text}}></div>
+        </div>
         <div className="track-container">
           <div className="track"
             onClick={::this.trackClick}
             ref={track => this.track = track}
           ></div>
-          <div
+          <img
             className="grip"
             ref={grip => this.grip = grip}
             onMouseDown={::this.dragstart}
             onTouchStart={::this.dragstart}
-          ></div>
+            src={blankSquare}
+          />
         </div>
-
         <div className="control">
-          play
+          <img
+            className="player-btn play"
+            src={blankSquare}
+          />
         </div>
       </div>
     )
@@ -80,3 +86,6 @@ class Listen extends React.Component {
 }
 
 export default Listen
+/*
+
+>*/

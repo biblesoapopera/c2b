@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/player/Player', ['react', './slides/Text', './slides/Slider', './slides/Pick', './slides/Listen', '../Swipe', './Tracker', '../Loading', '../Error', './audioPlayer'], function (_export, _context) {
+System.register('bso-client/comp/player/Player', ['react', './slides/Text', './slides/Slider', './slides/Pick', './slides/Listen', '../Swipe', './Tracker', '../Loading', '../Error', './audioPlayer', '../blankSquare'], function (_export, _context) {
   "use strict";
 
-  var React, Text, Slider, Pick, Listen, Swipe, Tracker, Loading, Error, audioPlayer, _slicedToArray, _createClass, Player;
+  var React, Text, Slider, Pick, Listen, Swipe, Tracker, Loading, Error, audioPlayer, blankSquare, _slicedToArray, _createClass, Player;
 
   function _asyncToGenerator(fn) {
     return function () {
@@ -85,6 +85,8 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
       Error = _Error.default;
     }, function (_audioPlayer) {
       audioPlayer = _audioPlayer.default;
+    }, function (_blankSquare) {
+      blankSquare = _blankSquare.default;
     }],
     execute: function () {
       _slicedToArray = function () {
@@ -358,7 +360,6 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
 
             var activeSlide = void 0;
             var activeType = void 0;
-            var blankSquare = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAHAAAABwBeAaJGQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAMSURBVAiZY2CgEwAAAGkAAUQjwBEAAAAASUVORK5CYII=";
 
             var episodeData = this.state.episodeData;
 

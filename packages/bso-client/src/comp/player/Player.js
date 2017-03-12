@@ -8,6 +8,7 @@ import Tracker from './Tracker'
 import Loading from '../Loading'
 import Error from '../Error'
 import audioPlayer from './audioPlayer'
+import blankSquare from '../blankSquare'
 
 class Player extends React.Component {
   constructor(props) {
@@ -145,7 +146,6 @@ class Player extends React.Component {
   render() {
     let activeSlide
     let activeType
-    let blankSquare = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAHAAAABwBeAaJGQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAMSURBVAiZY2CgEwAAAGkAAUQjwBEAAAAASUVORK5CYII="
 
     const episodeData = this.state.episodeData
 

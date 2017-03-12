@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/player/slides/Listen', ['react'], function (_export, _context) {
+System.register('bso-client/comp/player/slides/Listen', ['../../blankSquare', 'react'], function (_export, _context) {
   "use strict";
 
-  var React, _createClass, Listen;
+  var blankSquare, React, _createClass, Listen;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -36,7 +36,9 @@ System.register('bso-client/comp/player/slides/Listen', ['react'], function (_ex
   }
 
   return {
-    setters: [function (_react) {
+    setters: [function (_blankSquare) {
+      blankSquare = _blankSquare.default;
+    }, function (_react) {
       React = _react.default;
     }],
     execute: function () {
@@ -91,6 +93,7 @@ System.register('bso-client/comp/player/slides/Listen', ['react'], function (_ex
         }, {
           key: 'positionGrip',
           value: function positionGrip(value) {
+            console.log(this.grip.clientWidth, value);
             this.grip.style.left = this.track.clientWidth * value / 100 - this.grip.clientWidth / 2 + 'px';
             this.grip.style.top = -(this.grip.clientHeight / 2 - this.track.clientHeight / 2) + 'px';
           }
@@ -127,7 +130,11 @@ System.register('bso-client/comp/player/slides/Listen', ['react'], function (_ex
             return React.createElement(
               'div',
               { className: 'slide listen' },
-              React.createElement('div', { dangerouslySetInnerHTML: { __html: this.props.text } }),
+              React.createElement(
+                'div',
+                { className: 'listen-text' },
+                React.createElement('div', { dangerouslySetInnerHTML: { __html: this.props.text } })
+              ),
               React.createElement(
                 'div',
                 { className: 'track-container' },
@@ -137,19 +144,23 @@ System.register('bso-client/comp/player/slides/Listen', ['react'], function (_ex
                     return _this2.track = track;
                   }
                 }),
-                React.createElement('div', {
+                React.createElement('img', {
                   className: 'grip',
                   ref: function ref(grip) {
                     return _this2.grip = grip;
                   },
                   onMouseDown: this.dragstart.bind(this),
-                  onTouchStart: this.dragstart.bind(this)
+                  onTouchStart: this.dragstart.bind(this),
+                  src: blankSquare
                 })
               ),
               React.createElement(
                 'div',
                 { className: 'control' },
-                'play'
+                React.createElement('img', {
+                  className: 'player-btn play',
+                  src: blankSquare
+                })
               )
             );
           }

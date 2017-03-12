@@ -477,19 +477,6 @@ form button:enabled:hover {
   justify-content: space-between;
   align-items: center;
 }
-.player .nav .btn {
-  width: 5%;
-  height: 100%;
-  border-radius: 50%;
-  padding: 0;
-}
-.player .nav .btn div {
-  width: 100%;
-}
-.player .nav .btn div div {
-  background-size: cover;
-  background-position: 50%, 50%;
-}
 .player .nav .previous,
 .player .nav .audio,
 .player .nav .next {
@@ -772,43 +759,83 @@ form button:enabled:hover {
 }
 .slide.listen {
   width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  position: relative;
+}
+.slide.listen .listen-text {
+  width: 100%;
+  height: 45%;
+  top: 0;
+  left: 0;
+  position: absolute;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+}
+.slide.listen .listen-text div {
+  margin-bottom: 7.5%;
 }
 .slide.listen .track-container {
   width: 80%;
-  position: relative;
-  margin-top: 40px;
-  margin-bottom: 20px;
+  height: 5.9%;
+  top: 45%;
+  left: 10%;
+  position: absolute;
 }
 .slide.listen .track-container .track {
   background-color: rgba(255, 255, 255, 0.2);
   width: 100%;
-  height: 10px;
+  height: 30%;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 8px/50%;
 }
 .slide.listen .track-container .grip {
   box-shadow: 0 0 3px #001129;
-  width: 40px;
-  height: 40px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: thin solid transparent;
-  border-radius: 40px;
-  cursor: pointer;
+  height: 100%;
   position: absolute;
   top: 0;
   transition-property: left;
   transition-duration: 0.5s;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: thin solid transparent;
+  cursor: pointer;
+  border-radius: 50%;
 }
 .slide.listen .track-container .grip:hover,
 .slide.listen .track-container .grip.active {
   transition: none;
   border: thin solid #ffffff;
   background-color: #ffffff;
+}
+.slide.listen .control {
+  width: 100%;
+  height: 11.8%;
+  top: 55%;
+  left: 0;
+  position: absolute;
+}
+.slide.listen .control .player-btn {
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: thin solid transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 50% 50%;
+}
+.slide.listen .control .player-btn:hover {
+  border: thin solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.slide.listen .control .player-btn.play {
+  background-image: url('img/play.png');
+}
+.slide.listen .control .player-btn.pause {
+  background-image: url('img/pause.png');
 }
 .editor .text {
   margin: 3vw;
