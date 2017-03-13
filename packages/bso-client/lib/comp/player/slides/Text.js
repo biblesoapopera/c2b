@@ -73,7 +73,11 @@ System.register("bso-client/comp/player/slides/Text", ["react"], function (_expo
             return React.createElement(
               "div",
               { className: "slide text" },
-              React.createElement("div", { dangerouslySetInnerHTML: { __html: this.props.text } })
+              React.createElement(
+                "div",
+                { className: "text-outter" },
+                React.createElement("div", { dangerouslySetInnerHTML: { __html: this.props.text } })
+              )
             );
           }
         }]);

@@ -14,7 +14,7 @@ class Player extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      slide: 3,
+      slide: 2,
       err: false,
       episodeData: false,
       loadingAudio: false

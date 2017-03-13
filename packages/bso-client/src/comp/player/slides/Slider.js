@@ -1,4 +1,5 @@
 import React from 'react'
+import blankSquare from '../../blankSquare'
 
 class Slider extends React.Component {
   constructor(props) {
@@ -84,28 +85,31 @@ class Slider extends React.Component {
       <div className="slide slider"
         ref={slide => this.slide = slide}
       >
-        <div className="question" dangerouslySetInnerHTML={{__html: this.props.question}}></div>
+        <div className="question">
+          <div dangerouslySetInnerHTML={{__html: this.props.question}}></div>
+        </div>
 
-        <div className="answer-container">
-          <div className="track-container">
-            <div className="track"
-              onClick={::this.trackClick}
-              ref={track => this.track = track}
-            ></div>
-            <div
-              className="grip"
-              ref={grip => this.grip = grip}
-              onMouseDown={::this.dragstart}
-              onTouchStart={::this.dragstart}
-            ></div>
-          </div>
-          <div className="answers">
-            {this.props.answers.map((answer, key) => {
-              return (
-               <div key={key}>{answer.value}</div>
-              )
-            })}
-          </div>
+        <div className="track-container">
+          <div className="track"
+            onClick={::this.trackClick}
+            ref={track => this.track = track}
+          ></div>
+          <img
+            className="grip"
+            ref={grip => this.grip = grip}
+            onMouseDown={::this.dragstart}
+            onTouchStart={::this.dragstart}
+            src={blankSquare}
+          />
+        </div>
+
+
+        <div className="answers">
+          {this.props.answers.map((answer, key) => {
+            return (
+              <div key={key}>{answer.value}</div>
+            )
+          })}
         </div>
       </div>
     )

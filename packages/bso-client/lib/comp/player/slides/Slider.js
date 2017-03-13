@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/player/slides/Slider', ['react'], function (_export, _context) {
+System.register('bso-client/comp/player/slides/Slider', ['react', '../../blankSquare'], function (_export, _context) {
   "use strict";
 
-  var React, _createClass, Slider;
+  var React, blankSquare, _createClass, Slider;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -38,6 +38,8 @@ System.register('bso-client/comp/player/slides/Slider', ['react'], function (_ex
   return {
     setters: [function (_react) {
       React = _react.default;
+    }, function (_blankSquare) {
+      blankSquare = _blankSquare.default;
     }],
     execute: function () {
       _createClass = function () {
@@ -160,39 +162,40 @@ System.register('bso-client/comp/player/slides/Slider', ['react'], function (_ex
                   return _this2.slide = slide;
                 }
               },
-              React.createElement('div', { className: 'question', dangerouslySetInnerHTML: { __html: this.props.question } }),
               React.createElement(
                 'div',
-                { className: 'answer-container' },
-                React.createElement(
-                  'div',
-                  { className: 'track-container' },
-                  React.createElement('div', { className: 'track',
-                    onClick: this.trackClick.bind(this),
-                    ref: function ref(track) {
-                      return _this2.track = track;
-                    }
-                  }),
-                  React.createElement('div', {
-                    className: 'grip',
-                    ref: function ref(grip) {
-                      return _this2.grip = grip;
-                    },
-                    onMouseDown: this.dragstart.bind(this),
-                    onTouchStart: this.dragstart.bind(this)
-                  })
-                ),
-                React.createElement(
-                  'div',
-                  { className: 'answers' },
-                  this.props.answers.map(function (answer, key) {
-                    return React.createElement(
-                      'div',
-                      { key: key },
-                      answer.value
-                    );
-                  })
-                )
+                { className: 'question' },
+                React.createElement('div', { dangerouslySetInnerHTML: { __html: this.props.question } })
+              ),
+              React.createElement(
+                'div',
+                { className: 'track-container' },
+                React.createElement('div', { className: 'track',
+                  onClick: this.trackClick.bind(this),
+                  ref: function ref(track) {
+                    return _this2.track = track;
+                  }
+                }),
+                React.createElement('img', {
+                  className: 'grip',
+                  ref: function ref(grip) {
+                    return _this2.grip = grip;
+                  },
+                  onMouseDown: this.dragstart.bind(this),
+                  onTouchStart: this.dragstart.bind(this),
+                  src: blankSquare
+                })
+              ),
+              React.createElement(
+                'div',
+                { className: 'answers' },
+                this.props.answers.map(function (answer, key) {
+                  return React.createElement(
+                    'div',
+                    { key: key },
+                    answer.value
+                  );
+                })
               )
             );
           }

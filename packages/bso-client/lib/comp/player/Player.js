@@ -154,7 +154,7 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
           var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, props));
 
           _this.state = {
-            slide: 3,
+            slide: 2,
             err: false,
             episodeData: false,
             loadingAudio: false

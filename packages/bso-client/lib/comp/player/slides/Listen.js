@@ -93,7 +93,6 @@ System.register('bso-client/comp/player/slides/Listen', ['../../blankSquare', 'r
         }, {
           key: 'positionGrip',
           value: function positionGrip(value) {
-            console.log(this.grip.clientWidth, value);
             this.grip.style.left = this.track.clientWidth * value / 100 - this.grip.clientWidth / 2 + 'px';
             this.grip.style.top = -(this.grip.clientHeight / 2 - this.track.clientHeight / 2) + 'px';
           }
