@@ -17,7 +17,8 @@ class Player extends React.Component {
       slide: 2,
       err: false,
       episodeData: false,
-      loadingAudio: false
+      loadingAudio: false,
+      navDisabled: false
     }
 
     this.audioFiles = {}
@@ -108,6 +109,8 @@ class Player extends React.Component {
   }
 
   next() {
+    if (this.state.navDisabled) return
+
     if (this.state.slide !== this.state.episodeData.slides.length-1) {
       if (this.audioPlayer) {
         this.audioPlayer.kill()
@@ -119,6 +122,8 @@ class Player extends React.Component {
   }
 
   previous() {
+    if (this.state.navDisabled) return
+
     if (this.state.slide !== 0) {
       if (this.audioPlayer) {
         this.audioPlayer.kill()
@@ -127,6 +132,14 @@ class Player extends React.Component {
       this.updateMenu(this.state.slide, this.state.episodeData.slides.length)
       this.setState({slide: this.state.slide - 1})
     }
+  }
+
+  enableNav(){
+    this.setState({navDisabled: false})
+  }
+
+  disableNav(){
+    this.setState({navDisabled: true})
   }
 
   async audio() {
@@ -196,6 +209,8 @@ class Player extends React.Component {
                     feedback={slide.feedback}
                     complete={slide.complete}
                     focused={key === this.state.slide}
+                    enableNav={::this.enableNav}
+                    disableNav={::this.disableNav}
                   />
                 )
               } else if (type === 'pick') {
@@ -225,13 +240,13 @@ class Player extends React.Component {
         </Swipe>
 
         <div className="nav">
-          <div className={'previous ' + (this.state.slide !== 0 ? '' : 'hide')} onClick={::this.previous}>
+          <div className={'previous ' + (this.state.slide !== 0 ? '' : 'fade')} onClick={::this.previous}>
             <img src={blankSquare}/>
           </div>
-          <div className={'audio ' + ((activeType !== 'listen' && activeSlide && activeSlide.audio) ? '' : 'hide')} onClick={::this.audio}>
+          <div className={'audio ' + ((activeType !== 'listen' && activeSlide && activeSlide.audio) ? '' : 'fade')} onClick={::this.audio}>
             <img src={blankSquare}/>
           </div>
-          <div className={'next ' + ((episodeData && this.state.slide !== episodeData.slides.length-1) ? '' : 'hide')} onClick={::this.next}>
+          <div className={'next ' + ((episodeData && this.state.slide !== episodeData.slides.length-1) ? '' : 'fade')} onClick={::this.next}>
            <img src={blankSquare}/>
           </div>
         </div>

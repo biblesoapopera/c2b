@@ -82,6 +82,9 @@ a:hover {
 .hide {
   visibility: hidden;
 }
+.fade {
+  opacity: 0;
+}
 .btn {
   background-color: rgba(255, 255, 255, 0.2);
   padding: 5vh 5vh 5vh 5vh;
@@ -499,6 +502,10 @@ form button:enabled:hover {
   border: thin solid #ffffff;
   background-color: rgba(255, 255, 255, 0.4);
 }
+.player .nav .audio {
+  transition-property: opacity;
+  transition-duration: 0.5s;
+}
 .player .nav .previous img {
   background-image: url('img/left.png');
 }
@@ -723,12 +730,14 @@ form button:enabled:hover {
   height: 100%;
   position: absolute;
   top: 0;
-  transition-property: left;
-  transition-duration: 0.5s;
   background-color: rgba(255, 255, 255, 0.8);
   border: thin solid transparent;
   cursor: pointer;
   border-radius: 50%;
+}
+.slide.slider .track-container .grip.animate {
+  transition-property: left;
+  transition-duration: 0.5s;
 }
 .slide.slider .track-container .grip:hover,
 .slide.slider .track-container .grip.active {
@@ -856,6 +865,19 @@ form button:enabled:hover {
 }
 .slide.listen .control .player-btn.pause {
   background-image: url('img/pause.png');
+}
+.slide.text {
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.slide.text .text-outter {
+  padding: 2.5%;
 }
 .editor .text {
   margin: 3vw;

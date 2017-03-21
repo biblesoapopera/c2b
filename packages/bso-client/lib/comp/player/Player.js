@@ -157,7 +157,8 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
             slide: 2,
             err: false,
             episodeData: false,
-            loadingAudio: false
+            loadingAudio: false,
+            navDisabled: false
           };
 
           _this.audioFiles = {};
@@ -289,6 +290,8 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
         }, {
           key: 'next',
           value: function next() {
+            if (this.state.navDisabled) return;
+
             if (this.state.slide !== this.state.episodeData.slides.length - 1) {
               if (this.audioPlayer) {
                 this.audioPlayer.kill();
@@ -301,6 +304,8 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
         }, {
           key: 'previous',
           value: function previous() {
+            if (this.state.navDisabled) return;
+
             if (this.state.slide !== 0) {
               if (this.audioPlayer) {
                 this.audioPlayer.kill();
@@ -309,6 +314,16 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
               this.updateMenu(this.state.slide, this.state.episodeData.slides.length);
               this.setState({ slide: this.state.slide - 1 });
             }
+          }
+        }, {
+          key: 'enableNav',
+          value: function enableNav() {
+            this.setState({ navDisabled: false });
+          }
+        }, {
+          key: 'disableNav',
+          value: function disableNav() {
+            this.setState({ navDisabled: true });
           }
         }, {
           key: 'audio',
@@ -418,7 +433,9 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
                         answers: slide.answers,
                         feedback: slide.feedback,
                         complete: slide.complete,
-                        focused: key === _this3.state.slide
+                        focused: key === _this3.state.slide,
+                        enableNav: _this3.enableNav.bind(_this3),
+                        disableNav: _this3.disableNav.bind(_this3)
                       });
                     } else if (type === 'pick') {
                       slideJsx = React.createElement(Pick, {
@@ -448,17 +465,17 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
                 { className: 'nav' },
                 React.createElement(
                   'div',
-                  { className: 'previous ' + (this.state.slide !== 0 ? '' : 'hide'), onClick: this.previous.bind(this) },
+                  { className: 'previous ' + (this.state.slide !== 0 ? '' : 'fade'), onClick: this.previous.bind(this) },
                   React.createElement('img', { src: blankSquare })
                 ),
                 React.createElement(
                   'div',
-                  { className: 'audio ' + (activeType !== 'listen' && activeSlide && activeSlide.audio ? '' : 'hide'), onClick: this.audio.bind(this) },
+                  { className: 'audio ' + (activeType !== 'listen' && activeSlide && activeSlide.audio ? '' : 'fade'), onClick: this.audio.bind(this) },
                   React.createElement('img', { src: blankSquare })
                 ),
                 React.createElement(
                   'div',
-                  { className: 'next ' + (episodeData && this.state.slide !== episodeData.slides.length - 1 ? '' : 'hide'), onClick: this.next.bind(this) },
+                  { className: 'next ' + (episodeData && this.state.slide !== episodeData.slides.length - 1 ? '' : 'fade'), onClick: this.next.bind(this) },
                   React.createElement('img', { src: blankSquare })
                 )
               ),

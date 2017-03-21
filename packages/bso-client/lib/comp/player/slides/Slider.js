@@ -70,13 +70,19 @@ System.register('bso-client/comp/player/slides/Slider', ['react', '../../blankSq
 
           _this.state = {
             complete: props.complete === 'always',
-            score: 50
+            score: 50,
+            gripScore: 50,
+            gripLeft: 0,
+            gripTop: 0,
+            gripStart: 0,
+            gripDragging: false,
+            gripAnimate: false
           };
 
-          _this.gripState = {
-            handlers: {},
-            gripScore: 50,
-            start: 0
+          _this.handlers = {
+            dragend: _this.dragend.bind(_this),
+            dragmove: _this.dragmove.bind(_this),
+            resize: _this.resize.bind(_this)
           };
           return _this;
         }
@@ -84,71 +90,90 @@ System.register('bso-client/comp/player/slides/Slider', ['react', '../../blankSq
         _createClass(Slider, [{
           key: 'componentDidMount',
           value: function componentDidMount() {
-            this.positionGrip(this.state.score);
+            this.positionGrip(this.state.gripScore);
+            window.addEventListener("resize", this.handlers.resize, false);
           }
         }, {
-          key: 'componenetDidUpdate',
-          value: function componenetDidUpdate(prevProps) {
-            if (!prevProps.focused && this.props.focused) this.positionGrip(this.state.score);
+          key: 'componentWillUnmount',
+          value: function componentWillUnmount() {
+            window.removeEventListener("resize", this.handlers.resize, false);
+            window.removeEventListener('mouseup', this.handlers.dragend, false);
+            window.removeEventListener('touchend', this.handlers.dragend, false);
+            window.removeEventListener('mousemove', this.handlers.dragmove, false);
+            window.removeEventListener('touchmove', this.handlers.dragmove, false);
+          }
+        }, {
+          key: 'resize',
+          value: function resize() {
+            this.positionGrip(this.state.gripScore);
           }
         }, {
           key: 'positionGrip',
           value: function positionGrip(value) {
-            this.grip.style.left = this.track.clientWidth * value / 100 - this.grip.clientWidth / 2 + 'px';
-            this.grip.style.top = -(this.grip.clientHeight / 2 - this.track.clientHeight / 2) + 'px';
+            this.setState({
+              gripScore: value,
+              gripLeft: this.track.clientWidth * value / 100 - this.grip.clientWidth / 2,
+              gripTop: this.grip.style.top = -(this.grip.clientHeight / 2 - this.track.clientHeight / 2)
+            });
           }
         }, {
           key: 'trackClick',
           value: function trackClick(evt) {
             var newScore = Math.round((evt.clientX - this.track.getBoundingClientRect().left) * 100 / this.track.clientWidth);
             this.setState({
-              score: newScore
+              score: newScore,
+              gripAnimate: true
             });
             this.positionGrip(newScore);
           }
         }, {
           key: 'dragstart',
           value: function dragstart(evt) {
-            this.gripState.handlers = {
-              mouseup: this.dragend.bind(this),
-              touchend: this.dragend.bind(this),
-              mousemove: this.dragmove.bind(this),
-              touchmove: this.dragmove.bind(this)
-            };
-            this.slide.addEventListener('mouseup', this.gripState.handlers.mouseup);
-            this.slide.addEventListener('touchend', this.gripState.handlers.touchend);
-            this.slide.addEventListener('mousemove', this.gripState.handlers.mousemove);
-            this.slide.addEventListener('touchmove', this.gripState.handlers.touchmove);
+            if (evt.type === 'mousedown') evt.preventDefault();
 
-            this.gripState.start = evt.touches ? evt.touches[0].clientX : evt.clientX;
+            this.props.disableNav();
 
-            this.grip.classList.add('active');
+            window.addEventListener('mouseup', this.handlers.dragend, false);
+            window.addEventListener('touchend', this.handlers.dragend, false);
+            window.addEventListener('mousemove', this.handlers.dragmove, false);
+            window.addEventListener('touchmove', this.handlers.dragmove, false);
+
+            this.setState({
+              gripStart: evt.touches ? evt.touches[0].clientX : evt.clientX,
+              gripDragging: true
+            });
           }
         }, {
           key: 'dragmove',
           value: function dragmove(evt) {
             evt.stopPropagation();
-            var delta = (evt.touches ? evt.touches[0].clientX : evt.clientX) - this.gripState.start;
+            var delta = (evt.touches ? evt.touches[0].clientX : evt.clientX) - this.state.gripStart;
             var tempScore = Math.round(this.state.score + delta * 100 / this.track.clientWidth);
 
             if (tempScore > 100) tempScore = 100;else if (tempScore < 0) tempScore = 0;
 
-            this.gripState.gripScore = tempScore;
             this.positionGrip(tempScore);
           }
         }, {
           key: 'dragend',
           value: function dragend(evt) {
             evt.stopPropagation();
-            this.slide.removeEventListener('mouseup', this.gripState.handlers.mouseup);
-            this.slide.removeEventListener('touchend', this.gripState.handlers.touchend);
-            this.slide.removeEventListener('mousemove', this.gripState.handlers.mousemove);
-            this.slide.removeEventListener('touchmove', this.gripState.handlers.touchmove);
+            window.removeEventListener('mouseup', this.handlers.dragend, false);
+            window.removeEventListener('touchend', this.handlers.dragend, false);
+            window.removeEventListener('mousemove', this.handlers.dragmove, false);
+            window.removeEventListener('touchmove', this.handlers.dragmove, false);
 
-            this.grip.classList.remove('active');
+            this.props.enableNav();
+
             this.setState({
-              score: this.gripState.gripScore
+              score: this.state.gripScore,
+              gripDragging: false
             });
+          }
+        }, {
+          key: 'animateEnd',
+          value: function animateEnd() {
+            this.setState({ gripAnimate: false });
           }
         }, {
           key: 'render',
@@ -177,13 +202,18 @@ System.register('bso-client/comp/player/slides/Slider', ['react', '../../blankSq
                   }
                 }),
                 React.createElement('img', {
-                  className: 'grip',
+                  className: 'grip ' + (this.state.gripAnimate ? 'animate ' : '') + (this.state.gripDragging ? 'active' : ''),
                   ref: function ref(grip) {
                     return _this2.grip = grip;
                   },
                   onMouseDown: this.dragstart.bind(this),
                   onTouchStart: this.dragstart.bind(this),
-                  src: blankSquare
+                  onTransitionEnd: this.animateEnd.bind(this),
+                  src: blankSquare,
+                  style: {
+                    left: this.state.gripLeft + 'px',
+                    top: this.state.gripTop + 'px'
+                  }
                 })
               ),
               React.createElement(

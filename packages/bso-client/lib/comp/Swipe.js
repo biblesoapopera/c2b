@@ -3,7 +3,7 @@
 System.register('bso-client/comp/Swipe', ['react'], function (_export, _context) {
   "use strict";
 
-  var React, _createClass, PropTypes, ReactSwipe;
+  var React, _createClass, Swipe;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -58,18 +58,16 @@ System.register('bso-client/comp/Swipe', ['react'], function (_export, _context)
         };
       }();
 
-      PropTypes = React.PropTypes;
+      Swipe = function (_React$Component) {
+        _inherits(Swipe, _React$Component);
 
-      ReactSwipe = function (_React$Component) {
-        _inherits(ReactSwipe, _React$Component);
+        function Swipe() {
+          _classCallCheck(this, Swipe);
 
-        function ReactSwipe() {
-          _classCallCheck(this, ReactSwipe);
-
-          return _possibleConstructorReturn(this, (ReactSwipe.__proto__ || Object.getPrototypeOf(ReactSwipe)).apply(this, arguments));
+          return _possibleConstructorReturn(this, (Swipe.__proto__ || Object.getPrototypeOf(Swipe)).apply(this, arguments));
         }
 
-        _createClass(ReactSwipe, [{
+        _createClass(Swipe, [{
           key: 'swipeStart',
           value: function swipeStart(e) {
             var _e$touches$ = e.touches[0],
@@ -136,23 +134,10 @@ System.register('bso-client/comp/Swipe', ['react'], function (_export, _context)
           }
         }]);
 
-        return ReactSwipe;
+        return Swipe;
       }(React.Component);
 
-      ReactSwipe.propTypes = {
-        tagName: PropTypes.string,
-        className: PropTypes.string,
-        style: PropTypes.object,
-        children: PropTypes.node,
-        onSwipeUp: PropTypes.func,
-        onSwipeDown: PropTypes.func,
-        onSwipeLeft: PropTypes.func,
-        onSwipeRight: PropTypes.func,
-        onSwipeStart: PropTypes.func,
-        onSwipeMove: PropTypes.func,
-        onSwipeEnd: PropTypes.func
-      };
-      ReactSwipe.defaultProps = {
+      Swipe.defaultProps = {
         tagName: 'div',
         onSwipeUp: function onSwipeUp() {},
         onSwipeDown: function onSwipeDown() {},
@@ -163,10 +148,7 @@ System.register('bso-client/comp/Swipe', ['react'], function (_export, _context)
         onSwipeEnd: function onSwipeEnd() {}
       };
 
-
-      ReactSwipe.displayName = 'ReactSwipe';
-
-      _export('default', ReactSwipe);
+      _export('default', Swipe);
     }
   };
 });

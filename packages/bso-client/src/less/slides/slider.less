@@ -45,13 +45,15 @@
       position: absolute;
       top: 0;
 
-      transition-property: left;
-      transition-duration: 0.5s;
-
       background-color: fade(@white, 80%);
       border: thin solid transparent;
       cursor: pointer;
       border-radius: 50%;
+    }
+
+    .grip.animate {
+      transition-property: left;
+      transition-duration: 0.5s;
     }
 
     .grip:hover, .grip.active {

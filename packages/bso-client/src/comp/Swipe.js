@@ -1,22 +1,6 @@
 import React from 'react'
 
-const PropTypes = React.PropTypes
-
-class ReactSwipe extends React.Component {
-  static propTypes = {
-    tagName: PropTypes.string,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    children: PropTypes.node,
-    onSwipeUp: PropTypes.func,
-    onSwipeDown: PropTypes.func,
-    onSwipeLeft: PropTypes.func,
-    onSwipeRight: PropTypes.func,
-    onSwipeStart: PropTypes.func,
-    onSwipeMove: PropTypes.func,
-    onSwipeEnd: PropTypes.func
-  }
-
+class Swipe extends React.Component {
   static defaultProps = {
     tagName: 'div',
     onSwipeUp() {},
@@ -81,14 +65,10 @@ class ReactSwipe extends React.Component {
         className = { this.props.className }
         style = { this.props.style }
       >
-
         { this.props.children }
-
       </this.props.tagName>
     );
   }
 }
 
-ReactSwipe.displayName = 'ReactSwipe';
-
-export default ReactSwipe;
+export default Swipe;
