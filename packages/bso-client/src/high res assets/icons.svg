@@ -43,9 +43,9 @@
      inkscape:window-height="1017"
      id="namedview4166"
      showgrid="false"
-     inkscape:zoom="0.5425920812"
-     inkscape:cx="-343.2741076"
-     inkscape:cy="3008.677972"
+     inkscape:zoom="0.4791088082"
+     inkscape:cx="-560.273565"
+     inkscape:cy="2735.01964"
      inkscape:window-x="1592"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -541,38 +541,77 @@
        id="rect4554"
        style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:0.5440000048;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:53.3333320618;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
   </g>
+  <rect
+     inkscape:export-ydpi="4.860000134"
+     inkscape:export-xdpi="4.860000134"
+     inkscape:export-filename="C:\bso\packages\bso-client\src\img\globe.png"
+     y="-2815.34375"
+     x="-336.9277039"
+     height="426.6666565"
+     width="426.6666565"
+     id="rect4562"
+     style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:0.5440000048;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:53.3333320618;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
   <g
-     id="g4576"
-     inkscape:export-filename="C:\bso\packages\bso-client\src\img\pause.png"
+     id="g4570"
+     transform="translate(258.3149147)">
+    <rect
+       y="-2754.527344"
+       x="-362.543335"
+       height="304.7773743"
+       width="106.8655014"
+       id="rect4564"
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:7.7169733047;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+    <rect
+       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:7.7169733047;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       id="rect4566"
+       width="106.8655014"
+       height="304.7773743"
+       x="-508.1407471"
+       y="-2754.527344" />
+  </g>
+  <g
+     id="g4589"
+     inkscape:export-filename="C:\bso\packages\bso-client\src\img\rewind.png"
      inkscape:export-xdpi="4.860000134"
      inkscape:export-ydpi="4.860000134">
     <rect
        style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:0.5440000048;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:53.3333320618;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       id="rect4562"
+       id="rect4563"
        width="426.6666565"
        height="426.6666565"
-       x="-336.9277039"
+       x="-1734.45166"
        y="-2815.34375"
        inkscape:export-filename="C:\bso\packages\bso-client\src\img\globe.png"
        inkscape:export-xdpi="4.860000134"
        inkscape:export-ydpi="4.860000134" />
     <g
-       transform="translate(258.3149147)"
-       id="g4570">
+       style="fill:#ffffff;fill-opacity:1"
+       transform="translate(3.960860148)"
+       id="g4583">
+      <path
+         inkscape:transform-center-x="33.78490425"
+         transform="matrix(0,0.767353309,0.767353309,0,494.1346646,-2019.368899)"
+         sodipodi:type="star"
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:42.6666679382;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+         id="path4560"
+         sodipodi:sides="3"
+         sodipodi:cx="-759.2871704"
+         sodipodi:cy="-2557.982422"
+         sodipodi:r1="176.1113129"
+         sodipodi:r2="88.05565643"
+         sodipodi:arg1="0.5235987756"
+         sodipodi:arg2="1.570796327"
+         inkscape:flatsided="true"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="M -606.7702996,-2469.926765 -911.8040412,-2469.926765 -759.2871704,-2734.093735 Z" />
       <rect
-         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:7.7169733047;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-         id="rect4564"
-         width="106.8655014"
-         height="304.7773743"
-         x="-362.543335"
-         y="-2754.527344" />
-      <rect
-         y="-2754.527344"
-         x="-508.1407471"
-         height="304.7773743"
-         width="106.8655014"
-         id="rect4566"
-         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:7.7169733047;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
+         y="-2729.480957"
+         x="-1648.986572"
+         height="254.6843719"
+         width="61.39465332"
+         id="rect4573"
+         style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5.3469152451;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
     </g>
   </g>
 </svg>

@@ -6,7 +6,12 @@ System.register('bso-client/comp/player/audioPlayer', [], function (_export, _co
   return {
     setters: [],
     execute: function () {
-      _export('default', function (objectUrl, start, end) {
+      _export('default', function (objectUrl, start, end, progress) {
+        var playCalled = false;
+        var playing = false;
+        var pauseCalled = false;
+        var paused = false;
+
         var doneResolve = void 0;
         var doneReject = void 0;
         var donePromise = new Promise(function (resolve, reject) {
@@ -18,20 +23,28 @@ System.register('bso-client/comp/player/audioPlayer', [], function (_export, _co
 
         if (start) audio.currentTime = start;
 
-        if (end) {
+        if (end || progress) {
           audio.addEventListener('timeupdate', function (evt) {
-            if (audio && audio.currentTime > end - 0.15) {
+            if (end && audio && audio.currentTime > end - 0.15) {
               audio.pause();
               audio = undefined; // ensure object released for gc
               doneResolve();
+            } else if (progress && audio) {
+              progress(audio.currentTime);
             }
           });
-        } else {
-          audio.addEventListener('ended', function (evt) {
-            audio = undefined; // ensure object released for gc
-            doneResolve();
-          });
         }
+
+        audio.addEventListener('ended', function (evt) {
+          audio = undefined; // ensure object released for gc
+          doneResolve();
+        });
+
+        audio.addEventListener('error', function (evt) {
+          // TODO do something sensible with error
+          console.log('audio error');
+          console.log(evt);
+        });
 
         return {
           play: function play() {
@@ -39,6 +52,9 @@ System.register('bso-client/comp/player/audioPlayer', [], function (_export, _co
           },
           pause: function pause() {
             audio.pause();
+          },
+          jump: function jump(to) {
+            audio.currentTime = to;
           },
           kill: function kill() {
             audio.pause();

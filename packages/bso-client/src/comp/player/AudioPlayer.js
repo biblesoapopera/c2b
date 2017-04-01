@@ -1,4 +1,9 @@
-export default (objectUrl, start, end) => {
+export default (objectUrl, start, end, progress) => {
+  let playCalled = false
+  let playing = false
+  let pauseCalled = false
+  let paused = false
+
   let doneResolve
   let doneReject
   let donePromise = new Promise((resolve,reject) => {
@@ -10,20 +15,28 @@ export default (objectUrl, start, end) => {
 
   if (start) audio.currentTime = start
 
-  if (end) {
+  if (end || progress) {
     audio.addEventListener('timeupdate', evt => {
-      if (audio && audio.currentTime > end - 0.15) {
+      if (end && audio && audio.currentTime > end - 0.15) {
         audio.pause()
         audio = undefined // ensure object released for gc
         doneResolve()
+      } else if (progress && audio) {
+        progress(audio.currentTime)
       }
     })
-  } else {
-    audio.addEventListener('ended', evt => {
-      audio = undefined // ensure object released for gc
-      doneResolve()
-    })
   }
+
+  audio.addEventListener('ended', evt => {
+    audio = undefined // ensure object released for gc
+    doneResolve()
+  })
+
+  audio.addEventListener('error', evt => {
+    // TODO do something sensible with error
+    console.log('audio error')
+    console.log(evt)
+  })
 
   return {
     play: () => {
@@ -31,6 +44,9 @@ export default (objectUrl, start, end) => {
     },
     pause: () => {
       audio.pause()
+    },
+    jump: to => {
+      audio.currentTime = to
     },
     kill: () => {
       audio.pause()

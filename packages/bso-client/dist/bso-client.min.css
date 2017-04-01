@@ -483,6 +483,8 @@ form button:enabled:hover {
 .player .nav .audio,
 .player .nav .next {
   height: 100%;
+  transition-property: opacity;
+  transition-duration: 0.5s;
 }
 .player .nav .previous img,
 .player .nav .audio img,
@@ -501,10 +503,6 @@ form button:enabled:hover {
 .player .nav .next img:hover {
   border: thin solid #ffffff;
   background-color: rgba(255, 255, 255, 0.4);
-}
-.player .nav .audio {
-  transition-property: opacity;
-  transition-duration: 0.5s;
 }
 .player .nav .previous img {
   background-image: url('img/left.png');
@@ -814,24 +812,38 @@ form button:enabled:hover {
   left: 10%;
   position: absolute;
 }
+.slide.listen .track-container .progress {
+  background-color: rgba(255, 255, 255, 0.6);
+  width: 0%;
+  height: 30%;
+  border-radius: 8px/50%;
+}
+.slide.listen .track-container .progress.animate {
+  transition-property: width;
+  transition-duration: 0.5s;
+}
 .slide.listen .track-container .track {
   background-color: rgba(255, 255, 255, 0.2);
   width: 100%;
   height: 30%;
   cursor: pointer;
   border-radius: 8px/50%;
+  position: relative;
+  top: -30%;
 }
 .slide.listen .track-container .grip {
   box-shadow: 0 0 3px #001129;
   height: 100%;
   position: absolute;
   top: 0;
-  transition-property: left;
-  transition-duration: 0.5s;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #ffffff;
   border: thin solid transparent;
   cursor: pointer;
   border-radius: 50%;
+}
+.slide.listen .track-container .grip.animate {
+  transition-property: left;
+  transition-duration: 0.5s;
 }
 .slide.listen .track-container .grip:hover,
 .slide.listen .track-container .grip.active {
@@ -865,6 +877,9 @@ form button:enabled:hover {
 }
 .slide.listen .control .player-btn.pause {
   background-image: url('img/pause.png');
+}
+.slide.listen .control .player-btn.rewind {
+  background-image: url('img/rewind.png');
 }
 .slide.text {
   width: 100%;

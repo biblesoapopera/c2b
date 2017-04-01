@@ -57,6 +57,9 @@
     .previous, .audio, .next {
       height: 100%;
 
+      transition-property: opacity;
+      transition-duration: 0.5s;
+
       img {
         height: 100%;
         background-color: fade(@white, 20%);
@@ -72,11 +75,6 @@
         border: thin solid @white;
         background-color: fade(@white, 40%);
       }
-    }
-
-    .audio {
-      transition-property: opacity;
-      transition-duration: 0.5s;
     }
 
     .previous img {

@@ -14,10 +14,11 @@ class Player extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      slide: 2,
+      slide: 3,
       err: false,
       episodeData: false,
       loadingAudio: false,
+      playingAudio: false,
       navDisabled: false
     }
 
@@ -31,9 +32,24 @@ class Player extends React.Component {
   async componentDidMount() {
     let res = await this.props.api.episode.readId(this.props.episode)
     if (res.status === 200) {
-      this.setState({episodeData: res.body})
-      this.loadAudio(res.body)
-      this.updateMenu(this.state.slide + 1, res.body.slides.length)
+      let episodeData = res.body
+
+      this.loadAudio(episodeData)
+      this.updateMenu(this.state.slide + 1, episodeData.slides.length)
+
+      let slide
+      let slideType
+      [slide, slideType] = this.slideObjToSlide(episodeData.slides[this.state.slide])
+      if (slideType === 'listen' && !this.audioFiles[slide.audio.file].ready) {
+        this.setState({
+          loadingAudio: true,
+          episodeData: episodeData
+        })
+        await this.audioFiles[slide.audio.file].readyPromise
+        this.setState({loadingAudio: false})
+      } else {
+        this.setState({episodeData: episodeData})
+      }
     } else {
       this.setState({err: res})
     }
@@ -108,7 +124,7 @@ class Player extends React.Component {
     return [slide, type]
   }
 
-  next() {
+  async next() {
     if (this.state.navDisabled) return
 
     if (this.state.slide !== this.state.episodeData.slides.length-1) {
@@ -117,11 +133,22 @@ class Player extends React.Component {
         this.audioPlayer = undefined
       }
       this.updateMenu(this.state.slide + 2, this.state.episodeData.slides.length)
-      this.setState({slide: this.state.slide + 1})
+
+      let newSlideIndex = this.state.slide + 1
+      this.setState({slide: newSlideIndex})
+
+      let newSlide
+      let newSlideType
+      [newSlide, newSlideType] = this.slideObjToSlide(this.state.episodeData.slides[newSlideIndex])
+      if (newSlideType === 'listen' && !this.audioFiles[newSlide.audio.file].ready) {
+        this.setState({loadingAudio: true})
+        await this.audioFiles[newSlide.audio.file].readyPromise
+        this.setState({loadingAudio: false})
+      }
     }
   }
 
-  previous() {
+  async previous() {
     if (this.state.navDisabled) return
 
     if (this.state.slide !== 0) {
@@ -130,7 +157,17 @@ class Player extends React.Component {
         this.audioPlayer = undefined
       }
       this.updateMenu(this.state.slide, this.state.episodeData.slides.length)
-      this.setState({slide: this.state.slide - 1})
+      let newSlideIndex = this.state.slide - 1
+      this.setState({slide: newSlideIndex})
+
+      let newSlide
+      let newSlideType
+      [newSlide, newSlideType] = this.slideObjToSlide(this.state.episodeData.slides[newSlideIndex])
+      if (newSlideType === 'listen' && !this.audioFiles[newSlide.audio.file].ready) {
+        this.setState({loadingAudio: true})
+        await this.audioFiles[newSlide.audio.file].readyPromise
+        this.setState({loadingAudio: false})
+      }
     }
   }
 
@@ -143,6 +180,8 @@ class Player extends React.Component {
   }
 
   async audio() {
+    if (this.state.playingAudio) return
+
     let slide = this.slideObjToSlide(this.state.episodeData.slides[this.state.slide])[0]
     let file = slide.audio.file
 
@@ -154,6 +193,11 @@ class Player extends React.Component {
 
     this.audioPlayer = audioPlayer(this.props.api.audio.get(file), slide.audio.start, slide.audio.end)
     this.audioPlayer.play()
+
+    this.setState({playingAudio: true})
+    await this.audioPlayer.done
+    this.audioPlayer = undefined
+    this.setState({playingAudio: false})
   }
 
   render() {
@@ -227,7 +271,12 @@ class Player extends React.Component {
                 slideJsx = (
                   <Listen
                     text={slide.text}
+                    audioFile={this.props.api.audio.get(slide.audio.file)}
+                    audioStart={slide.audio.start}
+                    audioEnd={slide.audio.end}
                     focused={key === this.state.slide}
+                    enableNav={::this.enableNav}
+                    disableNav={::this.disableNav}
                   />
                 )
               }
