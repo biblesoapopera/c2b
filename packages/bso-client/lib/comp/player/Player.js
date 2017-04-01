@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/player/Player', ['react', './slides/Text', './slides/Slider', './slides/Pick', './slides/Listen', '../Swipe', './Tracker', '../Loading', '../Error', './audioPlayer', '../blankSquare'], function (_export, _context) {
+System.register('bso-client/comp/player/Player', ['react', './slides/Text', './slides/Slider', './slides/Pick', './slides/Multipick', './slides/Listen', '../Swipe', './Tracker', '../Loading', '../Error', './audioPlayer', '../blankSquare'], function (_export, _context) {
   "use strict";
 
-  var React, Text, Slider, Pick, Listen, Swipe, Tracker, Loading, Error, audioPlayer, blankSquare, _slicedToArray, _createClass, Player;
+  var React, Text, Slider, Pick, Multipick, Listen, Swipe, Tracker, Loading, Error, audioPlayer, blankSquare, _slicedToArray, _createClass, Player;
 
   function _asyncToGenerator(fn) {
     return function () {
@@ -73,6 +73,8 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
       Slider = _slidesSlider.default;
     }, function (_slidesPick) {
       Pick = _slidesPick.default;
+    }, function (_slidesMultipick) {
+      Multipick = _slidesMultipick.default;
     }, function (_slidesListen) {
       Listen = _slidesListen.default;
     }, function (_Swipe) {
@@ -154,7 +156,7 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
           var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, props));
 
           _this.state = {
-            slide: 3,
+            slide: 6,
             err: false,
             episodeData: false,
             loadingAudio: false,
@@ -597,6 +599,14 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
                       });
                     } else if (type === 'pick') {
                       slideJsx = React.createElement(Pick, {
+                        question: slide.question,
+                        answers: slide.answers,
+                        feedback: slide.feedback,
+                        complete: slide.complete,
+                        focused: key === _this3.state.slide
+                      });
+                    } else if (type === 'multipick') {
+                      slideJsx = React.createElement(Multipick, {
                         question: slide.question,
                         answers: slide.answers,
                         feedback: slide.feedback,

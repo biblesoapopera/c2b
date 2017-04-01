@@ -184,7 +184,7 @@ class Listen extends React.Component {
         </div>
 
         <div className="track-container">
-      <div className={'progress ' + (this.state.progressAnimate ? 'animate' : '')}
+          <div className={'progress ' + (this.state.progressAnimate ? 'animate' : '')}
             style = {{
               width: this.state.progressWidth + '%'
             }}

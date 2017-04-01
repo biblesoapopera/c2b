@@ -77,7 +77,7 @@ System.register('bso-client/comp/player/slides/Pick', ['react'], function (_expo
 
         _createClass(Pick, [{
           key: 'click',
-          value: function click(key, value, score, evt) {
+          value: function click(key, value, score) {
             this.setState({
               score: score,
               value: value,
@@ -92,26 +92,30 @@ System.register('bso-client/comp/player/slides/Pick', ['react'], function (_expo
             return React.createElement(
               'div',
               { className: 'slide pick' },
-              React.createElement('div', { className: 'question', dangerouslySetInnerHTML: { __html: this.props.question } }),
               React.createElement(
                 'div',
-                { className: 'answers' },
-                this.props.answers.map(function (answer, key) {
-                  return React.createElement(
-                    'div',
-                    {
-                      className: 'btn' + (_this2.state.activeKey === key ? ' active' : ''),
-                      key: key,
-                      onClick: _this2.click.bind(_this2, key, answer.value, answer.score)
-                    },
-                    React.createElement('div', { className: 'tick' }),
-                    React.createElement(
+                { className: 'pick-outter' },
+                React.createElement('div', { className: 'question', dangerouslySetInnerHTML: { __html: this.props.question } }),
+                React.createElement(
+                  'div',
+                  { className: 'answers' },
+                  this.props.answers.map(function (answer, key) {
+                    return React.createElement(
                       'div',
-                      { className: 'text' },
-                      answer.value
-                    )
-                  );
-                })
+                      {
+                        className: 'btn' + (_this2.state.activeKey === key ? ' active' : ''),
+                        key: key,
+                        onClick: _this2.click.bind(_this2, key, answer.value, answer.score)
+                      },
+                      React.createElement('div', { className: 'tick' }),
+                      React.createElement(
+                        'div',
+                        { className: 'text' },
+                        answer.value
+                      )
+                    );
+                  })
+                )
               )
             );
           }

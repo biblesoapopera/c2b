@@ -109,6 +109,21 @@ System.register('bso-server/tmp', ['babel-runtime/regenerator', 'babel-runtime/c
                       },
                       "completeWhen": "correct"
                     }
+                  }, {
+                    "multipick": {
+                      "question": "Which of these equals 10?",
+                      "answers": [{
+                        "value": "2 + 8",
+                        "score": 50
+                      }, {
+                        "value": "5 x 2",
+                        "score": 50
+                      }, {
+                        "value": "1 + 6",
+                        "score": -50
+                      }],
+                      "completeWhen": "always"
+                    }
                   }]
                 });
 

@@ -2,6 +2,7 @@ import React from 'react'
 import Text from './slides/Text'
 import Slider from './slides/Slider'
 import Pick from './slides/Pick'
+import Multipick from './slides/Multipick'
 import Listen from './slides/Listen'
 import Swipe from '../Swipe'
 import Tracker from './Tracker'
@@ -14,7 +15,7 @@ class Player extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      slide: 3,
+      slide: 6,
       err: false,
       episodeData: false,
       loadingAudio: false,
@@ -260,6 +261,16 @@ class Player extends React.Component {
               } else if (type === 'pick') {
                 slideJsx = (
                   <Pick
+                    question={slide.question}
+                    answers={slide.answers}
+                    feedback={slide.feedback}
+                    complete={slide.complete}
+                    focused={key === this.state.slide}
+                  />
+                )
+              } else if (type === 'multipick') {
+                slideJsx = (
+                  <Multipick
                     question={slide.question}
                     answers={slide.answers}
                     feedback={slide.feedback}

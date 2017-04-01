@@ -12,7 +12,7 @@ class Pick extends React.Component {
     }
   }
 
-  click(key, value, score, evt){
+  click(key, value, score){
     this.setState({
       score: score,
       value: value,
@@ -23,7 +23,8 @@ class Pick extends React.Component {
   render() {
     return (
       <div className="slide pick">
-        <div className="question" dangerouslySetInnerHTML={{__html: this.props.question}}></div>
+        <div className="pick-outter">
+          <div className="question" dangerouslySetInnerHTML={{__html: this.props.question}}></div>
 
           <div className="answers">
             {this.props.answers.map((answer, key) => {
@@ -39,6 +40,7 @@ class Pick extends React.Component {
               )
             })}
           </div>
+        </div>
       </div>
     )
   }
