@@ -15,7 +15,7 @@ class Player extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      slide: 6,
+      slide: 5,
       err: false,
       episodeData: false,
       loadingAudio: false,
@@ -266,6 +266,7 @@ class Player extends React.Component {
                     feedback={slide.feedback}
                     complete={slide.complete}
                     focused={key === this.state.slide}
+                    next={::this.next}
                   />
                 )
               } else if (type === 'multipick') {
@@ -276,6 +277,7 @@ class Player extends React.Component {
                     feedback={slide.feedback}
                     complete={slide.complete}
                     focused={key === this.state.slide}
+                    next={::this.next}
                   />
                 )
               } else if (type === 'listen') {

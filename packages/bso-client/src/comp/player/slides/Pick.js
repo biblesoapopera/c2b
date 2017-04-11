@@ -1,4 +1,5 @@
 import React from 'react'
+import Answer from '../Answer'
 
 class Pick extends React.Component {
   constructor(props) {
@@ -20,6 +21,10 @@ class Pick extends React.Component {
     })
   }
 
+  reset(){
+    console.log('reset')
+  }
+
   render() {
     return (
       <div className="slide pick">
@@ -28,16 +33,18 @@ class Pick extends React.Component {
 
           <div className="answers">
             {this.props.answers.map((answer, key) => {
-              return (
-             <div
-                className={'btn' + (this.state.activeKey === key ? ' active' : '')}
+              return <Answer
                 key={key}
-                onClick={this.click.bind(this, key, answer.value, answer.score)}
-              >
-                  <div className="tick"></div>
-                  <div className="text">{answer.value}</div>
-                </div>
-              )
+                active={this.state.activeKey === key}
+                value={answer.value}
+                score={answer.score}
+                click={this.click.bind(this, key)}
+                feedback={["This is test feedback", "part 2"]}
+                showFeedbackReset={true}
+                showFeedbackNext={true}
+                next={this.props.next}
+                reset={::this.reset}
+              />
             })}
           </div>
         </div>

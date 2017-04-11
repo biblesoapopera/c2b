@@ -5,14 +5,27 @@ import episode from './db/episode'
 import audioHash from './db/audioHash'
 import revokedToken from './db/revokedToken'
 
-export default url => {
-  mongoose.Promise = Promise
+let connect = url => {
+  let connection = mongoose.connection
+
+  connection.on('error', err => {
+    console.error('error connecting with mongodb database:', err)
+  })
+
+  connection.on('disconnected', () => connect(url))
+
   if (
-    mongoose.connection.readyState === 0 || //disconnected
-    mongoose.connection.readyState === 3    //disconnecting
+    connection.readyState === 0 || // disconnected
+    connection.readyState === 3    // disconnecting
   ){
     mongoose.connect(url)
   }
+}
+
+export default url => {
+  mongoose.Promise = Promise
+
+  connect(url)
 
   return {
     user: user,

@@ -430,6 +430,301 @@ form button:enabled:hover {
   height: calc(100vh - 50px );
   width: 100vw;
 }
+.player .feedback {
+  padding-bottom: 4%;
+}
+.player .feedback .arrow {
+  height: 4vh;
+  overflow: hidden;
+  position: relative;
+  width: 8vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+.player .feedback .arrow::after {
+  box-shadow: 0 0 1vw rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 17, 41, 0.9);
+  content: "";
+  height: 3.5vh;
+  left: 2.5vh;
+  position: absolute;
+  top: 2.5vh;
+  transform: rotate(45deg);
+  width: 3.5vh;
+}
+.player .feedback .box {
+  box-shadow: 0 0 1vw rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 17, 41, 0.9);
+  padding: 2%;
+}
+.player .feedback .box .text {
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+.player .feedback .box .actions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.player .feedback .box .actions .reset,
+.player .feedback .box .actions .next {
+  width: 18%;
+  transition-property: opacity;
+  transition-duration: 0.5s;
+}
+.player .feedback .box .actions .reset img,
+.player .feedback .box .actions .next img {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: thin solid transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 50% 50%;
+}
+.player .feedback .box .actions .reset img:hover,
+.player .feedback .box .actions .next img:hover {
+  border: thin solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.player .feedback .box .actions .reset img {
+  background-image: url('img/reset.png');
+}
+.player .feedback .box .actions .next img {
+  background-image: url('img/right.png');
+}
+.slide.slider {
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  position: relative;
+}
+.slide.slider .question {
+  width: 95%;
+  height: 45%;
+  padding: 2.5%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+.slide.slider .question div {
+  margin-bottom: 12.5%;
+}
+.slide.slider .track-container {
+  width: 80%;
+  height: 11.8%;
+  top: 45%;
+  left: 10%;
+  position: absolute;
+}
+.slide.slider .track-container .track {
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  height: 30%;
+  cursor: pointer;
+  border-radius: 8px/50%;
+}
+.slide.slider .track-container .grip {
+  box-shadow: 0 0 3px #001129;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: thin solid transparent;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.slide.slider .track-container .grip.animate {
+  transition-property: left;
+  transition-duration: 0.5s;
+}
+.slide.slider .track-container .grip:hover,
+.slide.slider .track-container .grip.active {
+  transition: none;
+  border: thin solid #ffffff;
+  background-color: #ffffff;
+}
+.slide.slider .answers {
+  width: 95%;
+  height: 40%;
+  top: 55%;
+  left: 0;
+  position: absolute;
+  padding: 2.5%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.slide.slider .answers div {
+  font-family: Sans-Serif;
+  font-weight: 300;
+  font-size: 80%;
+  width: 40%;
+}
+.slide.pick {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.slide.pick .pick-outter {
+  padding: 2.5%;
+}
+.slide.pick .answers .btn {
+  padding: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.slide.pick .answers .tick {
+  width: 50px;
+  height: 50px;
+}
+.slide.pick .answers .btn.active .tick {
+  background: url('img/tick.png');
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.slide.pick .answers .text {
+  flex-grow: 1;
+}
+.slide.multipick .multipick-outter {
+  padding: 2.5%;
+}
+.slide.multipick .answers .btn {
+  padding: 10px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.slide.multipick .answers .tick {
+  width: 50px;
+  height: 50px;
+}
+.slide.multipick .answers .btn.active .tick {
+  background: url('img/tick.png');
+  background-size: cover;
+  background-position: 50%, 50%;
+}
+.slide.multipick .answers .text {
+  flex-grow: 1;
+}
+.slide.listen {
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  position: relative;
+}
+.slide.listen .listen-text {
+  width: 95%;
+  height: 45%;
+  padding: 2.5%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+.slide.listen .listen-text div {
+  margin-bottom: 12.5%;
+}
+.slide.listen .track-container {
+  width: 80%;
+  height: 5.9%;
+  top: 45%;
+  left: 10%;
+  position: absolute;
+}
+.slide.listen .track-container .progress {
+  background-color: rgba(255, 255, 255, 0.6);
+  width: 0%;
+  height: 30%;
+  border-radius: 8px/50%;
+}
+.slide.listen .track-container .progress.animate {
+  transition-property: width;
+  transition-duration: 0.5s;
+}
+.slide.listen .track-container .track {
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  height: 30%;
+  cursor: pointer;
+  border-radius: 8px/50%;
+  position: relative;
+  top: -30%;
+}
+.slide.listen .track-container .grip {
+  box-shadow: 0 0 3px #001129;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-color: #ffffff;
+  border: thin solid transparent;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.slide.listen .track-container .grip.animate {
+  transition-property: left;
+  transition-duration: 0.5s;
+}
+.slide.listen .track-container .grip:hover,
+.slide.listen .track-container .grip.active {
+  transition: none;
+  border: thin solid #ffffff;
+  background-color: #ffffff;
+}
+.slide.listen .control {
+  width: 100%;
+  height: 11.8%;
+  top: 55%;
+  left: 0;
+  position: absolute;
+}
+.slide.listen .control .player-btn {
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: thin solid transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 50% 50%;
+}
+.slide.listen .control .player-btn:hover {
+  border: thin solid #ffffff;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.slide.listen .control .player-btn.play {
+  background-image: url('img/play.png');
+}
+.slide.listen .control .player-btn.pause {
+  background-image: url('img/pause.png');
+}
+.slide.listen .control .player-btn.rewind {
+  background-image: url('img/rewind.png');
+}
+.slide.text .text-outter {
+  padding: 2.5%;
+}
 .player {
   height: 100%;
   width: 100%;
@@ -686,230 +981,6 @@ form button:enabled:hover {
 }
 .edit .inner:hover {
   background-color: rgba(255, 255, 255, 0.1);
-}
-.slide.slider {
-  width: 100%;
-  height: 100%;
-  flex-grow: 1;
-  position: relative;
-}
-.slide.slider .question {
-  width: 95%;
-  height: 45%;
-  padding: 2.5%;
-  top: 0;
-  left: 0;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
-  align-items: center;
-}
-.slide.slider .question div {
-  margin-bottom: 12.5%;
-}
-.slide.slider .track-container {
-  width: 80%;
-  height: 11.8%;
-  top: 45%;
-  left: 10%;
-  position: absolute;
-}
-.slide.slider .track-container .track {
-  background-color: rgba(255, 255, 255, 0.2);
-  width: 100%;
-  height: 30%;
-  cursor: pointer;
-  border-radius: 8px/50%;
-}
-.slide.slider .track-container .grip {
-  box-shadow: 0 0 3px #001129;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: thin solid transparent;
-  cursor: pointer;
-  border-radius: 50%;
-}
-.slide.slider .track-container .grip.animate {
-  transition-property: left;
-  transition-duration: 0.5s;
-}
-.slide.slider .track-container .grip:hover,
-.slide.slider .track-container .grip.active {
-  transition: none;
-  border: thin solid #ffffff;
-  background-color: #ffffff;
-}
-.slide.slider .answers {
-  width: 95%;
-  height: 40%;
-  top: 55%;
-  left: 0;
-  position: absolute;
-  padding: 2.5%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-.slide.slider .answers div {
-  font-family: Sans-Serif;
-  font-weight: 300;
-  font-size: 80%;
-  width: 40%;
-}
-.slide.pick .pick-outter {
-  padding: 2.5%;
-}
-.slide.pick .answers .btn {
-  padding: 10px;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-}
-.slide.pick .answers .tick {
-  width: 50px;
-  height: 50px;
-}
-.slide.pick .answers .btn.active .tick {
-  background: url('img/tick.png');
-  background-size: cover;
-  background-position: 50%, 50%;
-}
-.slide.pick .answers .text {
-  flex-grow: 1;
-}
-.slide.multipick .multipick-outter {
-  padding: 2.5%;
-}
-.slide.multipick .answers .btn {
-  padding: 10px;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-}
-.slide.multipick .answers .tick {
-  width: 50px;
-  height: 50px;
-}
-.slide.multipick .answers .btn.active .tick {
-  background: url('img/tick.png');
-  background-size: cover;
-  background-position: 50%, 50%;
-}
-.slide.multipick .answers .text {
-  flex-grow: 1;
-}
-.slide.listen {
-  width: 100%;
-  height: 100%;
-  flex-grow: 1;
-  position: relative;
-}
-.slide.listen .listen-text {
-  width: 95%;
-  height: 45%;
-  padding: 2.5%;
-  top: 0;
-  left: 0;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
-  align-items: center;
-}
-.slide.listen .listen-text div {
-  margin-bottom: 12.5%;
-}
-.slide.listen .track-container {
-  width: 80%;
-  height: 5.9%;
-  top: 45%;
-  left: 10%;
-  position: absolute;
-}
-.slide.listen .track-container .progress {
-  background-color: rgba(255, 255, 255, 0.6);
-  width: 0%;
-  height: 30%;
-  border-radius: 8px/50%;
-}
-.slide.listen .track-container .progress.animate {
-  transition-property: width;
-  transition-duration: 0.5s;
-}
-.slide.listen .track-container .track {
-  background-color: rgba(255, 255, 255, 0.2);
-  width: 100%;
-  height: 30%;
-  cursor: pointer;
-  border-radius: 8px/50%;
-  position: relative;
-  top: -30%;
-}
-.slide.listen .track-container .grip {
-  box-shadow: 0 0 3px #001129;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  background-color: #ffffff;
-  border: thin solid transparent;
-  cursor: pointer;
-  border-radius: 50%;
-}
-.slide.listen .track-container .grip.animate {
-  transition-property: left;
-  transition-duration: 0.5s;
-}
-.slide.listen .track-container .grip:hover,
-.slide.listen .track-container .grip.active {
-  transition: none;
-  border: thin solid #ffffff;
-  background-color: #ffffff;
-}
-.slide.listen .control {
-  width: 100%;
-  height: 11.8%;
-  top: 55%;
-  left: 0;
-  position: absolute;
-}
-.slide.listen .control .player-btn {
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: thin solid transparent;
-  cursor: pointer;
-  border-radius: 50%;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-size: 50% 50%;
-}
-.slide.listen .control .player-btn:hover {
-  border: thin solid #ffffff;
-  background-color: rgba(255, 255, 255, 0.4);
-}
-.slide.listen .control .player-btn.play {
-  background-image: url('img/play.png');
-}
-.slide.listen .control .player-btn.pause {
-  background-image: url('img/pause.png');
-}
-.slide.listen .control .player-btn.rewind {
-  background-image: url('img/rewind.png');
-}
-.slide.text .text-outter {
-  padding: 2.5%;
 }
 .editor .text {
   margin: 3vw;

@@ -156,7 +156,7 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
           var _this = _possibleConstructorReturn(this, (Player.__proto__ || Object.getPrototypeOf(Player)).call(this, props));
 
           _this.state = {
-            slide: 6,
+            slide: 5,
             err: false,
             episodeData: false,
             loadingAudio: false,
@@ -603,7 +603,8 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
                         answers: slide.answers,
                         feedback: slide.feedback,
                         complete: slide.complete,
-                        focused: key === _this3.state.slide
+                        focused: key === _this3.state.slide,
+                        next: _this3.next.bind(_this3)
                       });
                     } else if (type === 'multipick') {
                       slideJsx = React.createElement(Multipick, {
@@ -611,7 +612,8 @@ System.register('bso-client/comp/player/Player', ['react', './slides/Text', './s
                         answers: slide.answers,
                         feedback: slide.feedback,
                         complete: slide.complete,
-                        focused: key === _this3.state.slide
+                        focused: key === _this3.state.slide,
+                        next: _this3.next.bind(_this3)
                       });
                     } else if (type === 'listen') {
                       slideJsx = React.createElement(Listen, {

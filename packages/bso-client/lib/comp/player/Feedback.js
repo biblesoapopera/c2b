@@ -1,9 +1,9 @@
 'use strict';
 
-System.register('bso-client/comp/player/slides/Pick', ['react', '../Answer'], function (_export, _context) {
+System.register('bso-client/comp/player/Feedback', ['react', '../blankSquare'], function (_export, _context) {
   "use strict";
 
-  var React, Answer, _createClass, Pick;
+  var React, blankSquare, _createClass, Feedback;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -38,8 +38,8 @@ System.register('bso-client/comp/player/slides/Pick', ['react', '../Answer'], fu
   return {
     setters: [function (_react) {
       React = _react.default;
-    }, function (_Answer) {
-      Answer = _Answer.default;
+    }, function (_blankSquare) {
+      blankSquare = _blankSquare.default;
     }],
     execute: function () {
       _createClass = function () {
@@ -60,76 +60,59 @@ System.register('bso-client/comp/player/slides/Pick', ['react', '../Answer'], fu
         };
       }();
 
-      Pick = function (_React$Component) {
-        _inherits(Pick, _React$Component);
+      Feedback = function (_React$Component) {
+        _inherits(Feedback, _React$Component);
 
-        function Pick(props) {
-          _classCallCheck(this, Pick);
+        function Feedback() {
+          _classCallCheck(this, Feedback);
 
-          var _this = _possibleConstructorReturn(this, (Pick.__proto__ || Object.getPrototypeOf(Pick)).call(this, props));
-
-          _this.state = {
-            complete: props.complete === 'always',
-            score: 0,
-            value: '',
-            activeKey: false
-          };
-          return _this;
+          return _possibleConstructorReturn(this, (Feedback.__proto__ || Object.getPrototypeOf(Feedback)).apply(this, arguments));
         }
 
-        _createClass(Pick, [{
-          key: 'click',
-          value: function click(key, value, score) {
-            this.setState({
-              score: score,
-              value: value,
-              activeKey: key
-            });
-          }
-        }, {
-          key: 'reset',
-          value: function reset() {
-            console.log('reset');
-          }
-        }, {
+        _createClass(Feedback, [{
           key: 'render',
           value: function render() {
-            var _this2 = this;
-
             return React.createElement(
               'div',
-              { className: 'slide pick' },
+              { className: 'feedback' },
+              React.createElement('div', { className: 'arrow' }),
               React.createElement(
                 'div',
-                { className: 'pick-outter' },
-                React.createElement('div', { className: 'question', dangerouslySetInnerHTML: { __html: this.props.question } }),
+                { className: 'box' },
                 React.createElement(
                   'div',
-                  { className: 'answers' },
-                  this.props.answers.map(function (answer, key) {
-                    return React.createElement(Answer, {
-                      key: key,
-                      active: _this2.state.activeKey === key,
-                      value: answer.value,
-                      score: answer.score,
-                      click: _this2.click.bind(_this2, key),
-                      feedback: ["This is test feedback", "part 2"],
-                      showFeedbackReset: true,
-                      showFeedbackNext: true,
-                      next: _this2.props.next,
-                      reset: _this2.reset.bind(_this2)
-                    });
+                  { className: 'text' },
+                  this.props.text.map(function (text, index) {
+                    return React.createElement(
+                      'p',
+                      { key: index },
+                      text
+                    );
                   })
+                ),
+                React.createElement(
+                  'div',
+                  { className: 'actions' },
+                  this.props.showReset && React.createElement(
+                    'div',
+                    { className: 'reset', onClick: this.props.reset },
+                    React.createElement('img', { src: blankSquare })
+                  ),
+                  this.props.showNext && React.createElement(
+                    'div',
+                    { className: 'next', onClick: this.props.next },
+                    React.createElement('img', { src: blankSquare })
+                  )
                 )
               )
             );
           }
         }]);
 
-        return Pick;
+        return Feedback;
       }(React.Component);
 
-      _export('default', Pick);
+      _export('default', Feedback);
     }
   };
 });

@@ -1,0 +1,79 @@
+.player {
+  .feedback {
+    padding-bottom: 4%;
+
+    .arrow {
+      height: 4vh;
+      overflow: hidden;
+      position: relative;
+      width: 8vh;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .arrow::after {
+      box-shadow: 0 0 1vw fade(@white, 50%);
+      background-color: fade(@dark, 90%);
+      content: "";
+      height: 3.5vh;
+      left: 2.5vh;
+      position: absolute;
+      top: 2.5vh;
+      transform: rotate(45deg);
+      width: 3.5vh;
+    }
+
+
+    .box {
+      box-shadow: 0 0 1vw fade(@white, 50%);
+      background-color: fade(@dark, 90%);
+      padding: 2%;
+
+      .text {
+        padding-top: 5%;
+        padding-bottom: 5%;
+      }
+
+      .actions {
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+
+        .reset, .next {
+          width: 18%;
+
+          transition-property: opacity;
+          transition-duration: 0.5s;
+
+          img {
+            width: 100%;
+            background-color: fade(@white, 20%);
+            border: thin solid transparent;
+            cursor: pointer;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            background-size: 50% 50%;
+          }
+
+          img:hover {
+            border: thin solid @white;
+            background-color: fade(@white, 40%);
+          }
+        }
+
+        .reset img {
+          background-image: url('img/reset.png');
+        }
+
+        .next img {
+          background-image: url('img/right.png');
+        }
+      }
+    }
+  }
+}
